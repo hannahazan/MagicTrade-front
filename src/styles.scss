@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Abstracts
+@import "./scss/abstracts/functions";
+@import "./scss/abstracts/mixins";
+@import "./scss/abstracts/variables";
+
+// Base
+@import "./scss/base/fonts";
+@import "./scss/base/reset";
+@import "./scss/base/typography";
+
+// Components
+// Atomes
+@import "./scss/components/atoms/button";
+// Molecules
+@import "./scss/components/molecules/card";
+// Organism
+@import "./scss/components/organisms/header";
+
+// Pages
+@import "./scss/pages/home";

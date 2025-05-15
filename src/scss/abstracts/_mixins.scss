@@ -1,0 +1,10 @@
+// Breakpoints
+@mixin breakpoint($device, $breakpoints-system: $mt-breakpoint) {
+  @if map.has-key($breakpoints-system, $device) {
+    @media (min-width: #{map.get($breakpoints-system, $device)}px) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

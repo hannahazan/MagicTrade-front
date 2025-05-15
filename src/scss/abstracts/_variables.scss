@@ -1,0 +1,28 @@
+@use "sass:map";
+
+// Colors
+$primary-color: #39ff14;
+$secondary-color: #00d0ff;
+$grey-color: #747474;
+$white-color: #ffffff;
+
+// Border color
+$gradient-border: linear-gradient(135deg, $primary-color, $secondary-color);
+
+// Background color
+$background-black-color: #18181c;
+
+// Card state colors
+$state-mint: #17a2b8;
+$state-near-mint: #3caf56;
+$state-excellent: #82891e;
+$state-good: #ffc107;
+$state-light-played: #fd8b2b;
+$state-played: #e56874;
+$state-poor: #dc3545;
+
+// Breakpoints
+$mt-breakpoint: (
+  "tablet": 768,
+  "desktop": 1024,
+);
