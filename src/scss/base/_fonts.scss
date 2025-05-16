@@ -1,0 +1,13 @@
+@mixin font-face($font-name, $font-style, $file-name, $font-format) {
+  @font-face {
+    font-family: $font-name;
+    font-style: $font-style;
+    src: url("../../assets/fonts/#{$file-name}.woff") format($font-format);
+  }
+}
+
+@include font-face("Poppins Light", normal, "Poppins-Light", "woff");
+@include font-face("Poppins Regular", normal, "Poppins-Regular", "woff");
+@include font-face("Poppins Bold", normal, "Poppins-Bold", "woff");
+@include font-face("Poly Regular", normal, "Poly-Regular", "woff");
+@include font-face("Poly Regular", italic, "Poly-Italic", "woff");
