@@ -21,8 +21,25 @@ $state-light-played: #fd8b2b;
 $state-played: #e56874;
 $state-poor: #dc3545;
 
+// Font size
+$font-size-64: 4rem; // 64px
+$font-size-48: 3rem; // 48px
+$font-size-36: 2.25rem; // 36px
+$font-size-24: 1.5rem; // 24px
+$font-size-20: 1.25rem; // 20px
+$font-size-16: 1rem; // 16px
+$font-size-14: .875rem; // 14px
+$font-size-12: .75rem; // 12px
+$font-size-10: .625rem; // 10px
+
 // Breakpoints
 $mt-breakpoint: (
-  "tablet": 768,
-  "desktop": 1024,
+  mobile: 480,
+  tablet: 768,
+  desktop: 1024,
 );
+
+// Border radius
+$border-radius-small: 5px;
+$border-radius-medium: 10px;
+$border-radius-large: 15px;

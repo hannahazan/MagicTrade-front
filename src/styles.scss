@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 // Abstracts
+@import "./scss/abstracts/variables";
 @import "./scss/abstracts/functions";
 @import "./scss/abstracts/mixins";
-@import "./scss/abstracts/variables";
 
 // Base
 @import "./scss/base/fonts";
@@ -11,7 +11,7 @@
 @import "./scss/base/typography";
 
 // Components
-// Atomes
+// Atoms
 @import "./scss/components/atoms/button";
 // Molecules
 @import "./scss/components/molecules/card";
