@@ -7,7 +7,12 @@ $state-font-size--mobile: $font-size-16;
 $state-font-size--tablet: $font-size-18;
 $state-font-size--desktop: $font-size-20;
 
-// State Height
+// Width
+$state-width--mobile: 40px;
+$state-width--tablet: 50px;
+$state-width--desktop: 60px;
+
+// Height
 $state-height--mobile: 20px;
 $state-height--tablet: 30px;
 $state-height--desktop: 40px;
@@ -19,15 +24,18 @@ $state-height--desktop: 40px;
 :root {
   --state-font-size: #{$state-font-size--mobile};
   --state-height: #{$state-height--mobile};
+  --state-width: #{$state-width--mobile};
 
   @include breakpoint('tablet') {
     --state-font-size: #{$state-font-size--tablet};
     --state-height: #{$state-height--tablet};
+    --state-width: #{$state-width--tablet};
   }
 
   @include breakpoint('desktop') {
     --state-font-size: #{$state-font-size--desktop};
     --state-height: #{$state-height--desktop};
+    --state-width: #{$state-width--desktop};
   }
 }
 
@@ -36,10 +44,10 @@ $state-height--desktop: 40px;
 
   font-size: var(--state-font-size);
   height: var(--state-height);
+  width: var(--state-width);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
   border-radius: $border-radius-medium;
   text-align: center;
   box-sizing: border-box;
@@ -92,7 +100,7 @@ $state-height--desktop: 40px;
     background: $state-played;
   }
 
-  &--poor-closed {
+  &--poor {
     background: $state-poor;
   }
 }
