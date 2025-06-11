@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import {ButtonComponent} from "./components/button/button.component";
+import {StatesComponent} from "./components/states/states.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    ButtonComponent
+    ButtonComponent,
+    StatesComponent
   ],
   templateUrl: './app.component.html',
 })
