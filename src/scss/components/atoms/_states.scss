@@ -1,0 +1,106 @@
+/********************************************
+************** SCSS Variables ***************
+********************************************/
+
+// Font size
+$state-font-size--mobile: $font-size-16;
+$state-font-size--tablet: $font-size-18;
+$state-font-size--desktop: $font-size-20;
+
+// Width
+$state-width--mobile: 40px;
+$state-width--tablet: 50px;
+$state-width--desktop: 60px;
+
+// Height
+$state-height--mobile: 20px;
+$state-height--tablet: 30px;
+$state-height--desktop: 40px;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --state-font-size: #{$state-font-size--mobile};
+  --state-height: #{$state-height--mobile};
+  --state-width: #{$state-width--mobile};
+
+  @include breakpoint('tablet') {
+    --state-font-size: #{$state-font-size--tablet};
+    --state-height: #{$state-height--tablet};
+    --state-width: #{$state-width--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --state-font-size: #{$state-font-size--desktop};
+    --state-height: #{$state-height--desktop};
+    --state-width: #{$state-width--desktop};
+  }
+}
+
+.States {
+  @include heading5-poppins;
+
+  font-size: var(--state-font-size);
+  height: var(--state-height);
+  width: var(--state-width);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius-medium;
+  text-align: center;
+  box-sizing: border-box;
+  color: $white-color;
+  margin: 10px;
+
+  &--open {
+    background: $state-mint;
+    width: 135px;
+  }
+
+  &--negotiation {
+    background: $state-good;
+    color: $black-color;
+    width: 135px;
+  }
+
+  &--validation {
+    background: $state-near-mint;
+    width: 135px;
+  }
+
+  &--closed {
+    background: $state-poor;
+    width: 135px;
+  }
+
+  &--mint {
+    background: $state-mint;
+  }
+
+  &--near-mint {
+    background: $state-near-mint;
+  }
+
+  &--excellent {
+    background: $state-excellent;
+  }
+
+  &--good {
+    background: $state-good;
+    color: $black-color;
+  }
+
+  &--light-played {
+    background: $state-light-played;
+  }
+
+  &--played {
+    background: $state-played;
+  }
+
+  &--poor {
+    background: $state-poor;
+  }
+}

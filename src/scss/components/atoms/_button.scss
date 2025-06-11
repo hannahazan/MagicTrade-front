@@ -1,3 +1,7 @@
+/********************************************
+************** SCSS Variables ***************
+********************************************/
+
 // Font size
 $button-font-size--mobile: $font-size-12;
 $button-font-size--tablet: $font-size-14;
@@ -12,6 +16,10 @@ $button-min-height--desktop: 50px;
 $button-padding-block--mobile: 5px;
 $button-padding-block--tablet: 10px;
 $button-padding-block--desktop: 15px;
+
+/********************************************
+************** Custom properties ************
+********************************************/
 
 :root {
   --button-font-size: #{$button-font-size--mobile};
