@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ButtonComponent} from "./components/button/button.component";
 import {StatesComponent} from "./components/states/states.component";
+import {LinkComponent} from "./components/link/link.component";
 import {StatusComponent} from "./components/status/status.component";
 
 @Component({
@@ -9,6 +10,7 @@ import {StatusComponent} from "./components/status/status.component";
   imports: [
     ButtonComponent,
     StatesComponent,
+    LinkComponent,
     StatusComponent
   ],
   templateUrl: './app.component.html',
