@@ -1,0 +1,20 @@
+<div class="Header">
+  <div>
+    <img class="Header-logo" src="dragon.png" alt="logo" />
+  </div>
+
+  <button class="Header-burger" (click)="toggleMenu()" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="Header-Nav-links" [ngClass]="{ 'open': menuOpen }">
+    <a class="Nav-link">HOME</a>
+    <a class="Nav-link">CARDS</a>
+    <a class="Nav-link">TRADERS</a>
+    <a class="Nav-link">WISHLIST</a>
+    <a class="Nav-link">COLLECTION</a>
+    <a class="Nav-link">SIGN IN</a>
+  </nav>
+</div>

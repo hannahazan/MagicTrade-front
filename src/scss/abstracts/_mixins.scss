@@ -24,11 +24,12 @@ $heading5--font-size--mobile: $font-size-16;
 $heading5--font-size--desktop: $font-size-20;
 
 // paragraph
-
 $paragraph--font-size--mobile: $font-size-16;
 $paragraph--font-size--desktop: $font-size-20;
 
-
+// Navbar
+$navbar-font-size--mobile: $font-size-14;
+$navbar-font-size--desktop: $font-size-18;
 
 // Custom Properties
 :root {
@@ -38,6 +39,7 @@ $paragraph--font-size--desktop: $font-size-20;
   --heading4--font-size: #{$heading4--font-size--mobile};
   --heading5--font-size: #{$heading5--font-size--mobile};
   --paragraph--font-size: #{$paragraph--font-size--mobile};
+  --nav-font-size: #{$navbar-font-size--mobile};
 
   @include breakpoint("desktop") {
     --heading1--font-size: #{$heading1--font-size--desktop};
@@ -46,6 +48,8 @@ $paragraph--font-size--desktop: $font-size-20;
     --heading4--font-size: #{$heading4--font-size--desktop};
     --heading5--font-size: #{$heading5--font-size--desktop};
     --paragraph--font-size: #{$paragraph--font-size--desktop};
+    --nav-font-size: #{$navbar-font-size--desktop};
+
   }
 }
 
@@ -55,30 +59,35 @@ $paragraph--font-size--desktop: $font-size-20;
   font-size: var(--heading1--font-size);
   font-weight: 700; // Bold
   text-transform: uppercase;
+  color: $white-color;
 }
 
 @mixin heading2-poppins {
   font-family: "Poppins Bold", sans-serif;
   font-size: var(--heading2--font-size);
   font-weight: 600; // Semi bold
+  color: $white-color;
 }
 
 @mixin heading3-poppins {
   font-family: "Poppins Bold", sans-serif;
   font-size: var(--heading3--font-size);
   font-weight: 600; // Semi bold
+  color: $white-color;
 }
 
 @mixin heading4-poppins {
   font-family: "Poppins Bold", sans-serif;
   font-size: var(--heading4--font-size);
   font-weight: 600; // Semi bold
+  color: $white-color;
 }
 
 @mixin heading5-poppins {
   font-family: "Poppins Bold", sans-serif;
   font-size: var(--heading5--font-size);
   font-weight: 600; // Semi bold
+  color: $white-color;
 }
 
 // Poly
@@ -87,33 +96,45 @@ $paragraph--font-size--desktop: $font-size-20;
   font-size: var(--heading1--font-size);
   font-weight: 700; // Bold
   text-transform: uppercase;
+  color: $white-color;
 }
 
 @mixin heading2-poly {
   font-family: "Poly Regular", serif;
   font-size: var(--heading2--font-size);
   font-weight: 600; // Semi bold
+  color: $white-color;
 }
 
 @mixin heading3-poly {
   font-family: "Poly Regular", serif;
   font-size: var(--heading3--font-size);
   font-weight: 600; // Semi bold
+  color: $white-color;
 }
 
 @mixin heading4-poly {
   font-family: "Poly Regular", serif;
   font-size: var(--heading4--font-size);
   font-weight: 600; // Semi bold
+  color: $white-color;
 }
 
 @mixin heading5-poly {
   font-family: "Poly Regular", serif;
   font-size: var(--heading5--font-size);
   font-weight: 600; // Semi bold
+  color: $white-color;
 }
 
 @mixin paragraph($font-family) {
   font-family: $font-family;
   font-size: var(--paragraph--font-size);
+  color: $white-color;
+}
+
+@mixin header {
+  font-family: "Poppins", sans-serif;
+  font-size: var(--navbar--font-size);
+  color: $white-color;
 }
