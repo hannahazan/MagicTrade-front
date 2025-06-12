@@ -63,19 +63,6 @@
     .Nav-link {
       text-decoration: none;
       color: $white-color;
-
-      //&::before {
-      //  content: "•";
-      //  color: $primary-color;
-      //  margin: 0 10px;
-      //  font-size: 1.2rem;
-      //  display: inline-block;
-      //  vertical-align: middle;
-      //}
-      //
-      //&:first-child::before {
-      //  content: none;
-      //}
     }
 
     @include breakpoint(desktop) {
