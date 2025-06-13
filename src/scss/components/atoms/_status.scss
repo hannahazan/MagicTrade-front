@@ -1,0 +1,79 @@
+/********************************************
+************** SCSS Variables ***************
+********************************************/
+
+// Font size
+$status-font-size--mobile: $font-size-14;
+$status-font-size--tablet: $font-size-18;
+$status-font-size--desktop: $font-size-20;
+
+// Width
+$status-width--mobile: 100px;
+$status-width--tablet: 120px;
+$status-width--desktop: 135px;
+
+// Height
+$status-height--mobile: 20px;
+$status-height--tablet: 30px;
+$status-height--desktop: 40px;
+
+// Border-radius
+$status-border-radius--mobile: $border-radius-small;
+$status-border-radius--tablet: $border-radius-medium;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --status-font-size: #{$status-font-size--mobile};
+  --status-height: #{$status-height--mobile};
+  --status-width: #{$status-width--mobile};
+  --status-border-radius: #{$status-border-radius--mobile};
+
+  @include breakpoint('tablet') {
+    --status-font-size: #{$status-font-size--tablet};
+    --status-height: #{$status-height--tablet};
+    --status-width: #{$status-width--tablet};
+    --status-border-radius: #{$status-border-radius--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --status-font-size: #{$status-font-size--desktop};
+    --status-height: #{$status-height--desktop};
+    --status-width: #{$status-width--desktop};
+  }
+}
+
+.Status {
+  @include heading5-poppins;
+
+  font-size: var(--status-font-size);
+  height: var(--status-height);
+  width: var(--status-width);
+  border-radius: var(--status-border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  color: $white-color;
+  margin: 10px;
+
+  &--open {
+    background: $state-mint;
+  }
+
+  &--negotiation {
+    background: $state-good;
+    color: $black-color;
+  }
+
+  &--validation {
+    background: $state-near-mint;
+  }
+
+  &--closed {
+    background: $state-poor;
+  }
+}
