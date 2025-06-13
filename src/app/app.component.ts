@@ -3,6 +3,7 @@ import {ButtonComponent} from "./components/button/button.component";
 import {StatesComponent} from "./components/states/states.component";
 import {LinkComponent} from "./components/link/link.component";
 import {StatusComponent} from "./components/status/status.component";
+import {HeaderComponent} from "./components/header/header.component";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import {StatusComponent} from "./components/status/status.component";
     ButtonComponent,
     StatesComponent,
     LinkComponent,
-    StatusComponent
+    StatusComponent,
+    HeaderComponent,
   ],
   templateUrl: './app.component.html',
 })

@@ -67,6 +67,7 @@ $button-padding-block--desktop: 15px;
     &:hover {
       background-color: $black-color;
       color: $white-color;
+      outline: solid $white-color 3px;
     }
   }
 
@@ -77,6 +78,7 @@ $button-padding-block--desktop: 15px;
     &:hover {
       background-color: $white-color;
       color: $black-color;
+      outline: solid $black-color 3px;
     }
   }
 

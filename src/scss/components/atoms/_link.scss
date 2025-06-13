@@ -1,6 +1,6 @@
 .Nav-link {
-  @include heading5-poppins;
-  color: $black-color;
+  @include header;
+  color: $white-color;
   position: relative;
   text-decoration: none;
   cursor: pointer;
