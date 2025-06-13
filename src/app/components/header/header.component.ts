@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { CustomBreakpoints } from '../../core/constants/breakpoints';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { effect } from '@angular/core';
@@ -10,7 +9,7 @@ import { effect } from '@angular/core';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgClass, AsyncPipe],
+  imports: [NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -21,7 +20,7 @@ export class HeaderComponent {
 
   isDesktop = toSignal(
     this.breakpointObserver
-      .observe([CustomBreakpoints.tablet])
+      .observe([CustomBreakpoints.desktop])
       .pipe(map((result) => result.matches)),
     { initialValue: false }
   );
