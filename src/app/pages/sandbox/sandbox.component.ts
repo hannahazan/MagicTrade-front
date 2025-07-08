@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../components/button/button.component';
-import { StatesComponent } from '../../components/states/states.component';
-import { StatusComponent } from '../../components/status/status.component';
+import { ButtonComponent } from '../../shared/component/button/button.component';
+import { StatesComponent } from '../../shared/component/states/states.component';
+import { StatusComponent } from '../../shared/component/status/status.component';
 import { FormInputComponent } from '../../shared/component/form-input/form-input.component';
 
 @Component({
