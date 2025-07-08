@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '../../components/button/button.component';
 import { StatesComponent } from '../../components/states/states.component';
 import { StatusComponent } from '../../components/status/status.component';
+import { FormInputComponent } from '../../shared/component/form-input/form-input.component';
 
 @Component({
   selector: 'app-sandbox',
@@ -10,6 +11,7 @@ import { StatusComponent } from '../../components/status/status.component';
     ButtonComponent,
     StatesComponent,
     StatusComponent,
+    FormInputComponent
   ],
   templateUrl: './sandbox.component.html',
   styleUrl: './sandbox.component.scss'

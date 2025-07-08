@@ -4,7 +4,7 @@ import { SandboxComponent } from './pages/sandbox/sandbox.component';
 
 export const routes: Routes = [
     {
-        path: 'sign-up',
+        path: 'signup',
         component: SignUpComponent
     },
     {
