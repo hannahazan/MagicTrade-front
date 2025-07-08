@@ -1,0 +1,19 @@
+main {
+    padding: 4rem 0 3rem;
+    background-color: $background-black-color;
+}
+
+a {
+    color: $secondary-color;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        color: $primary-color;
+        text-decoration: underline;
+    }
+}
+
+.page-heading {
+    text-align: center;
+}
