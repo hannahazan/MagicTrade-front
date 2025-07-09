@@ -1,3 +1,5 @@
+// === Elements === //
+
 * {
     box-sizing: border-box;
 }
@@ -18,6 +20,20 @@ a {
     }
 }
 
+// === Classes === //
+
 .page-heading {
     text-align: center;
+}
+
+.gradient-border-sm {
+    @include gradient-border($border-radius-small);
+}
+
+.gradient-border-md {
+    @include gradient-border($border-radius-medium);
+}
+
+.gradient-border-lg {
+    @include gradient-border($border-radius-large);
 }

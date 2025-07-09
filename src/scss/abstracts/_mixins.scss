@@ -138,3 +138,10 @@ $navbar-font-size--desktop: $font-size-18;
   font-size: var(--navbar--font-size);
   color: $white-color;
 }
+
+@mixin gradient-border($border-radius) {
+  background: linear-gradient(to right, $primary-color, $secondary-color) border-box;
+  border-radius: $border-radius;
+  border: 2px solid transparent;
+  overflow: hidden;
+}

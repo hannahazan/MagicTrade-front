@@ -4,9 +4,6 @@
         margin: 0px 36px;
         min-height: 200px;
         height: 600px;
-        border-radius: $border-radius-large;
-        border: 2px solid $primary-color;
-        overflow: hidden;
     }
     
     &__form {
@@ -20,7 +17,7 @@
         padding: 24px 12px;
         background-color: white;
 
-        &::before {
+        &:before {
             content: "";
             position: absolute;
             inset: 0;
@@ -30,6 +27,7 @@
             background-position: center;
             opacity: 0.20;
             z-index: -1;
+            border-radius: 13px;
         }
         
         & > * {
