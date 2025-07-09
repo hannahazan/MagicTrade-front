@@ -19,9 +19,10 @@
 
 // Molecules
 @import "./scss/components/molecules/card";
+@import "./scss/components/molecules/auth-form";
 // Organism
 @import "./scss/components/organisms/header";
-@import "./scss/components/organisms/signup-form";
+@import "./scss/components/organisms/auth-container";
 
 // Pages
 @import "./scss/pages/home";

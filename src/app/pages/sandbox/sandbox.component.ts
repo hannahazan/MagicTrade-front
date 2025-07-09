@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '../../shared/component/button/button.component';
 import { StatesComponent } from '../../shared/component/states/states.component';
 import { StatusComponent } from '../../shared/component/status/status.component';
-import { FormInputComponent } from '../../shared/component/form-input/form-input.component';
+import { AuthTextInputComponent } from '../../shared/component/auth-text-input/auth-text-input.component';
 
 @Component({
   selector: 'app-sandbox',
@@ -11,7 +11,7 @@ import { FormInputComponent } from '../../shared/component/form-input/form-input
     ButtonComponent,
     StatesComponent,
     StatusComponent,
-    FormInputComponent
+    AuthTextInputComponent
   ],
   templateUrl: './sandbox.component.html',
   styleUrl: './sandbox.component.scss'

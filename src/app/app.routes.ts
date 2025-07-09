@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SandboxComponent } from './pages/sandbox/sandbox.component';
+import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 
 export const routes: Routes = [
     {
         path: 'signup',
-        component: SignUpComponent
+        component: SignUpPageComponent
     },
     {
         path: 'sandbox',

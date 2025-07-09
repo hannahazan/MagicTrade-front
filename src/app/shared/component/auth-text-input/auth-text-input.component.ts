@@ -3,13 +3,13 @@ import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-form-input',
+  selector: 'app-auth-text-input',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './form-input.component.html',
-  styleUrl: './form-input.component.scss'
+  templateUrl: './auth-text-input.component.html',
+  styleUrl: './auth-text-input.component.scss'
 })
-export class FormInputComponent {
+export class AuthTextInputComponent {
   @Input() label = '';
   @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';
   @Input() placeholder = '';
