@@ -1,0 +1,53 @@
+.auth {
+
+    &__container {
+        margin: 0px 36px;
+        min-height: 200px;
+        height: 600px;
+        border-radius: $border-radius-large;
+        border: 2px solid $primary-color;
+        overflow: hidden;
+    }
+    
+    &__form {
+        position: relative;
+        z-index: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 12px;
+        background-color: white;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("/images/chandra.webp");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.20;
+            z-index: -1;
+        }
+        
+        & > * {
+            color: $background-black-color;
+        }
+    }
+
+    // &__img {
+    //     height: 100%;
+    //     width: 30%;
+    //     overflow: hidden;
+        
+    //     & > img {
+    //         width: 100%;
+    //         height: 100%;
+    //         object-fit:contain;
+    //         display: block;
+    //     }
+    // }
+    
+}

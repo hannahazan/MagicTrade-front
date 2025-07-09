@@ -10,5 +10,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent {
-
+  imageUrl = 'assets/images/chandra.webp';
 }
