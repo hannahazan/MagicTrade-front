@@ -37,3 +37,25 @@ a {
 .gradient-border-lg {
     @include gradient-border($border-radius-large);
 }
+
+.input-placeholder {
+    
+  &::placeholder {
+    @include paragraph("Poppins Light");
+    color: $grey-color;
+    font-size: $font-size-14;
+
+    @include breakpoint("desktop") {
+        font-size: $font-size-16;
+    }
+  }
+}
+
+.input-errors {
+    color: $red-error-color;
+    font-size: $font-size-14;
+
+    @include breakpoint("desktop") {
+        font-size: $font-size-16;
+    }
+}

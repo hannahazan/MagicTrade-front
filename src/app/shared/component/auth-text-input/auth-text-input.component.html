@@ -1,20 +1,23 @@
-<label
-    [attr.for]="id"
-    class=""
->
-    {{ label }}
-</label>
-<input
-    [id]="id"
-    [type]="type"
-    [formControl]="control"
-    [placeholder]="placeholder"
-/>
-@if (hasError) {
-    <ul>
-    @for (msg of errorMessages; track msg) {
-        <li>{{ msg }}</li>
+<div class="paragraph-poppins auth__text-input">
+    <label
+        [attr.for]="id"
+        class=""
+    >
+        {{ label }}
+    </label>
+    <input
+        class="input-placeholder"
+        [id]="id"
+        [type]="type"
+        [formControl]="control"
+        [placeholder]="placeholder"
+    />
+    @if (hasError) {
+        <div class="input-errors">
+            @for (msg of errorMessages; track msg) {
+                <span>{{ msg }}</span>
+            }
+        </div>
     }
-    </ul>
-}
+</div>
 

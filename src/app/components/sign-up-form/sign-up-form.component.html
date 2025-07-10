@@ -1,12 +1,67 @@
-<form class="auth-form">
+<form 
+    class="auth-form"
+    [formGroup]="signupForm"
+>
     <app-auth-text-input 
-        label="pseudonym *"
-        type="text"
-        placeholder="akroma93"
-    />
-    <!-- <app-auth-text-input 
-        label="email *"
+        label="Email *"
         type="email"
-        placeholder="akroma@example.com"
-    /> -->
+        placeholder="chandra@example.com"
+        [control]="signupForm.controls.email"
+    />
+    <app-auth-text-input 
+        label="Username *"
+        type="text"
+        placeholder="chandra93"
+        [control]="signupForm.controls.username"
+    />
+    <app-auth-text-input 
+        label="First name *"
+        type="text"
+        placeholder="Chandra"
+        [control]="signupForm.controls.firstName"
+    />
+    <app-auth-text-input 
+        label="Last name *"
+        type="text"
+        placeholder="Nalaar"
+        [control]="signupForm.controls.lastName"
+    />
+    <app-auth-text-input 
+        label="Country *"
+        type="text"
+        placeholder="France"
+        [control]="signupForm.controls.country"
+    />
+    <app-auth-text-input 
+        label="Department *"
+        type="text"
+        placeholder="Manche"
+        [control]="signupForm.controls.department"
+    />
+    <app-auth-text-input 
+        label="City *"
+        type="text"
+        placeholder="Tirepied-sur-Sée"
+        [control]="signupForm.controls.city"
+    />
+    <app-auth-text-input 
+        label="Password *"
+        type="password"
+        placeholder=""
+        [control]="getControl('passwords.password')"
+    />
+    <app-auth-text-input 
+        label="Confirm password *"
+        type="password"
+        placeholder=""
+        [control]="getControl('passwords.passwordConfirm')"
+    />
+
+    <app-button 
+        type="submit"
+        variant="secondary"
+        [disabled]="!signupForm.valid"
+    >
+        Sign up
+    </app-button>
 </form>
