@@ -59,3 +59,8 @@ a {
         font-size: $font-size-16;
     }
 }
+
+.center-content {
+    display : flex;
+    justify-content: center;
+}

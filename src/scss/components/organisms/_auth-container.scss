@@ -3,6 +3,12 @@
     &__container {
         margin: 0px 36px;
         min-height: 200px;
+        min-width: 300px;
+        max-width: 900px;
+
+        @include breakpoint("desktop") {
+            display: flex;
+        }
     }
     
     &__form-wrapper {
@@ -27,6 +33,10 @@
             opacity: 0.20;
             z-index: -1;
             border-radius: 13px;
+
+            @include breakpoint("desktop") {
+                all: unset;
+            }
         }
         
         & > * {
@@ -38,17 +48,23 @@
         margin-bottom: 3rem;
     }
 
-    // &__img {
-    //     height: 100%;
-    //     width: 30%;
-    //     overflow: hidden;
-        
-    //     & > img {
-    //         width: 100%;
-    //         height: 100%;
-    //         object-fit:contain;
-    //         display: block;
-    //     }
-    // }
+    &__img {
+        display: none;
+
+        @include breakpoint("desktop") {
+            display: block;
+            width: 50%;
+            overflow: hidden;
+            background-color: $background-black-color;
+            
+            & > img {
+                width: 100%;
+                height: 100%;
+                object-fit:cover;
+                object-position: 35% center;
+                display: block;
+            }
+        }
+    }
     
 }
