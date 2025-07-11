@@ -1,0 +1,29 @@
+.auth__text-input {
+    color: $background-black-color;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 250px;
+
+    @include breakpoint("desktop") {
+        width: 500px;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    input {
+        @include paragraph("Poppins Light");
+        color: $background-black-color;
+        height: 50px;
+        border-radius: $border-radius-small;
+        border: 2px solid $background-black-color;
+        padding: 1rem;
+        outline: none;
+
+        &:focus {
+            border: 2px solid $secondary-color;
+        }
+    }
+}

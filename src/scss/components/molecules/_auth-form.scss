@@ -1,0 +1,11 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: center;
+
+    button {
+        margin-top: 1rem;
+    }
+}

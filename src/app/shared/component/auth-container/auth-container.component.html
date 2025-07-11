@@ -1,0 +1,15 @@
+<div class="auth__container gradient-border-lg">
+    <div class="auth__img">
+        <img src="images/chandra.webp" alt="A Magic character is posing">
+    </div>
+    <div class="auth__form-wrapper">
+        <h2 class="auth__form-title heading2-poppins">
+        @if (authType === "signup") {
+            SIGN UP
+        }
+        </h2>
+        @if (authType === "signup") {
+            <app-sign-up-form />
+        }
+    </div>
+</div>
