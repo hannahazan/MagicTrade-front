@@ -46,6 +46,12 @@ export class AuthTextInputComponent {
           : 'Invalid format.'
       );
     }
+    if (errors['strongPassword']) {
+      messages.push(errors['strongPassword'].message)
+    }
+    if (errors['passwordMismatch']) {
+      messages.push("Passwords don't match");
+    }
     if (errors['custom']) {
       messages.push(errors['custom'].message || 'Invalid value.');
     }

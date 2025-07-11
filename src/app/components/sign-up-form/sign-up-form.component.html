@@ -56,6 +56,11 @@
         placeholder=""
         [control]="getControl('passwords.passwordConfirm')"
     />
+    <div class="input-errors">
+        @if (signupForm.get('passwords')?.errors?.['passwordMismatch'] && signupForm.get('passwords')?.touched ) {
+            <span>Passwords don't match</span>
+        }
+    </div>
 
     <app-button 
         type="submit"

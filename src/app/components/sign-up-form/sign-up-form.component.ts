@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthTextInputComponent } from '../../shared/component/auth-text-input/auth-text-input.component';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from "../../shared/component/button/button.component";
+import { strongPasswordValidator } from '../../shared/validators/strong-password-validator';
+import { passwordMatchValidator } from '../../shared/validators/password-match-validator';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -46,13 +48,10 @@ export class SignUpFormComponent implements OnInit {
     passwords: this.formBuilder.group({
       password: ['', [
         Validators.required, 
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&]).{12,}$')
+        strongPasswordValidator()
       ]],
-      passwordConfirm: ['', [
-        Validators.required, 
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&]).{12,}$')
-      ]]
-    })
+      passwordConfirm: ['', [Validators.required]]
+    }, { validators: passwordMatchValidator() })
   });
 
   ngOnInit() {
