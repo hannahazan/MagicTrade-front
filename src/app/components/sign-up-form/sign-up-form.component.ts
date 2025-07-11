@@ -18,15 +18,40 @@ export class SignUpFormComponent implements OnInit {
       Validators.required, 
       Validators.email
     ]],
-    username: [''],
-    firstName: [''],
-    lastName: [''],
-    country: [''],
-    department: [''],
-    city: [''],
+    username: ['', [
+      Validators.required,
+      Validators.minLength(3), 
+      Validators.maxLength(15)
+    ]],
+    firstName: ['', [
+      Validators.required, 
+      Validators.maxLength(15)
+    ]],
+    lastName: ['', [
+      Validators.required, 
+      Validators.maxLength(15)
+    ]],
+    country: ['', [
+      Validators.required,
+      Validators.maxLength(30)
+    ]],
+    department: ['', [
+      Validators.required,
+      Validators.maxLength(30)
+    ]],
+    city: ['', [
+      Validators.required, 
+      Validators.maxLength(30)
+    ]],
     passwords: this.formBuilder.group({
-      password: [''],
-      passwordConfirm: ['']
+      password: ['', [
+        Validators.required, 
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&]).{12,}$')
+      ]],
+      passwordConfirm: ['', [
+        Validators.required, 
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&]).{12,}$')
+      ]]
     })
   });
 
@@ -37,10 +62,10 @@ export class SignUpFormComponent implements OnInit {
   }
 
   getControl(path: string): FormControl {
-  const control = this.signupForm.get(path);
-    if (!control) {
-      throw new Error(`FormControl introuvable pour le chemin '${path}'`);
-    }
-  return control as FormControl;
-}
+    const control = this.signupForm.get(path);
+      if (!control) {
+        throw new Error(`FormControl introuvable pour le chemin '${path}'`);
+      }
+    return control as FormControl;
+  }
 }
