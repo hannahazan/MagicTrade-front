@@ -2,12 +2,15 @@
     class="auth-form"
     [formGroup]="signupForm"
 >
-    <app-auth-text-input 
-        label="Email *"
-        type="email"
-        placeholder="chandra@example.com"
-        [control]="signupForm.controls.email"
-    />
+    <div>
+        <app-auth-text-input
+            label="Email *"
+            type="email"
+            placeholder="chandra@example.com"
+            [control]="signupForm.controls.email"
+        />
+        <app-input-errors [control]="signupForm.controls.email" />
+    </div>
     <app-auth-text-input 
         label="Username *"
         type="text"

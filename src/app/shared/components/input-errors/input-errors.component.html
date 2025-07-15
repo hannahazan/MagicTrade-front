@@ -1,0 +1,7 @@
+@if (hasError()) {
+    <ul class="input-errors">
+        @for(msg of errorMessages() ; track msg) {
+            <li>{{ msg }}</li>
+        }
+    </ul>
+}

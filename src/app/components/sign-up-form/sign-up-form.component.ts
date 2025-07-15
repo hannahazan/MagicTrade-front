@@ -1,14 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthTextInputComponent } from '../../shared/component/auth-text-input/auth-text-input.component';
+import { AuthTextInputComponent } from '../../shared/components/auth-text-input/auth-text-input.component';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonComponent } from "../../shared/component/button/button.component";
+import { ButtonComponent } from "../../shared/components/button/button.component";
 import { strongPasswordValidator } from '../../shared/validators/strong-password-validator';
 import { passwordMatchValidator } from '../../shared/validators/password-match-validator';
+import { InputErrorsComponent } from '../../shared/components/input-errors/input-errors.component';
 
 @Component({
   selector: 'app-sign-up-form',
   standalone: true,
-  imports: [AuthTextInputComponent, ReactiveFormsModule, ButtonComponent],
+  imports: [AuthTextInputComponent, ReactiveFormsModule, ButtonComponent, InputErrorsComponent],
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.scss'
 })

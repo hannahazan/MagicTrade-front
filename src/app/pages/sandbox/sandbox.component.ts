@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../shared/component/button/button.component';
-import { StatesComponent } from '../../shared/component/states/states.component';
-import { StatusComponent } from '../../shared/component/status/status.component';
-import { AuthTextInputComponent } from '../../shared/component/auth-text-input/auth-text-input.component';
+import { ButtonComponent } from '../../shared/components/button/button.component';
+import { StatesComponent } from '../../shared/components/states/states.component';
+import { StatusComponent } from '../../shared/components/status/status.component';
+import { AuthTextInputComponent } from '../../shared/components/auth-text-input/auth-text-input.component';
 
 @Component({
   selector: 'app-sandbox',
