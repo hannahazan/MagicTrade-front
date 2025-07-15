@@ -5,6 +5,7 @@ import { ButtonComponent } from "../../shared/components/button/button.component
 import { strongPasswordValidator } from '../../shared/validators/strong-password-validator';
 import { passwordMatchValidator } from '../../shared/validators/password-match-validator';
 import { InputErrorsComponent } from '../../shared/components/input-errors/input-errors.component';
+import { UserRegisterService } from '../../core/services/user-register.service';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -15,6 +16,7 @@ import { InputErrorsComponent } from '../../shared/components/input-errors/input
 })
 export class SignUpFormComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
+  private readonly userRegisterService = inject(UserRegisterService);
   
   signupForm = this.formBuilder.group({
     email: ['', [
@@ -58,6 +60,17 @@ export class SignUpFormComponent implements OnInit {
   ngOnInit() {
     this.signupForm.valueChanges.subscribe(value => {
       console.log('Form updated:', value);
+    });
+  }
+
+  onSubmit(): void {
+    this.userRegisterService.execute().subscribe({
+      next: (res) => {
+        console.log('User successfully registered: ', res);
+      },
+      error: (err) => {
+        console.error('Registration error: ', err);
+      }
     });
   }
 

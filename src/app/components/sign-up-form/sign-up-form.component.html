@@ -1,6 +1,7 @@
 <form 
     class="auth-form"
     [formGroup]="signupForm"
+    (submit)="onSubmit()"
 >
     <div class="auth__input">
         <app-auth-text-input
