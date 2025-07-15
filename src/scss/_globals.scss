@@ -5,7 +5,7 @@
 }
 
 main {
-    padding: 4rem 0 3rem;
+    padding: 3rem 0 3rem;
     background-color: $background-black-color;
 }
 
@@ -39,7 +39,7 @@ a {
 }
 
 .input-placeholder {
-    
+
   &::placeholder {
     @include paragraph("Poppins Light");
     color: $grey-color;

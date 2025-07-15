@@ -10,7 +10,7 @@
             display: flex;
         }
     }
-    
+
     &__form-wrapper {
         position: relative;
         z-index: 0;
@@ -19,7 +19,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 3rem 2.5rem;
+        padding: 2rem;
         background-color: white;
 
         &:before {
@@ -38,13 +38,15 @@
                 all: unset;
             }
         }
-        
+
         & > * {
             color: $background-black-color;
         }
     }
 
     &__form-title {
+      @include heading3-poppins;
+      color: $black-color;
         margin-bottom: 3rem;
     }
 
@@ -56,7 +58,7 @@
             width: 50%;
             overflow: hidden;
             background-color: $background-black-color;
-            
+
             & > img {
                 width: 100%;
                 height: 100%;
@@ -66,5 +68,5 @@
             }
         }
     }
-    
+
 }

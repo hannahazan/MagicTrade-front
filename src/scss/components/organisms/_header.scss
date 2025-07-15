@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 115px;
+  height: 110px;
   background-color: $background-black-color;
   color: $white-color;
   padding: 0 30px;
@@ -14,8 +14,8 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 115px;
-    height: 4px;
+    top: calc(100%);
+    height: 6px;
     background: $gradient-border;
   }
 

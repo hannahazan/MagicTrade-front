@@ -10,11 +10,14 @@
     }
 
     label {
+      @include paragraph("Poppins Regular");
+        color: $black-color;
         font-weight: 600;
     }
 
     input {
         @include paragraph("Poppins Light");
+
         color: $background-black-color;
         height: 50px;
         border-radius: $border-radius-small;
