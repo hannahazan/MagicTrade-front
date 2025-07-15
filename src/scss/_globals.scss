@@ -51,15 +51,6 @@ a {
   }
 }
 
-.input-errors {
-    color: $red-error-color;
-    font-size: $font-size-14;
-
-    @include breakpoint("desktop") {
-        font-size: $font-size-16;
-    }
-}
-
 .center-content {
     display : flex;
     justify-content: center;

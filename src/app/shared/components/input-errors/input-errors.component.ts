@@ -1,5 +1,5 @@
-import { Component, computed, input, Signal } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-input-errors',
@@ -9,19 +9,16 @@ import { FormControl } from '@angular/forms';
   styleUrl: './input-errors.component.scss'
 })
 export class InputErrorsComponent {
-  control = input.required<FormControl<unknown>>();
+  @Input() control!: FormControl<unknown> | FormGroup;
 
-  hasError: Signal<boolean> = computed(() => {
-    const control = this.control();
-    return control.invalid && (control.touched || control.dirty);
-  })
-  
-  public errorMessages: Signal<string[]> = computed (() => {
-    const control = this.control();
+  get hasError(): boolean {
+    return this.control.invalid && (this.control.touched || this.control.dirty);
+  }
 
-    if (!this.hasError() || !control.errors) return [];
+  get errorMessages(): string[] {
+    if (!this.hasError || !this.control.errors) return [];
 
-    const errors = control.errors;
+    const errors = this.control.errors;
     const messages: string[] = [];
 
     if (errors['required']) {
@@ -55,7 +52,5 @@ export class InputErrorsComponent {
     }
 
     return messages;
-  })
-    
-
+  }
 }

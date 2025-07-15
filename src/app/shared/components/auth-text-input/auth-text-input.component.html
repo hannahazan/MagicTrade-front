@@ -1,4 +1,7 @@
-<div class="paragraph-poppins auth__text-input">
+<div 
+    class="paragraph-poppins auth__text-input"
+    [class.auth__text-input--invalid]="hasError && !isValid"
+>
     <label
         [attr.for]="id"
         class=""
@@ -12,12 +15,5 @@
         [formControl]="control"
         [placeholder]="placeholder"
     />
-    <!-- @if (hasError) {
-        <div class="input-errors">
-            @for (msg of errorMessages; track msg) {
-                <span>{{ msg }}</span>
-            }
-        </div>
-    } -->
 </div>
 

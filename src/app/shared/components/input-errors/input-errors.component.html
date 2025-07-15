@@ -1,6 +1,6 @@
-@if (hasError()) {
+@if (hasError) {
     <ul class="input-errors">
-        @for(msg of errorMessages() ; track msg) {
+        @for(msg of errorMessages ; track $index) {
             <li>{{ msg }}</li>
         }
     </ul>

@@ -10,7 +10,7 @@ export function strongPasswordValidator(): ValidatorFn {
         if (!strongPasswordRegex.test(value)) {
             return {
                 strongPassword: {
-                    message: 'Password must be at least 12 characters long and include one uppercase letter, one lowercase letter, one number, and one special character (@$!%*#?&).'
+                    message: 'Password must be at least 12 characters, include an uppercase and lowercase letter, a number and a special character (@$!%*#?&).'
                 }
             }
         }
