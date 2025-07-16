@@ -5,26 +5,17 @@
 }
 
 main {
-    padding: 3rem 0 3rem;
-    background-color: $background-black-color;
+  padding: 3rem 0 3rem;
+  background-color: $background-black-color;
 }
 
 a {
     color: $secondary-color;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
-
-    &:hover {
-        color: $primary-color;
-        text-decoration: underline;
-    }
 }
 
 // === Classes === //
-
-.page-heading {
-    text-align: center;
-}
 
 .gradient-border-sm {
     @include gradient-border($border-radius-small);
@@ -36,6 +27,14 @@ a {
 
 .gradient-border-lg {
     @include gradient-border($border-radius-large);
+}
+
+.Page-Inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
 .input-placeholder {
