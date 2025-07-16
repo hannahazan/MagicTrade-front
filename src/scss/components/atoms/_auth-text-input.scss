@@ -1,6 +1,7 @@
 @import "scss/components/molecules/auth-form";
 
 .auth__text-input {
+  @include paragraph("Poppins Regular");
     color: $background-black-color;
     display: flex;
     flex-direction: column;
@@ -15,6 +16,7 @@
       @include paragraph("Poppins Regular");
         color: $black-color;
         font-weight: 600;
+      text-align: left;
     }
 
     input {

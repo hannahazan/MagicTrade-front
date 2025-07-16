@@ -5,11 +5,12 @@ import { map } from 'rxjs';
 import { CustomBreakpoints } from '../../core/constants/breakpoints';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { effect } from '@angular/core';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

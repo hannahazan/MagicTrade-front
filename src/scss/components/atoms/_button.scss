@@ -93,5 +93,6 @@ $button-padding-sides: 20px;
 
   &[disabled] {
     color: $grey-color;
+    cursor: not-allowed;
   }
 }
