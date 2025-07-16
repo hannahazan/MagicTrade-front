@@ -1,20 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-auth-text-input',
+  selector: 'app-input-errors',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './auth-text-input.component.html',
-  styleUrl: './auth-text-input.component.scss'
+  imports: [],
+  templateUrl: './input-errors.component.html',
+  styleUrl: './input-errors.component.scss'
 })
-export class AuthTextInputComponent {
-  @Input() label = '';
-  @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';
-  @Input() placeholder = '';
-  @Input() control!: FormControl<unknown>;
-  @Input() id = crypto.randomUUID();
+export class InputErrorsComponent {
+  @Input() control!: FormControl<unknown> | FormGroup;
 
   get hasError(): boolean {
     return this.control.invalid && (this.control.touched || this.control.dirty);
@@ -46,6 +41,12 @@ export class AuthTextInputComponent {
           : 'Invalid format.'
       );
     }
+    if (errors['strongPassword']) {
+      messages.push(errors['strongPassword'].message)
+    }
+    if (errors['passwordMismatch']) {
+      messages.push("Passwords don't match");
+    }
     if (errors['custom']) {
       messages.push(errors['custom'].message || 'Invalid value.');
     }
@@ -53,4 +54,3 @@ export class AuthTextInputComponent {
     return messages;
   }
 }
-

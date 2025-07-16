@@ -1,12 +1,14 @@
+@import "scss/components/molecules/auth-form";
+
 .auth__text-input {
     color: $background-black-color;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: 250px;
+    width: $input-width-mobile;
 
     @include breakpoint("desktop") {
-        width: 500px;
+        width: $input-width-desktop;
     }
 
     label {
@@ -27,6 +29,16 @@
 
         &:focus {
             border: 2px solid $secondary-color;
+        }
+    }
+
+    &--invalid {
+        input {
+            border-color: $red-error-color;
+
+            &:focus {
+                border-color: $red-error-color;
+            }
         }
     }
 }

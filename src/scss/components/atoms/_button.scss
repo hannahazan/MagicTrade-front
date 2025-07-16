@@ -46,7 +46,6 @@ $button-padding-sides: 20px;
   font-size: var(--button-font-size);
   padding: var(--button-padding-block);
   height: var(--button-min-height);
-  cursor: pointer;
   outline: none;
   box-sizing: border-box;
   display: inline-flex;
@@ -72,10 +71,11 @@ $button-padding-sides: 20px;
     background-color: $white-color;
     color: $black-color;
 
-    &:hover {
+    &:hover:not([disabled]) {
       background-color: $black-color;
       color: $white-color;
       outline: solid $white-color 3px;
+      cursor: pointer;
     }
   }
 
@@ -83,10 +83,11 @@ $button-padding-sides: 20px;
     background-color: $black-color;
     color: $white-color;
 
-    &:hover {
+    &:hover:not([disabled]) {
       background-color: $white-color;
       color: $black-color;
       outline: solid $black-color 3px;
+      cursor: pointer;
     }
   }
 

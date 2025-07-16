@@ -1,11 +1,22 @@
+$input-width-mobile: 250px;
+$input-width-desktop: 500px;
+
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
     width: 100%;
     align-items: center;
 
     button {
         margin-top: 1rem;
+    }
+}
+
+.auth__input {
+    width: $input-width-mobile;
+
+    @include breakpoint("desktop") {
+        width : $input-width-desktop;
     }
 }

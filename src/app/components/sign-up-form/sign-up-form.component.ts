@@ -1,12 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthTextInputComponent } from '../../shared/component/auth-text-input/auth-text-input.component';
+import { AuthTextInputComponent } from '../../shared/components/auth-text-input/auth-text-input.component';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonComponent } from "../../shared/component/button/button.component";
+import { ButtonComponent } from "../../shared/components/button/button.component";
+import { strongPasswordValidator } from '../../shared/validators/strong-password-validator';
+import { passwordMatchValidator } from '../../shared/validators/password-match-validator';
+import { InputErrorsComponent } from '../../shared/components/input-errors/input-errors.component';
 
 @Component({
   selector: 'app-sign-up-form',
   standalone: true,
-  imports: [AuthTextInputComponent, ReactiveFormsModule, ButtonComponent],
+  imports: [AuthTextInputComponent, ReactiveFormsModule, ButtonComponent, InputErrorsComponent],
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.scss'
 })
@@ -18,16 +21,38 @@ export class SignUpFormComponent implements OnInit {
       Validators.required, 
       Validators.email
     ]],
-    username: [''],
-    firstName: [''],
-    lastName: [''],
-    country: [''],
-    department: [''],
-    city: [''],
+    username: ['', [
+      Validators.required,
+      Validators.minLength(3), 
+      Validators.maxLength(15)
+    ]],
+    firstName: ['', [
+      Validators.required, 
+      Validators.maxLength(15)
+    ]],
+    lastName: ['', [
+      Validators.required, 
+      Validators.maxLength(15)
+    ]],
+    country: ['', [
+      Validators.required,
+      Validators.maxLength(30)
+    ]],
+    department: ['', [
+      Validators.required,
+      Validators.maxLength(30)
+    ]],
+    city: ['', [
+      Validators.required, 
+      Validators.maxLength(30)
+    ]],
     passwords: this.formBuilder.group({
-      password: [''],
-      passwordConfirm: ['']
-    })
+      password: ['', [
+        Validators.required, 
+        strongPasswordValidator()
+      ]],
+      passwordConfirm: ['', [Validators.required]]
+    }, { validators: passwordMatchValidator() })
   });
 
   ngOnInit() {
@@ -37,10 +62,10 @@ export class SignUpFormComponent implements OnInit {
   }
 
   getControl(path: string): FormControl {
-  const control = this.signupForm.get(path);
-    if (!control) {
-      throw new Error(`FormControl introuvable pour le chemin '${path}'`);
-    }
-  return control as FormControl;
-}
+    const control = this.signupForm.get(path);
+      if (!control) {
+        throw new Error(`FormControl introuvable pour le chemin '${path}'`);
+      }
+    return control as FormControl;
+  }
 }
