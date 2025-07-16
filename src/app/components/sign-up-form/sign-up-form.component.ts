@@ -64,14 +64,11 @@ export class SignUpFormComponent {
 
   onSubmit(): void {
     this.userRegisterService.execute(this.formValue).subscribe({
-      next: (res) => {
-        console.log(this.signupForm.value);
-        console.log('User successfully registered: ', res);
+      next: () => {
         this.failedRegister = false;
         this.router.navigate(['/login']);
       },
-      error: (err) => {
-        console.error('Registration error: ', err);
+      error: () => {
         this.failedRegister = true;
       }
     });
