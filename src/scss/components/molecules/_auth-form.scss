@@ -13,10 +13,18 @@ $input-width-desktop: 500px;
     }
 }
 
-.auth__input {
-    width: $input-width-mobile;
+.auth {
 
-    @include breakpoint("desktop") {
-        width : $input-width-desktop;
+    &__input {
+      width: $input-width-mobile;
+
+      @include breakpoint("desktop") {
+        width: $input-width-desktop;
+      }
     }
+
+  &__failure-message {
+    @include paragraph("Poppins Regular");
+    color: $red-error-color;
+  }
 }
