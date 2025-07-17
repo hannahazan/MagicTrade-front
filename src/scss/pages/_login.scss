@@ -1,11 +1,11 @@
-.Signup {
+.login {
 
   &__title {
     @include heading1-poly;
     margin-block-end: 20px;
   }
 
-  &__login-link {
+  &__signup-link {
     @include paragraph('Poppins Regular');
     color: $secondary-color;
 
