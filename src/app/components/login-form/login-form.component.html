@@ -1,1 +1,36 @@
-<p>login-form works!</p>
+<form
+  class="auth-form"
+  [formGroup]="loginForm"
+  (submit)="onSubmit()"
+>
+  <div class="auth__input">
+    <app-auth-text-input
+      label="Email"
+      type="email"
+      placeholder="chandra@example.com"
+      [control]="loginForm.controls.email"
+    />
+    <app-input-errors [control]="loginForm.controls.email" />
+  </div>
+  <div class="auth__input">
+    <app-auth-text-input
+      label="Password"
+      type="password"
+      placeholder=""
+      [control]="loginForm.controls.password"
+    />
+    <app-input-errors [control]="loginForm.controls.password" />
+  </div>
+
+  @if(failedLogin) {
+    <p class="auth__failure-message">We could not log you in. Please try again.</p>
+  }
+
+  <app-button
+    type="submit"
+    variant="secondary"
+    [disabled]="!loginForm.valid"
+  >
+    Sign up
+  </app-button>
+</form>
