@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable, tap} from "rxjs";
 import {LoginCredentials} from "../../models/login-credentials.model";
+import {jwtDecode} from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,6 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  /*
   getUserRole(): string[] | null {
     const token = this.getToken();
     if (!token) return null;
@@ -83,6 +83,5 @@ export class AuthService {
       return false;
     }
   }
-  */
 
 }
