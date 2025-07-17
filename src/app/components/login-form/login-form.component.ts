@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {AuthTextInputComponent} from "../../shared/components/auth-text-input/auth-text-input.component";
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {InputErrorsComponent} from "../../shared/components/input-errors/input-errors.component";
+import {LoginCredentials} from "../../models/login-credentials.model";
+import {AuthService} from "../../core/services/auth.service";
 
 @Component({
   selector: 'app-login-form',
@@ -20,6 +22,7 @@ import {InputErrorsComponent} from "../../shared/components/input-errors/input-e
 })
 export class LoginFormComponent {
   private readonly formBuilder = inject(FormBuilder);
+  private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
 
   failedLogin = false;
@@ -35,10 +38,21 @@ export class LoginFormComponent {
   });
 
   onSubmit(): void {
+    this.auth.login(this.formValue).subscribe({
+      next: result => {
+        console.log(result);
+        this.failedLogin = false;
+        this.router.navigate(['/profile']);
+      },
+      error: error => {
+        console.log(error);
+        this.failedLogin = true;
+      }
+    })
     console.log("submit")
   }
 
-  get formValue(): object {
+  get formValue(): LoginCredentials {
     const values = this.loginForm.getRawValue();
 
     return {
