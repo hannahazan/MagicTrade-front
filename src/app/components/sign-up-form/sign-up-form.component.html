@@ -85,11 +85,13 @@
         <app-input-errors [control]="getControl('passwords.passwordConfirm')" />
     </div>
 
-    @if(signupForm.controls.passwords.errors) {
+
       <div class="auth__input">
-        <app-input-errors [control]="signupForm.controls.passwords" />
+        @if(signupForm.controls.passwords.errors) {
+          <app-input-errors [control]="signupForm.controls.passwords" />
+        }
       </div>
-    }
+
 
     @if(failedRegister) {
       <p class="auth__failure-message">An error has occurred, please try registering again.</p>
