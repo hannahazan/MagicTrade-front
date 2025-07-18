@@ -17,11 +17,12 @@
 @import "./scss/components/atoms/link";
 @import "./scss/components/atoms/status";
 @import "./scss/components/atoms/input-errors";
+@import "./scss/components/atoms/auth-text-input";
 
 // Molecules
 @import "./scss/components/molecules/card";
 @import "./scss/components/molecules/auth-form";
-@import "./scss/components/atoms/auth-text-input";
+@import "./scss/components/molecules/footer";
 
 // Organism
 @import "./scss/components/organisms/card-modal";
