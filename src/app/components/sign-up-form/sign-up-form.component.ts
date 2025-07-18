@@ -1,10 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthTextInputComponent } from '../../shared/components/auth-text-input/auth-text-input.component';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { strongPasswordValidator } from '../../shared/validators/strong-password-validator';
 import { passwordMatchValidator } from '../../shared/validators/password-match-validator';
 import { InputErrorsComponent } from '../../shared/components/input-errors/input-errors.component';
+import { UserRegisterService } from '../../core/services/user-register.service';
+import {Router} from "@angular/router";
+import {UserRegister} from "../../models/user-register.model";
 
 @Component({
   selector: 'app-sign-up-form',
@@ -13,25 +16,29 @@ import { InputErrorsComponent } from '../../shared/components/input-errors/input
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.scss'
 })
-export class SignUpFormComponent implements OnInit {
+export class SignUpFormComponent {
   private readonly formBuilder = inject(FormBuilder);
-  
+  private readonly userRegisterService = inject(UserRegisterService);
+  private readonly router = inject(Router);
+
+  failedRegister = false;
+
   signupForm = this.formBuilder.group({
     email: ['', [
-      Validators.required, 
+      Validators.required,
       Validators.email
     ]],
     username: ['', [
       Validators.required,
-      Validators.minLength(3), 
+      Validators.minLength(3),
       Validators.maxLength(15)
     ]],
     firstName: ['', [
-      Validators.required, 
+      Validators.required,
       Validators.maxLength(15)
     ]],
     lastName: ['', [
-      Validators.required, 
+      Validators.required,
       Validators.maxLength(15)
     ]],
     country: ['', [
@@ -43,21 +50,27 @@ export class SignUpFormComponent implements OnInit {
       Validators.maxLength(30)
     ]],
     city: ['', [
-      Validators.required, 
+      Validators.required,
       Validators.maxLength(30)
     ]],
     passwords: this.formBuilder.group({
       password: ['', [
-        Validators.required, 
+        Validators.required,
         strongPasswordValidator()
       ]],
       passwordConfirm: ['', [Validators.required]]
     }, { validators: passwordMatchValidator() })
   });
 
-  ngOnInit() {
-    this.signupForm.valueChanges.subscribe(value => {
-      console.log('Form updated:', value);
+  onSubmit(): void {
+    this.userRegisterService.execute(this.formValue).subscribe({
+      next: () => {
+        this.failedRegister = false;
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.failedRegister = true;
+      }
     });
   }
 
@@ -67,5 +80,20 @@ export class SignUpFormComponent implements OnInit {
         throw new Error(`FormControl introuvable pour le chemin '${path}'`);
       }
     return control as FormControl;
+  }
+
+  get formValue(): UserRegister {
+    const values = this.signupForm.getRawValue();
+
+    return {
+      pseudo: values.username!,
+      email: values.email!,
+      firstName: values.firstName!,
+      lastName: values.lastName!,
+      country: values.country!,
+      department: values.department!,
+      city: values.city!,
+      password: values.passwords.password!
+    }
   }
 }
