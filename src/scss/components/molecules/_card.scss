@@ -3,14 +3,14 @@
 ********************************************/
 
 // Card width
-$card-img-width--mobile: 125px;
+$card-img-width--mobile: 120px;
 $card-img-width--tablet: 200px;
-$card-img-width--desktop: 242px;
+$card-img-width--desktop: 286px;
 
 // Card-height
-$card-height--mobile: 250px;
-$card-height--tablet: 300px;
-$card-height--desktop: 337px;
+$card-height--mobile: calc(#{$card-img-width--mobile} * 1.395);
+$card-height--tablet: calc(#{$card-img-width--tablet} * 1.395);
+$card-height--desktop: calc(#{$card-img-width--desktop} * 1.395);
 
 /********************************************
 ************** Custom properties ************
@@ -18,13 +18,16 @@ $card-height--desktop: 337px;
 
 :root {
   --card-img-width: #{$card-img-width--mobile};
+  --card-img-height: #{$card-height--mobile};
 
   @include breakpoint('tablet') {
     --card-img-width: #{$card-img-width--tablet};
+    --card-img-height: #{$card-height--tablet};
   }
 
   @include breakpoint('desktop') {
     --card-img-width: #{$card-img-width--desktop};
+    --card-img-height: #{$card-height--desktop};
   }
 }
 
@@ -32,15 +35,39 @@ $card-height--desktop: 337px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   max-width: var(--card-img-width);
+  transition: box-shadow 0.3s, transform 0.2s;
 
   img {
+    @include gradient-border($border-radius-medium);
+
     width: var(--card-img-width);
-    height: calc(var(--card-img-width) * 1.5);
+    height: var(--card-img-height);
     border-radius: $border-radius-medium;
     margin-bottom: 0.5rem;
     object-fit: cover;
+    transition: box-shadow 0.3s ease;
+  }
+
+  &:hover img {
+    box-shadow: 0 0 15px 4px rgba(0, 255, 0, 0.5);
+  }
+
+  &__actions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 2;
+  }
+
+  &:hover &__actions {
+    opacity: 1;
   }
 }
-
-

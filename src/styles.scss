@@ -24,10 +24,12 @@
 @import "./scss/components/atoms/auth-text-input";
 
 // Organism
+@import "./scss/components/organisms/card-modal";
 @import "./scss/components/organisms/header";
 @import "./scss/components/organisms/auth-container";
 
 // Pages
+@import "./scss/pages/cards";
 @import "./scss/pages/collection";
 @import "./scss/pages/home";
 @import "./scss/pages/signup";

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { SandboxComponent } from './pages/sandbox/sandbox.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import {CollectionComponent} from "./pages/collection/collection.component";
+import {CardsComponent} from "./pages/cards/cards.component";
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
 
 export const routes: Routes = [
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
       path: 'collection',
       component: CollectionComponent
+    },
+    {
+      path: 'cards',
+      component: CardsComponent
     }
 ];
