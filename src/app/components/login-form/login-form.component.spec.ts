@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginFormComponent } from './login-form.component';
+import {provideHttpClientTesting} from "@angular/common/http/testing";
+import {provideHttpClient} from "@angular/common/http";
+import {provideRouter} from "@angular/router";
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -8,7 +11,12 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginFormComponent]
+      imports: [LoginFormComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([])
+      ]
     })
     .compileComponents();
 
@@ -22,6 +30,6 @@ describe('LoginFormComponent', () => {
   });
 
   it('should be invalid when empty', () => {
-    expect(component.loginForm).toBeFalse();
+    expect(component.loginForm.invalid).toBeTrue();
   })
 });
