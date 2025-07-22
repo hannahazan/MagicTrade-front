@@ -20,4 +20,8 @@ describe('LoginFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be invalid when empty', () => {
+    expect(component.loginForm).toBeFalse();
+  })
 });
