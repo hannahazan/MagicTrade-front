@@ -1,0 +1,31 @@
+$input-width-mobile: 250px;
+$input-width-desktop: 500px;
+$gap: 2.5rem;
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+    width: 100%;
+    align-items: center;
+
+    button {
+        margin-top: -$gap;
+    }
+}
+
+.auth {
+
+    &__input {
+      width: $input-width-mobile;
+
+      @include breakpoint("desktop") {
+        width: $input-width-desktop;
+      }
+    }
+
+  &__failure-message {
+    @include paragraph("Poppins Regular");
+    color: $red-error-color;
+  }
+}

@@ -1,0 +1,55 @@
+@use "sass:map";
+
+// Colors
+$primary-color: #39ff14;
+$secondary-color: #00d0ff;
+$grey-color: #747474;
+$white-color: #ffffff;
+$black-color: #000000;
+$red-error-color: rgb(209, 23, 23);
+
+// Border color
+$gradient-border: linear-gradient(135deg, $primary-color, $secondary-color);
+
+// Background color
+$background-black-color: #18181c;
+
+// Card state colors
+$state-mint: #17a2b8;
+$state-near-mint: #3caf56;
+$state-excellent: #82891e;
+$state-good: #ffc107;
+$state-light-played: #fd8b2b;
+$state-played: #e56874;
+$state-poor: #dc3545;
+
+// Font size
+$font-size-64: 4rem; // 64px
+$font-size-48: 3rem; // 48px
+$font-size-36: 2.25rem; // 36px
+$font-size-28: 1.75rem; // 28px
+$font-size-24: 1.5rem; // 24px
+$font-size-20: 1.25rem; // 20px
+$font-size-18: 1.125rem; // 18px
+$font-size-16: 1rem; // 16px
+$font-size-14: .875rem; // 14px
+$font-size-12: .75rem; // 12px
+$font-size-10: .625rem; // 10px
+
+// Breakpoints
+$mt-breakpoint: (
+  mobile: 480,
+  tablet: 768,
+  desktop: 1024,
+);
+
+// Border radius
+$border-radius-small: 5px;
+$border-radius-medium: 10px;
+$border-radius-large: 15px;
+
+.Back {
+  width: 100%;
+  height: 100%;
+  background-color: #18181c;
+}

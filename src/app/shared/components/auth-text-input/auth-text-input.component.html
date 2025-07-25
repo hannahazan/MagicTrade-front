@@ -1,0 +1,21 @@
+
+<div
+    class="auth__text-input"
+    [class.auth__text-input--invalid]="hasError && !isValid"
+>
+    <label
+        [attr.for]="id"
+        class=""
+    >
+        {{ label }}
+    </label>
+    <input
+        class="input-placeholder"
+        [id]="id"
+        [type]="type"
+        [formControl]="control"
+        [placeholder]="placeholder"
+    />
+
+</div>
+

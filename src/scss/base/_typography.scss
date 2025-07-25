@@ -1,0 +1,53 @@
+// h1
+.heading1-poppins {
+  @include heading1-poppins;
+}
+
+.heading1-poly {
+  @include heading1-poly;
+}
+
+// h2
+.heading2-poppins {
+  @include heading2-poppins;
+}
+
+.heading2-poly {
+  @include heading2-poly;
+}
+
+// h3
+.heading3-poppins {
+  @include heading3-poppins;
+}
+
+.heading3-poly {
+  @include heading3-poly;
+}
+
+// h4
+.heading4-poppins {
+  @include heading4-poppins;
+}
+
+.heading4-poly {
+  @include heading4-poly;
+}
+
+// h5
+.heading5-poppins {
+  @include heading5-poppins;
+}
+
+.heading5-poly {
+  @include heading5-poly;
+}
+
+// p
+.paragraph-poppins {
+  @include paragraph("Poppins Regular");
+}
+
+.paragraph-poly {
+  @include paragraph("Poly Regular");
+}

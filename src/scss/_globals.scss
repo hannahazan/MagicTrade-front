@@ -1,0 +1,56 @@
+// === Elements === //
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+  padding: 3rem 0 3rem;
+  background-color: $background-black-color;
+}
+
+a {
+    color: $secondary-color;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+// === Classes === //
+
+.gradient-border-sm {
+    @include gradient-border($border-radius-small);
+}
+
+.gradient-border-md {
+    @include gradient-border($border-radius-medium);
+}
+
+.gradient-border-lg {
+    @include gradient-border($border-radius-large);
+}
+
+.Page-Inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.input-placeholder {
+
+  &::placeholder {
+    @include paragraph("Poppins Light");
+    color: $grey-color;
+    font-size: $font-size-14;
+
+    @include breakpoint("desktop") {
+        font-size: $font-size-16;
+    }
+  }
+}
+
+.center-content {
+    display : flex;
+    justify-content: center;
+}

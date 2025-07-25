@@ -1,0 +1,46 @@
+/********************************************
+************** SCSS Variables ***************
+********************************************/
+
+// Card width
+$card-img-width--mobile: 125px;
+$card-img-width--tablet: 200px;
+$card-img-width--desktop: 242px;
+
+// Card-height
+$card-height--mobile: 250px;
+$card-height--tablet: 300px;
+$card-height--desktop: 337px;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --card-img-width: #{$card-img-width--mobile};
+
+  @include breakpoint('tablet') {
+    --card-img-width: #{$card-img-width--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --card-img-width: #{$card-img-width--desktop};
+  }
+}
+
+.Card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: var(--card-img-width);
+
+  img {
+    width: var(--card-img-width);
+    height: calc(var(--card-img-width) * 1.5);
+    border-radius: $border-radius-medium;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+  }
+}
+
+

@@ -1,0 +1,80 @@
+.auth {
+
+    &__container {
+        margin: 36px 0;
+        min-height: 200px;
+        min-width: 300px;
+        max-width: 900px;
+
+        @include breakpoint("desktop") {
+            display: flex;
+        }
+    }
+
+    &__form-wrapper {
+        position: relative;
+        z-index: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        background-color: white;
+
+        &:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.20;
+            z-index: -1;
+            border-radius: 13px;
+
+            @include breakpoint("desktop") {
+                all: unset;
+            }
+        }
+
+        &--bg-signup:before {
+          background-image: url("/images/chandra.webp");
+        }
+
+        &--bg-login:before {
+          background-image: url("/images/avacyn.webp");
+        }
+
+        & > * {
+            color: $background-black-color;
+        }
+    }
+
+    &__form-title {
+      @include heading3-poppins;
+      color: $black-color;
+        margin-bottom: 3rem;
+    }
+
+    &__img {
+        display: none;
+
+        @include breakpoint("desktop") {
+            display: block;
+            width: 50%;
+            overflow: hidden;
+            background-color: $background-black-color;
+
+            & > img {
+                width: 100%;
+                height: 100%;
+                object-fit:cover;
+                object-position: 35% center;
+                display: block;
+            }
+        }
+    }
+
+}

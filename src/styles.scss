@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Abstracts
+@import "./scss/abstracts/variables";
+@import "./scss/abstracts/functions";
+@import "./scss/abstracts/mixins";
+
+// Base
+@import "./scss/base/fonts";
+@import "./scss/base/reset";
+@import "./scss/base/typography";
+
+// Components
+// Atoms
+@import "./scss/components/atoms/button";
+@import "./scss/components/atoms/states";
+@import "./scss/components/atoms/link";
+@import "./scss/components/atoms/status";
+@import "./scss/components/atoms/input-errors";
+
+// Molecules
+@import "./scss/components/molecules/card";
+@import "./scss/components/molecules/auth-form";
+@import "./scss/components/atoms/auth-text-input";
+
+// Organism
+@import "./scss/components/organisms/header";
+@import "./scss/components/organisms/auth-container";
+
+// Pages
+@import "./scss/pages/collection";
+@import "./scss/pages/home";
+@import "./scss/pages/signup";
+@import "./scss/pages/login";
+
+// globals
+@import "./scss/globals";
