@@ -38,6 +38,8 @@ export class LoginFormComponent {
   });
 
   onSubmit(): void {
+    if (this.loginForm.invalid) return;
+
     this.auth.login(this.formValue).subscribe({
       next: result => {
         console.log(result);
