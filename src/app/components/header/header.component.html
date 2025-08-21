@@ -11,7 +11,7 @@
 
   <nav class="Header-Nav-links" [ngClass]="{ open: menuOpen }">
     <a class="Nav-link">HOME</a>
-    <a class="Nav-link">CARDS</a>
+    <a [routerLink]="['/cards']" class="Nav-link">CARDS</a>
     <a class="Nav-link">TRADERS</a>
     <a class="Nav-link">WISHLIST</a>
     <a [routerLink]="['/collection']" class="Nav-link">COLLECTION</a>

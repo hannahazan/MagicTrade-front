@@ -1,0 +1,35 @@
+<div class="modal">
+  <div class="modal__card modal__card--gradient-border-md">
+    <div class="modal__wrapper">
+      <button class="modal__close-btn" (click)="close.emit()">
+        ✕
+      </button>
+
+      <p class="modal__subtitle">Add in your collection one by one</p>
+      <h2 class="modal__title">About your Card</h2>
+
+      <div class="modal__select-group">
+        <select class="modal__select-box">
+          <option disabled selected>State</option>
+        </select>
+        <select class="modal__select-box">
+          <option disabled selected>Language</option>
+        </select>
+      </div>
+
+      <div class="modal__checkbox-group">
+        <label class="modal__checkbox-label">
+          <input type="checkbox" class="modal__checkbox" /> Foil
+        </label>
+        <label class="modal__checkbox-label">
+          <input type="checkbox" class="modal__checkbox" /> Full art
+        </label>
+        <label class="modal__checkbox-label">
+          <input type="checkbox" class="modal__checkbox" /> Textless
+        </label>
+      </div>
+
+      <app-button class="modal__button">Add to Collection</app-button>
+    </div>
+  </div>
+</div>

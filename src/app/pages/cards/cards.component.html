@@ -1,0 +1,41 @@
+<div class="Page-Inner">
+  <h1 class="Cards__title">Cards</h1>
+  <div class="Cards__filter">
+    <p>Sort by :</p>
+    <select name="set" id="set-select">
+      <option value="">Set</option>
+    </select>
+    <select name="type" id="type-select">
+      <option value="">Type</option>
+    </select>
+    <select name="Rarity" id="rarity-select">
+      <option value="">Rarity</option>
+    </select>
+    <select name="Color" id="color-select">
+      <option value="">Color</option>
+    </select>
+    <select name="CCM" id="ccm-select">
+      <option value="">CCM</option>
+    </select>
+  </div>
+
+  <div class="Cards__container gradient-border-lg">
+    <div class="Cards__wrapper">
+      @for (card of cards; track $index) {
+        <div class="Card">
+          <img [src]="card.image" alt="" />
+          <div class="Card__actions">
+            <app-button (click)="openCardModal(card)">Add</app-button>
+            <app-button (click)="goToCardDetail(card)">Detail</app-button>
+          </div>
+        </div>
+      }
+      @if (selectedCard) {
+        <app-card-modal
+          [card]="selectedCard"
+          (close)="closeModal()">
+        </app-card-modal>
+      }
+    </div>
+  </div>
+</div>
