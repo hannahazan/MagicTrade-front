@@ -1,11 +1,9 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { LoginFormComponent } from './login-form.component';
-import {provideHttpClientTesting} from "@angular/common/http/testing";
-import {provideHttpClient} from "@angular/common/http";
-import {provideRouter, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {AuthService} from "../../core/services/auth.service";
-import {delay, throwError} from "rxjs";
+import {throwError} from "rxjs";
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;

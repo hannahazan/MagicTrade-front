@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SignUpFormComponent } from './sign-up-form.component';
-import {provideRouter, Router} from "@angular/router";
-import {provideHttpClientTesting} from "@angular/common/http/testing";
-import {provideHttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 import {UserRegisterService} from "../../core/services/user-register.service";
 import {throwError} from "rxjs";
 
