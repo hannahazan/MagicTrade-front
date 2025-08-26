@@ -32,11 +32,22 @@
 
   <div class="wishlist__container gradient-border-lg">
     <div class="wishlist__wrapper">
-      @for (card of cards; track $index) {
+      @for (card of cards.length ? cards : []; track $index) {
         <div class="Card">
           <img [src]="card.image" alt="" />
+        </div>
+      } @empty {
+        <div class="wishlist__empty">
+          <h3 class="wishlist__subtitle">You have no items in your Wishlist.</h3>
+          <app-button class="Button">Back to cards</app-button>
         </div>
       }
     </div>
   </div>
+
+  <app-pager
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)">
+  </app-pager>
 </div>

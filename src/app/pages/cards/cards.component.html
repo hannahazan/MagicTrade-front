@@ -49,4 +49,9 @@
       }
     </div>
   </div>
+  <app-pager
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)">
+  </app-pager>
 </div>

@@ -3,20 +3,30 @@ import {CardModalComponent} from "../../components/card-modal/card-modal.compone
 import {Router} from "@angular/router";
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
+import {PagerComponent} from "../../shared/components/pager/pager.component";
 
 @Component({
   selector: 'app-cards',
   standalone: true,
-    imports: [
-        CardModalComponent,
-        ButtonComponent,
-        SelectComponent
-    ],
+  imports: [
+    CardModalComponent,
+    ButtonComponent,
+    SelectComponent,
+    PagerComponent
+  ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss'
 })
 export class CardsComponent {
  private router = inject(Router);
+
+  currentPage = 1;
+  totalPages = 10;
+
+
+  onPageChange(newPage: number) {
+    this.currentPage = newPage;
+  }
 
   onSortChange(value: string) {
     console.log('Selected value:', value);
