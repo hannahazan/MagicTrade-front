@@ -1,0 +1,6 @@
+.profile {
+  &__title {
+    @include heading1-poly;
+    margin-block-end: 20px;
+  }
+}
