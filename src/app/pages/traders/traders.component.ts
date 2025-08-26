@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {TraderComponent} from "../../components/trader/trader.component";
+import {TraderPreviewComponent} from "../../components/trader/trader-preview.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
 
 @Component({
   selector: 'app-traders',
   standalone: true,
   imports: [
-    TraderComponent,
+    TraderPreviewComponent,
     SelectComponent
   ],
   templateUrl: './traders.component.html',

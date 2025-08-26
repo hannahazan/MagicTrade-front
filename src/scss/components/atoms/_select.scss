@@ -41,12 +41,6 @@ select {
 
   transition: background-color 0.2s, box-shadow 0.2s;
 
-  &:hover {
-    background-color: $black-color;
-    color: $white-color;
-    outline: solid $white-color 2px;
-  }
-
   &:focus {
     box-shadow: 0 0 0 2px $primary-color;
   }

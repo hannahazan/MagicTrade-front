@@ -7,9 +7,9 @@ import {ButtonComponent} from "../../shared/components/button/button.component";
   imports: [
     ButtonComponent
   ],
-  templateUrl: './trader.component.html',
-  styleUrl: './trader.component.scss'
+  templateUrl: './trader-preview.component.html',
+  styleUrl: './trader-preview.component.scss'
 })
-export class TraderComponent {
+export class TraderPreviewComponent {
 
 }
