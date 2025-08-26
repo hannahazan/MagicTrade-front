@@ -8,11 +8,12 @@ import {ProfilePageComponent} from "./pages/profile-page/profile-page.component"
 import {TradersComponent} from "./pages/traders/traders.component";
 import {WishlistComponent} from "./pages/wishlist/wishlist.component";
 import {authGuard} from "./core/guards/auth.guard";
+import {roleGuard} from "./core/guards/role.guard";
 
 export const routes: Routes = [
     {
-        path: 'signup',
-        component: SignUpPageComponent
+      path: 'signup',
+      component: SignUpPageComponent
     },
     {
       path: 'login',
@@ -24,12 +25,14 @@ export const routes: Routes = [
       canActivate: [authGuard]
     },
     {
-        path: 'sandbox',
-        component: SandboxComponent
+      path: 'sandbox',
+      component: SandboxComponent,
+      canActivate: [roleGuard("ROLE_ADMIN")],
     },
     {
       path: 'collection',
-      component: CollectionComponent
+      component: CollectionComponent,
+      canActivate: [authGuard]
     },
     {
       path: 'cards',
@@ -41,6 +44,7 @@ export const routes: Routes = [
     },
     {
       path: 'wishlist',
-      component: WishlistComponent
+      component: WishlistComponent,
+      canActivate: [authGuard]
     }
 ];
