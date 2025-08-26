@@ -58,7 +58,6 @@ export class AuthService {
 
     try {
       const decodedToken = jwtDecode<JwtPayload>(token);
-      console.log(decodedToken);
       if (!decodedToken.exp) {
         this.clearToken();
         return
