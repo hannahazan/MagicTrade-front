@@ -1,0 +1,109 @@
+/********************************************
+************** SCSS Wishlist **************
+********************************************/
+
+// Wishlist width
+$wishlist-container-width--mobile: calc(100vw - 72px);
+$wishlist-container-width--tablet: calc(100vw - 100px);
+$wishlist-container-width--desktop: calc(100vw - 200px);
+
+$wishlist-filter-flex-direction--mobile: column;
+$wishlist-filter-flex-direction--tablet: row;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --wishlist-container-width: #{$wishlist-container-width--mobile};
+  --wishlist-filter-flex-direction: #{$wishlist-filter-flex-direction--mobile};
+
+  @include breakpoint('tablet') {
+    --wishlist-container-width: #{$wishlist-container-width--tablet};
+    --wishlist-filter-flex-direction: #{$wishlist-filter-flex-direction--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --wishlist-container-width: #{$wishlist-container-width--desktop};
+  }
+}
+
+.wishlist {
+  &__title {
+    @include heading1-poly;
+    margin-block-end: 20px;
+  }
+
+  &__container {
+    width: var(--wishlist-container-width);
+    min-height: 500px;
+  }
+
+  &__filter {
+    width: var(--wishlist-container-width);
+    display: flex;
+    flex-direction: var(--wishlist-filter-flex-direction);
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    margin: 30px 0px;
+
+    &-label {
+      @include paragraph("Poppins Regular");
+    }
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-img-width), 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    background: $background-black-color;
+    min-height: 500px;
+    justify-items: center;
+
+    .Card {
+      &__info {
+        max-width: var(--card-img-width);
+        text-align: left;
+
+        &__description {
+          @include paragraph('Poppins Regular');
+          margin: 0.2rem 0;
+
+          strong {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__subtitle {
+    @include heading3-poppins;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  &__description {
+    @include paragraph("Poppins Regular");
+  }
+}
+
