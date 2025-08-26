@@ -1,48 +1,48 @@
 /********************************************
-************** SCSS Collection **************
+************** SCSS Wishlist **************
 ********************************************/
 
-// Card width
-$collection-container-width--mobile: calc(100vw - 72px);
-$collection-container-width--tablet: calc(100vw - 100px);
-$collection-container-width--desktop: calc(100vw - 200px);
+// Wishlist width
+$wishlist-container-width--mobile: calc(100vw - 72px);
+$wishlist-container-width--tablet: calc(100vw - 100px);
+$wishlist-container-width--desktop: calc(100vw - 200px);
 
-$collection-filter-flex-direction--mobile: column;
-$collection-filter-flex-direction--tablet: row;
+$wishlist-filter-flex-direction--mobile: column;
+$wishlist-filter-flex-direction--tablet: row;
 
 /********************************************
 ************** Custom properties ************
 ********************************************/
 
 :root {
-  --collection-container-width: #{$collection-container-width--mobile};
-  --collection-filter-flex-direction: #{$collection-filter-flex-direction--mobile};
+  --wishlist-container-width: #{$wishlist-container-width--mobile};
+  --wishlist-filter-flex-direction: #{$wishlist-filter-flex-direction--mobile};
 
   @include breakpoint('tablet') {
-    --collection-container-width: #{$collection-container-width--tablet};
-    --collection-filter-flex-direction: #{$collection-filter-flex-direction--tablet};
+    --wishlist-container-width: #{$wishlist-container-width--tablet};
+    --wishlist-filter-flex-direction: #{$wishlist-filter-flex-direction--tablet};
   }
 
   @include breakpoint('desktop') {
-    --collection-container-width: #{$collection-container-width--desktop};
+    --wishlist-container-width: #{$wishlist-container-width--desktop};
   }
 }
 
-.collection {
+.wishlist {
   &__title {
     @include heading1-poly;
     margin-block-end: 20px;
   }
 
   &__container {
-    width: var(--collection-container-width);
+    width: var(--wishlist-container-width);
     min-height: 500px;
   }
 
   &__filter {
-    width: var(--collection-container-width);
+    width: var(--wishlist-container-width);
     display: flex;
-    flex-direction: var(--collection-filter-flex-direction);
+    flex-direction: var(--wishlist-filter-flex-direction);
     align-items: center;
     gap: 0.5rem;
     color: white;
@@ -67,9 +67,9 @@ $collection-filter-flex-direction--tablet: row;
         max-width: var(--card-img-width);
         text-align: left;
 
-       &__description {
-        @include paragraph('Poppins Regular');
-        margin: 0.2rem 0;
+        &__description {
+          @include paragraph('Poppins Regular');
+          margin: 0.2rem 0;
 
           strong {
             color: $primary-color;

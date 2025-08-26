@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TraderPreviewComponent} from "../../components/trader/trader-preview.component";
+import {TraderPreviewComponent} from "../../components/trader-preview/trader-preview.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
 
 @Component({

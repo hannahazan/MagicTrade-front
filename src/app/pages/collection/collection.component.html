@@ -33,7 +33,7 @@
   <div class="collection__container gradient-border-lg">
 
     <div class="collection__wrapper">
-      @for (card of paginatedCards; track $index) {
+      @for (card of cards; track $index) {
         <div class="Card">
           <img class="gradient-border-md" [src]="card.image" alt="Card Image" />
           <div class="Card__info">
@@ -54,12 +54,9 @@
     </div>
 
   </div>
-
-  <div class="pagination">
-    <button class="Button" (click)="prevPage()" [disabled]="currentPage === 1"> < </button>
-
-    <span class="Pagination__description">Page {{ currentPage }} of {{ totalPages }}</span>
-
-    <button class="Button" (click)="nextPage()" [disabled]="currentPage === totalPages"> > </button>
-  </div>
+  <app-pager
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)">
+  </app-pager>
 </div>

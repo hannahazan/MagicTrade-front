@@ -3,19 +3,18 @@ import {ButtonComponent} from "../../shared/components/button/button.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
 import {PagerComponent} from "../../shared/components/pager/pager.component";
 
-
 @Component({
-  selector: 'app-collection',
+  selector: 'app-wishlist',
   standalone: true,
   imports: [
-    ButtonComponent,
     SelectComponent,
-    PagerComponent
+    PagerComponent,
+    ButtonComponent
   ],
-  templateUrl: './collection.component.html',
-  styleUrl: './collection.component.scss'
+  templateUrl: './wishlist.component.html',
+  styleUrl: './wishlist.component.scss'
 })
-export class CollectionComponent {
+export class WishlistComponent {
   currentPage = 1;
   totalPages = 10;
 

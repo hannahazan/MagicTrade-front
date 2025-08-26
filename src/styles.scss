@@ -19,6 +19,7 @@
 @import "./scss/components/atoms/input-errors";
 @import "./scss/components/atoms/auth-text-input";
 @import "./scss/components/atoms/select";
+@import "./scss/components/atoms/pager";
 
 // Molecules
 @import "./scss/components/molecules/card";
@@ -39,6 +40,8 @@
 @import "./scss/pages/login";
 @import "./scss/pages/profile";
 @import "./scss/pages/traders";
+@import "./scss/pages/login";
+@import "./scss/pages/wishlist";
 
 // globals
 @import "./scss/globals";
