@@ -1,0 +1,55 @@
+/********************************************
+************** SCSS trader **************
+********************************************/
+
+// Trader width
+$trader-container-width--mobile: calc(100vw - 72px);
+$trader-container-width--tablet: calc(100vw - 100px);
+$trader-container-width--desktop: calc(100vw - 200px);
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --trader-container-width: #{$trader-container-width--mobile};
+
+  @include breakpoint('tablet') {
+    --trader-container-width: #{$trader-container-width--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --trader-container-width: #{$trader-container-width--desktop};
+  }
+}
+
+.trader {
+  &__container {
+    width: 100%;
+  }
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: $background-black-color;
+    height: 300px;
+
+    @include breakpoint('tablet') {
+      flex-direction: row;
+      row-gap: 1rem;
+      height: 100px;
+    }
+  }
+
+  &__name,
+  &__rate,
+  &__localisation {
+    @include paragraph("Poppins Regular");
+
+    color: white;
+  }
+}

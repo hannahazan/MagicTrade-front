@@ -11,26 +11,6 @@
   }
 }
 
-// Heading
-$heading1--font-size--mobile: $font-size-36;
-$heading1--font-size--desktop: $font-size-48;
-$heading2--font-size--mobile: $font-size-28;
-$heading2--font-size--desktop: $font-size-36;
-$heading3--font-size--mobile: $font-size-20;
-$heading3--font-size--desktop: $font-size-28;
-$heading4--font-size--mobile: $font-size-18;
-$heading4--font-size--desktop: $font-size-24;
-$heading5--font-size--mobile: $font-size-16;
-$heading5--font-size--desktop: $font-size-20;
-
-// paragraph
-$paragraph--font-size--mobile: $font-size-12;
-$paragraph--font-size--desktop: $font-size-16;
-
-// Navbar
-$navbar-font-size--mobile: $font-size-12;
-$navbar-font-size--desktop: $font-size-14;
-
 // Custom Properties
 :root {
   --heading1--font-size: #{$heading1--font-size--mobile};

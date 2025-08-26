@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {ButtonComponent} from "../../shared/components/button/button.component";
+import {SelectComponent} from "../../shared/components/select/select.component";
 
 
 @Component({
   selector: 'app-collection',
   standalone: true,
   imports: [
-    ButtonComponent
+    ButtonComponent,
+    SelectComponent
   ],
   templateUrl: './collection.component.html',
   styleUrl: './collection.component.scss'
@@ -34,6 +36,10 @@ export class CollectionComponent {
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+  }
+
+  onSortChange(value: string) {
+    console.log('Selected value:', value);
   }
 
   cards = [

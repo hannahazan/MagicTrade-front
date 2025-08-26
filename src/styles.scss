@@ -18,6 +18,7 @@
 @import "./scss/components/atoms/status";
 @import "./scss/components/atoms/input-errors";
 @import "./scss/components/atoms/auth-text-input";
+@import "./scss/components/atoms/select";
 
 // Molecules
 @import "./scss/components/molecules/card";
@@ -28,6 +29,7 @@
 @import "./scss/components/organisms/card-modal";
 @import "./scss/components/organisms/header";
 @import "./scss/components/organisms/auth-container";
+@import "./scss/components/organisms/trader";
 
 // Pages
 @import "./scss/pages/cards";
@@ -35,6 +37,7 @@
 @import "./scss/pages/home";
 @import "./scss/pages/signup";
 @import "./scss/pages/login";
+@import "./scss/pages/traders";
 
 // globals
 @import "./scss/globals";

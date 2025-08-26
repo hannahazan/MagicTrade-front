@@ -4,6 +4,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import {CollectionComponent} from "./pages/collection/collection.component";
 import {CardsComponent} from "./pages/cards/cards.component";
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
+import {TradersComponent} from "./pages/traders/traders.component";
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
       path: 'cards',
       component: CardsComponent
+    },
+    {
+      path: 'traders',
+      component: TradersComponent
     }
 ];

@@ -1,26 +1,37 @@
-<div class="Page-Inner">
-  <h1 class="Cards__title">Cards</h1>
-  <div class="Cards__filter">
-    <p>Sort by :</p>
-    <select name="set" id="set-select">
-      <option value="">Set</option>
-    </select>
-    <select name="type" id="type-select">
-      <option value="">Type</option>
-    </select>
-    <select name="Rarity" id="rarity-select">
-      <option value="">Rarity</option>
-    </select>
-    <select name="Color" id="color-select">
-      <option value="">Color</option>
-    </select>
-    <select name="CCM" id="ccm-select">
-      <option value="">CCM</option>
-    </select>
+<div class="page-inner">
+  <h1 class="cards__title">cards</h1>
+  <div class="cards__filter">
+    <p class="cards__filter-label">SORT BY :</p>
+
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Set"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Type"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Rarity"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Color"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="CCM"
+      (valueChange)="onSortChange($event)">
+    </app-select>
   </div>
 
-  <div class="Cards__container gradient-border-lg">
-    <div class="Cards__wrapper">
+  <div class="cards__container gradient-border-lg">
+    <div class="cards__wrapper">
       @for (card of cards; track $index) {
         <div class="Card">
           <img [src]="card.image" alt="" />
