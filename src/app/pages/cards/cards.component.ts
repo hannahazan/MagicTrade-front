@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {CardModalComponent} from "../../components/card-modal/card-modal.component";
 import {Router} from "@angular/router";
 import {ButtonComponent} from "../../shared/components/button/button.component";
+import {SelectComponent} from "../../shared/components/select/select.component";
 
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [
-    CardModalComponent,
-    ButtonComponent
-  ],
+    imports: [
+        CardModalComponent,
+        ButtonComponent,
+        SelectComponent
+    ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss'
 })
 export class CardsComponent {
-  constructor(private router: Router) {}
+ private router = inject(Router);
+
+  onSortChange(value: string) {
+    console.log('Selected value:', value);
+  }
 
   cards = [
     {

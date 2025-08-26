@@ -29,7 +29,7 @@ a {
     @include gradient-border($border-radius-large);
 }
 
-.Page-Inner {
+.page-inner {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,6 +51,6 @@ a {
 }
 
 .center-content {
-    display : flex;
-    justify-content: center;
+  display : flex;
+  justify-content: center;
 }
