@@ -9,15 +9,18 @@ import {TradersComponent} from "./pages/traders/traders.component";
 import {WishlistComponent} from "./pages/wishlist/wishlist.component";
 import {authGuard} from "./core/guards/auth.guard";
 import {roleGuard} from "./core/guards/role.guard";
+import {visitorOnlyGuard} from "./core/guards/visitor-only.guard";
 
 export const routes: Routes = [
     {
       path: 'signup',
-      component: SignUpPageComponent
+      component: SignUpPageComponent,
+      canActivate: [visitorOnlyGuard]
     },
     {
       path: 'login',
-      component: LoginPageComponent
+      component: LoginPageComponent,
+      canActivate: [visitorOnlyGuard]
     },
     {
       path: 'profile',
