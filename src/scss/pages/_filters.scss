@@ -27,11 +27,7 @@
     gap: 2rem;
 
     select {
-      width: $input-width-mobile;
-
-      @include breakpoint("desktop") {
-        width: $input-width-desktop;
-      }
+      width: var(--input-width);
     }
 
     label {

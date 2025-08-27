@@ -1,6 +1,28 @@
-$input-width-mobile: 250px;
-$input-width-desktop: 500px;
+/********************************************
+************** SCSS Variables ***************
+********************************************/
+
+$input-width--mobile: 250px;
+$input-width--tablet: 350px;
+$input-width--desktop: 500px;
 $gap: 2.5rem;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --input-width: #{$input-width--mobile};
+
+
+  @include breakpoint('tablet') {
+    --input-width: #{$input-width--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --input-width: #{$input-width--desktop};
+  }
+}
 
 .auth-form {
     display: flex;
@@ -17,11 +39,7 @@ $gap: 2.5rem;
 .auth {
 
     &__input {
-      width: $input-width-mobile;
-
-      @include breakpoint("desktop") {
-        width: $input-width-desktop;
-      }
+      width: var(--input-width);
     }
 
   &__failure-message {
