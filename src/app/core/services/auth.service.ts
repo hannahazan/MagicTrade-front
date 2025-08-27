@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Observable, tap} from "rxjs";
 import {LoginCredentials} from "../../models/login-credentials.model";
 import {jwtDecode, JwtPayload} from "jwt-decode";
+import {JwtCustomPayload} from "../../models/jwt-custom-payload.model";
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,13 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  getUserRole(): string[] | null {
+  getUserRole(): string | null {
     const token = this.getToken();
     if (!token) return null;
     try {
-      const decodedToken: any = jwtDecode(token);
-      return decodedToken.roles || null;
+      const decodedToken: JwtCustomPayload = jwtDecode(token);
+      // Les users ont un seul rôle donc on prend le premier (pas de table de jointure user_role dans le back)
+      return decodedToken.roles?.[0]?.authority ?? null;
     } catch {
       return null;
     }
@@ -77,6 +79,7 @@ export class AuthService {
     if (!token) return false;
     try {
       const decodedToken = jwtDecode<JwtPayload>(token);
+      console.log(decodedToken);
 
       if (!decodedToken.exp) {
         this.clearToken();
@@ -94,6 +97,11 @@ export class AuthService {
       this.clearToken();
       return false;
     }
+  }
+
+  isAdmin(): boolean {
+    if (!this.isLoggedIn()) return false;
+    return this.getUserRole() === "ROLE_ADMIN";
   }
 
 }

@@ -7,27 +7,36 @@ import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {ProfilePageComponent} from "./pages/profile-page/profile-page.component";
 import {TradersComponent} from "./pages/traders/traders.component";
 import {WishlistComponent} from "./pages/wishlist/wishlist.component";
+import {authGuard} from "./core/guards/auth.guard";
+import {roleGuard} from "./core/guards/role.guard";
+import {visitorOnlyGuard} from "./core/guards/visitor-only.guard";
+import {AdminBoardComponent} from "./pages/admin-board/admin-board.component";
 
 export const routes: Routes = [
     {
-        path: 'signup',
-        component: SignUpPageComponent
+      path: 'signup',
+      component: SignUpPageComponent,
+      canActivate: [visitorOnlyGuard]
     },
     {
       path: 'login',
-      component: LoginPageComponent
+      component: LoginPageComponent,
+      canActivate: [visitorOnlyGuard]
     },
     {
       path: 'profile',
-      component: ProfilePageComponent
+      component: ProfilePageComponent,
+      canActivate: [authGuard]
     },
     {
-        path: 'sandbox',
-        component: SandboxComponent
+      path: 'sandbox',
+      component: SandboxComponent,
+      canActivate: [roleGuard("ROLE_ADMIN")],
     },
     {
       path: 'collection',
-      component: CollectionComponent
+      component: CollectionComponent,
+      canActivate: [authGuard]
     },
     {
       path: 'cards',
@@ -39,6 +48,13 @@ export const routes: Routes = [
     },
     {
       path: 'wishlist',
-      component: WishlistComponent
-    }
+      component: WishlistComponent,
+      canActivate: [authGuard]
+    },
+    {
+      path: 'admin',
+      component: AdminBoardComponent,
+      canActivate: [roleGuard("ROLE_ADMIN")],
+    },
+
 ];
