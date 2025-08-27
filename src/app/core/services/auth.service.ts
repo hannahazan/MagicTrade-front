@@ -99,4 +99,9 @@ export class AuthService {
     }
   }
 
+  isAdmin(): boolean {
+    if (!this.isLoggedIn()) return false;
+    return this.getUserRole() === "ROLE_ADMIN";
+  }
+
 }

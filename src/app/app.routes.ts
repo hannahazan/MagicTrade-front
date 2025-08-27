@@ -10,6 +10,7 @@ import {WishlistComponent} from "./pages/wishlist/wishlist.component";
 import {authGuard} from "./core/guards/auth.guard";
 import {roleGuard} from "./core/guards/role.guard";
 import {visitorOnlyGuard} from "./core/guards/visitor-only.guard";
+import {AdminBoardComponent} from "./pages/admin-board/admin-board.component";
 
 export const routes: Routes = [
     {
@@ -49,5 +50,11 @@ export const routes: Routes = [
       path: 'wishlist',
       component: WishlistComponent,
       canActivate: [authGuard]
-    }
+    },
+    {
+      path: 'admin',
+      component: AdminBoardComponent,
+      canActivate: [roleGuard("ROLE_ADMIN")],
+    },
+
 ];
