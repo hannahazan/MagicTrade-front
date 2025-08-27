@@ -3,6 +3,7 @@ import {AuthTextInputComponent} from "../../shared/components/auth-text-input/au
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
+import {AuthCheckboxComponent} from "../../shared/components/auth-checkbox/auth-checkbox.component";
 
 @Component({
   selector: 'app-filters',
@@ -11,7 +12,8 @@ import {SelectComponent} from "../../shared/components/select/select.component";
     AuthTextInputComponent,
     ReactiveFormsModule,
     ButtonComponent,
-    SelectComponent
+    SelectComponent,
+    AuthCheckboxComponent
   ],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.scss'

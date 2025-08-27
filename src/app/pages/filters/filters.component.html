@@ -19,16 +19,19 @@
           [control]="searchForm.controls.typeLine"
         />
 
-        <!-- Colors (checkboxes natifs ou à transformer aussi en custom component plus tard) -->
         <div formGroupName="colors" class="checkboxes">
           <p>Color</p>
           <div class="checkboxes__labels">
-          <label><input type="checkbox" formControlName="white" /> White</label>
-          <label><input type="checkbox" formControlName="blue" /> Blue</label>
-          <label><input type="checkbox" formControlName="black" /> Black</label>
-          <label><input type="checkbox" formControlName="red" /> Red</label>
-          <label><input type="checkbox" formControlName="green" /> Green</label>
-          <label><input type="checkbox" formControlName="colorless" /> Colorless</label>
+            <div class="checkboxes__labels-triple">
+            <app-auth-checkbox label="White" [control]="searchForm.controls.colors.controls.white" />
+            <app-auth-checkbox label="Blue" [control]="searchForm.controls.colors.controls.blue" />
+            <app-auth-checkbox label="Black" [control]="searchForm.controls.colors.controls.black" />
+            </div>
+            <div class="checkboxes__labels-triple">
+            <app-auth-checkbox label="Red" [control]="searchForm.controls.colors.controls.red" />
+            <app-auth-checkbox label="Green" [control]="searchForm.controls.colors.controls.green" />
+            <app-auth-checkbox label="Colorless" [control]="searchForm.controls.colors.controls.colorless" />
+            </div>
           </div>
         </div>
 
