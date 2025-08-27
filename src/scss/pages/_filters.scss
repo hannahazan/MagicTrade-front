@@ -1,0 +1,75 @@
+.filters {
+
+  &__title {
+    @include heading1-poly;
+    margin-block-end: 20px;
+  }
+
+  &__container {
+    width: var(--cards-container-width);
+    min-height: 200px;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background: $background-black-color;
+    min-height: 200px;
+    color: $white-color;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    .checkboxes {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: start;
+      gap: 0.5rem;
+      width: $input-width-mobile;
+
+      .checkboxes__labels {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0.175rem;
+        padding: 0;
+
+        label {
+          flex: 1;
+          width: 90px;
+          text-align: start;
+        }
+      }
+
+      @include breakpoint("desktop") {
+        width: $input-width-desktop;
+      }
+
+      p {
+        @include paragraph("Poppins Regular");
+        color: $white-color;
+        font-weight: 600;
+        text-align: left;
+      }
+    }
+
+    select {
+      width: $input-width-mobile;
+
+      @include breakpoint("desktop") {
+        width: $input-width-desktop;
+      }
+    }
+
+    label {
+      color: $white-color;
+    }
+  }
+}

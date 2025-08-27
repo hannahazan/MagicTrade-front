@@ -1,0 +1,55 @@
+<div class="page-inner">
+  <h1 class="filters__title">FILTERS</h1>
+  <div class="filters__container gradient-border-lg">
+    <div class="filters__wrapper">
+      <form class="filters__form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <!-- Card name -->
+        <app-auth-text-input
+          label="Card name"
+          type="text"
+          placeholder='Any words in the name, e.g. "Fire"'
+          [control]="searchForm.controls.cardName"
+        />
+
+        <!-- Type line -->
+        <app-auth-text-input
+          label="Type Line"
+          type="text"
+          placeholder="Enter a type or choose from the list"
+          [control]="searchForm.controls.typeLine"
+        />
+
+        <!-- Colors (checkboxes natifs ou à transformer aussi en custom component plus tard) -->
+        <div formGroupName="colors" class="checkboxes">
+          <p>Color</p>
+          <div class="checkboxes__labels">
+          <label><input type="checkbox" formControlName="white" /> White</label>
+          <label><input type="checkbox" formControlName="blue" /> Blue</label>
+          <label><input type="checkbox" formControlName="black" /> Black</label>
+          <label><input type="checkbox" formControlName="red" /> Red</label>
+          <label><input type="checkbox" formControlName="green" /> Green</label>
+          <label><input type="checkbox" formControlName="colorless" /> Colorless</label>
+          </div>
+        </div>
+
+        <!-- Mana cost -->
+        <app-auth-text-input
+          label="Mana Cost"
+          type="text"
+          placeholder='Any mana symbols, e.g. "{W}{W}"'
+          [control]="searchForm.controls.manaCost"
+        />
+
+        <!-- Sets -->
+        <app-select
+          [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+          placeholder="Set"
+          (valueChange)="onSortChange($event)">
+        </app-select>
+
+        <app-button>Search with these options</app-button>
+      </form>
+
+    </div>
+  </div>
+</div>
