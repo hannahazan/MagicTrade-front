@@ -12,6 +12,7 @@
   <nav class="Header-Nav-links" [ngClass]="{ open: menuOpen }">
     <a class="Nav-link">HOME</a>
     <a [routerLink]="['/cards']" class="Nav-link">CARDS</a>
+    <a [routerLink]="['/card']" class="Nav-link">SINGLE CARD</a>
     <a [routerLink]="['/traders']" class="Nav-link">TRADERS</a>
 
     @if (authService.isLoggedIn()) {
