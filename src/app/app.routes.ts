@@ -12,6 +12,7 @@ import {authGuard} from "./core/guards/auth.guard";
 import {roleGuard} from "./core/guards/role.guard";
 import {visitorOnlyGuard} from "./core/guards/visitor-only.guard";
 import {AdminBoardComponent} from "./pages/admin-board/admin-board.component";
+import {CardPageComponent} from "./pages/card-page/card-page.component";
 
 export const routes: Routes = [
     {
@@ -42,6 +43,10 @@ export const routes: Routes = [
     {
       path: 'cards',
       component: CardsComponent
+    },
+    {
+      path: 'card',
+      component: CardPageComponent,
     },
     {
       path: 'traders',

@@ -1,0 +1,32 @@
+<div class="page-inner">
+  <section class="card-container gradient-border-lg">
+    <div class="card-wrapper">
+      <div class="card__details">
+        <img [src]="card.imageSizeNormal" alt=""/>
+        <div class="card__info">
+          <h2 class="card__info__title">{{ card.title.toUpperCase() }}</h2>
+          <p><span class="card__info__label">Type : </span>{{ card.types }}</p>
+          <p class="card__info__text">
+            <span class="card__info__label">Text : </span>
+            <span [innerHTML]="card.text | newLineToParagraph"></span>
+          </p>
+          <p><span class="card__info__label">Set : </span>{{ card.setName }}</p>
+          <p><span class="card__info__label">Price : </span>{{ card.price }}</p>
+        </div>
+      </div>
+      <div class="card__actions">
+        <app-button>Add to Wishlist</app-button>
+        <app-button>Add to Collection</app-button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card-owners">
+    <h2 class="card-owners__title">OWNERS</h2>
+    <app-trader></app-trader>
+    <app-trader></app-trader>
+    <app-trader></app-trader>
+    <app-trader></app-trader>
+    <app-trader></app-trader>
+  </section>
+</div>
