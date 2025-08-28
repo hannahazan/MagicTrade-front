@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {TraderPreviewComponent} from "../../shared/components/trader-preview/trader-preview.component";
 import {NewLineToParagraphPipe} from "../../shared/pipes/new-line-to-paragraph.pipe";
 import {CardModalComponent} from "../../shared/components/add-card-to-collection-modal/card-modal.component";
 import {TraderPreview} from "../../models/trader-preview";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-card-page',
@@ -13,6 +14,8 @@ import {TraderPreview} from "../../models/trader-preview";
   styleUrl: './card-page.component.scss'
 })
 export class CardPageComponent {
+
+  private readonly router = inject(Router);
 
   card: any = {
     imageSizeNormal: "cardMagic.png",
@@ -72,6 +75,10 @@ export class CardPageComponent {
 
   toggleAddCardModal(): void {
     this.isAddCardModalOpen = !this.isAddCardModalOpen;
+  }
+
+  clickOnViewTraders(): void {
+     void this.router.navigate(["/traders"]);
   }
 
 }

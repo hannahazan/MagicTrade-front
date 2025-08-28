@@ -45,7 +45,7 @@ export const routes: Routes = [
       component: CardsComponent
     },
     {
-      path: 'card',
+      path: 'cards/:cardId',
       component: CardPageComponent,
     },
     {
@@ -57,10 +57,10 @@ export const routes: Routes = [
       component: WishlistComponent,
       canActivate: [authGuard]
     },
-  {
-    path: 'filters',
-    component: FiltersComponent
-  },
+    {
+      path: 'filters',
+      component: FiltersComponent
+    },
     {
       path: 'admin',
       component: AdminBoardComponent,

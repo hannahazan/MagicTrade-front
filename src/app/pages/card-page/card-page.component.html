@@ -30,6 +30,8 @@
     }
   </section>
 
+  <app-button (click)="clickOnViewTraders()">View all traders</app-button>
+
   @if (isAddCardModalOpen) {
     <app-add-card-to-collection-modal
         [card]="card"
