@@ -25,11 +25,9 @@
 
   <section class="card-owners">
     <h2 class="card-owners__title">OWNERS</h2>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
+    @for (owner of owners; track $index) {
+      <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>
+    }
   </section>
 
   @if (isAddCardModalOpen) {
