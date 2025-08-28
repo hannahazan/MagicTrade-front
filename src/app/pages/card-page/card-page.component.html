@@ -11,12 +11,14 @@
             <span [innerHTML]="card.text | newLineToParagraph"></span>
           </p>
           <p><span class="card__info__label">Set : </span>{{ card.setName }}</p>
-          <p><span class="card__info__label">Price : </span>{{ card.price }}</p>
+          <p><a href="https://www.cardmarket.com/fr/Magic/Cards/Unite-the-Coalition">See on Cardmarket</a></p>
         </div>
       </div>
       <div class="card__actions">
-        <app-button>Add to Wishlist</app-button>
-        <app-button>Add to Collection</app-button>
+        @if (!isCardInWishlist) {
+          <app-button (click)="addToWishlist()">Add to Wishlist</app-button>
+        }
+        <app-button (click)="toggleAddCardModal()">Add to Collection</app-button>
       </div>
     </div>
   </section>
@@ -29,4 +31,12 @@
     <app-trader></app-trader>
     <app-trader></app-trader>
   </section>
+
+  @if (isAddCardModalOpen) {
+    <app-add-card-to-collection-modal
+        [card]="card"
+        (close)="toggleAddCardModal()"
+    >
+    </app-add-card-to-collection-modal>
+  }
 </div>

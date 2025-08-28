@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {CardModalComponent} from "../../components/card-modal/card-modal.component";
+import {CardModalComponent} from "../../shared/components/add-card-to-collection-modal/card-modal.component";
 import {Router, RouterLink} from "@angular/router";
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
