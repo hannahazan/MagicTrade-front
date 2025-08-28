@@ -1,4 +1,3 @@
-@import "scss/components/molecules/auth-form";
 
 .auth__text-input {
   @include paragraph("Poppins Regular");
@@ -6,14 +5,9 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: $input-width-mobile;
-
-    @include breakpoint("desktop") {
-        width: $input-width-desktop;
-    }
+    width: var(--input-width);
 
     label {
-      @include paragraph("Poppins Regular");
         color: $black-color;
         font-weight: 600;
       text-align: left;

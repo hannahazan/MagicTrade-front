@@ -22,6 +22,19 @@ $select-width--desktop: 160px;
   }
 }
 
+.select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__label {
+    @include paragraph("Poppins Regular");
+    color: $white-color;
+    font-weight: 600;
+    text-align: left;
+  }
+}
+
 select {
   @include paragraph("Poppins Regular");
   appearance: none;
@@ -36,6 +49,7 @@ select {
   border-radius: $border-radius-small;
   cursor: pointer;
   outline: none;
+  height: 50px;
 
   box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 

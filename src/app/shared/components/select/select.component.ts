@@ -11,7 +11,7 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './select.component.scss'
 })
 export class SelectComponent {
-  @Input() label = '';
+  @Input() label = 'Label';
   @Input() options: string[] = [];
   @Input() placeholder = 'Select';
   @Input() selected = '';

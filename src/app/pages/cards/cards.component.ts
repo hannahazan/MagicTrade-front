@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {CardModalComponent} from "../../components/card-modal/card-modal.component";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
 import {PagerComponent} from "../../shared/components/pager/pager.component";
@@ -12,7 +12,8 @@ import {PagerComponent} from "../../shared/components/pager/pager.component";
     CardModalComponent,
     ButtonComponent,
     SelectComponent,
-    PagerComponent
+    PagerComponent,
+    RouterLink
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss'

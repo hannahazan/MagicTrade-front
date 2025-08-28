@@ -1,0 +1,39 @@
+.checkboxes {
+  @include paragraph("Poppins Regular");
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: var(--input-width);
+
+  .checkboxes__labels {
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 0.175rem;
+
+    &-triple {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      @include breakpoint('tablet') {
+        flex-direction: row;
+      }
+    }
+
+    label {
+      display: block;
+      width: 130px;
+      text-align: start;
+    }
+  }
+
+  p {
+    color: $white-color;
+    font-weight: 600;
+    text-align: left;
+  }
+}
