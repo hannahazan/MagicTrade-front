@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {TraderPreviewComponent} from "../../components/trader-preview/trader-preview.component";
+import {TraderPreviewComponent} from "../../shared/components/trader-preview/trader-preview.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
+import {TraderPreview} from "../../models/trader-preview";
 
 @Component({
   selector: 'app-traders',
@@ -13,6 +14,39 @@ import {SelectComponent} from "../../shared/components/select/select.component";
   styleUrl: './traders.component.scss'
 })
 export class TradersComponent {
+  traders: TraderPreview[] = [
+    {
+      profilePicture: "dragon.png",
+      pseudo: "JOHN WICK",
+      rate: "4,8",
+      location: "Auvergne-Rhône-Alpes",
+    },
+    {
+      profilePicture: "dragon.png",
+      pseudo: "JOHN WICK",
+      rate: "4,8",
+      location: "Auvergne-Rhône-Alpes",
+    },
+    {
+      profilePicture: "dragon.png",
+      pseudo: "JOHN WICK",
+      rate: "4,8",
+      location: "Auvergne-Rhône-Alpes",
+    },
+    {
+      profilePicture: "dragon.png",
+      pseudo: "JOHN WICK",
+      rate: "4,8",
+      location: "Auvergne-Rhône-Alpes",
+    },
+    {
+      profilePicture: "dragon.png",
+      pseudo: "JOHN WICK",
+      rate: "4,8",
+      location: "Auvergne-Rhône-Alpes",
+    }
+  ]
+
   onSortChange(value: string) {
     console.log('Selected value:', value);
   }

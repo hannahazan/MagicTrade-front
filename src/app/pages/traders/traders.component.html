@@ -20,8 +20,8 @@
     </app-select>
   </div>
   <div class="traders__container">
-    <app-trader></app-trader>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
+    @for (trader of traders; track $index) {
+      <app-trader [traderPreview]="trader"></app-trader>
+    }
   </div>
 </div>

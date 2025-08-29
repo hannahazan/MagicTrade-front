@@ -11,22 +11,32 @@
             <span [innerHTML]="card.text | newLineToParagraph"></span>
           </p>
           <p><span class="card__info__label">Set : </span>{{ card.setName }}</p>
-          <p><span class="card__info__label">Price : </span>{{ card.price }}</p>
+          <p><a href="https://www.cardmarket.com/fr/Magic/Cards/Unite-the-Coalition">See on Cardmarket</a></p>
         </div>
       </div>
       <div class="card__actions">
-        <app-button>Add to Wishlist</app-button>
-        <app-button>Add to Collection</app-button>
+        @if (!isCardInWishlist) {
+          <app-button (click)="addToWishlist()">Add to Wishlist</app-button>
+        }
+        <app-button (click)="toggleAddCardModal()">Add to Collection</app-button>
       </div>
     </div>
   </section>
 
   <section class="card-owners">
     <h2 class="card-owners__title">OWNERS</h2>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
-    <app-trader></app-trader>
+    @for (owner of owners; track $index) {
+      <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>
+    }
   </section>
+
+  <app-button (click)="clickOnViewTraders()">View all traders</app-button>
+
+  @if (isAddCardModalOpen) {
+    <app-add-card-to-collection-modal
+        [card]="card"
+        (close)="toggleAddCardModal()"
+    >
+    </app-add-card-to-collection-modal>
+  }
 </div>

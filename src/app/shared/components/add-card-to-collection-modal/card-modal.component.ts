@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ButtonComponent} from "../../shared/components/button/button.component";
+import {ButtonComponent} from "../button/button.component";
 
 @Component({
-  selector: 'app-card-modal',
+  selector: 'app-add-card-to-collection-modal',
   standalone: true,
   imports: [
     ButtonComponent
