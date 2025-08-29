@@ -2,15 +2,16 @@
   <section class="card-container gradient-border-lg">
     <div class="card-wrapper">
       <div class="card__details">
-        <img [src]="card.imageSizeNormal" alt=""/>
+        <img [src]="displayedCard.imageSizeNormal" alt=""/>
+        <div (click)="flipCard()">flip side</div>
         <div class="card__info">
-          <h2 class="card__info__title">{{ card.title.toUpperCase() }}</h2>
-          <p><span class="card__info__label">Type : </span>{{ card.types }}</p>
+          <h2 class="card__info__title">{{ displayedCard.name.toUpperCase() }}</h2>
+          <p><span class="card__info__label">Type : </span>{{ displayedCard.types }}</p>
           <p class="card__info__text">
             <span class="card__info__label">Text : </span>
-            <span [innerHTML]="card.text | newLineToParagraph"></span>
+            <span [innerHTML]="displayedCard.text | newLineToParagraph"></span>
           </p>
-          <p><span class="card__info__label">Set : </span>{{ card.setName }}</p>
+          <p><span class="card__info__label">Set : </span>{{ displayedCard.setName }}</p>
           <p><a href="https://www.cardmarket.com/fr/Magic/Cards/Unite-the-Coalition">See on Cardmarket</a></p>
         </div>
       </div>
@@ -34,7 +35,7 @@
 
   @if (isAddCardModalOpen) {
     <app-add-card-to-collection-modal
-        [card]="card"
+        [card]="displayedCard"
         (close)="toggleAddCardModal()"
     >
     </app-add-card-to-collection-modal>
