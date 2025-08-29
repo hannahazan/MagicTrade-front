@@ -9,6 +9,9 @@ $single-card-container-width--desktop: 1000px;
 $single-card-img-width--mobile: 250px;
 $single-card-img-width--tablet: 300px;
 $single-card-img-width--desktop: 350px;
+$single-card-img-height--mobile: calc(1.395 * $single-card-img-width--mobile);
+$single-card-img-height--tablet: calc(1.395 * $single-card-img-width--tablet);
+$single-card-img-height--desktop: calc(1.395 * $single-card-img-width--desktop);
 
 $single-card-details-flex-direction--mobile: column;
 $single-card-details-flex-direction--tablet: row;
@@ -21,17 +24,20 @@ $single-card-details-flex-direction--desktop: row;
 :root {
   --single-card-container-width: #{$single-card-container-width--mobile};
   --single-card-img-width: #{$single-card-img-width--mobile};
+  --single-card-img-height: #{$single-card-img-height--mobile};
   --single-card-details-flex-direction: #{$single-card-details-flex-direction--mobile};
 
   @include breakpoint('tablet') {
     --single-card-container-width: #{$single-card-container-width--tablet};
     --single-card-img-width: #{$single-card-img-width--tablet};
+    --single-card-img-height: #{$single-card-img-height--tablet};
     --single-card-details-flex-direction: #{$single-card-details-flex-direction--tablet};
   }
 
   @include breakpoint('desktop') {
     --single-card-container-width: #{$single-card-container-width--desktop};
     --single-card-img-width: #{$single-card-img-width--desktop};
+    --single-card-img-height: #{$single-card-img-height--desktop};
     --single-card-details-flex-direction: #{$single-card-details-flex-direction--desktop};
   }
 }
@@ -58,11 +64,59 @@ $single-card-details-flex-direction--desktop: row;
     @include breakpoint('tablet') {
       align-items: start;
     }
+  }
 
-    img {
-      width: var(--single-card-img-width);
-      @include gradient-border($border-radius-large);
-      object-fit: cover;
+  &__img-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .card-flipper-btn {
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: lightgray;
+
+      &:hover {
+        cursor: pointer;
+        background-color: lighten(lightgray, 15%);
+      }
+
+      img {
+        width: 80%;
+        height: auto;
+      }
+    }
+  }
+
+  &__img-wrapper {
+    position: relative;
+    width: var(--single-card-img-width);
+    height: var(--single-card-img-height);
+    perspective: 800px;
+
+    // conteneur qui tourne
+    transition: transform 0.4s ease-in-out;
+    transform-style: preserve-3d;
+  }
+
+  &-flipped {
+    transform: rotateY(180deg);
+  }
+
+  &__img {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    @include gradient-border($border-radius-large);
+    object-fit: cover;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    &--back {
+      transform: rotateY(180deg);
     }
   }
 
@@ -76,6 +130,7 @@ $single-card-details-flex-direction--desktop: row;
 
     @include breakpoint("tablet") {
       max-width: 50%;
+      width: 50%;
     }
 
     &__title {
