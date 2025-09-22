@@ -1,9 +1,11 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CardModalComponent} from "../../shared/components/add-card-to-collection-modal/card-modal.component";
 import {Router, RouterLink} from "@angular/router";
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
 import {PagerComponent} from "../../shared/components/pager/pager.component";
+import {Card} from "../../models/card.model";
+import {CardService} from "../../core/services/cards.service";
 
 @Component({
   selector: 'app-cards',
@@ -16,16 +18,28 @@ import {PagerComponent} from "../../shared/components/pager/pager.component";
     RouterLink
   ],
   templateUrl: './cards.component.html',
-  styleUrl: './cards.component.scss'
+  styleUrls: ['./cards.component.scss']
 })
-export class CardsComponent {
- private router = inject(Router);
 
+export class CardsComponent implements OnInit {
+  private router = inject(Router);
+  constructor(private cardService: CardService) {}
+
+  cards: Card[] = [];
   currentPage = 1;
   totalPages = 10;
+  selectedCard: Card | null = null;
 
+  ngOnInit(): void {
+    this.cardService.getCards().subscribe({
+      next: (res) => {
+        this.cards = res.cards;
+      },
+      error: (err) => console.error('Erreur de chargement des cartes', err)
+    });
+  }
 
-  onPageChange(newPage: number) {
+  onPageChange(newPage: number): void {
     this.currentPage = newPage;
   }
 
@@ -33,84 +47,7 @@ export class CardsComponent {
     console.log('Selected value:', value);
   }
 
-  cards = [
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    ]
-
-  selectedCard: any = null;
-
-  openCardModal(card: any): void {
+  openCardModal(card: Card): void {
     this.selectedCard = card;
   }
 
