@@ -35,7 +35,7 @@
     <div class="cards__wrapper">
       @for (card of cards; track $index) {
         <div class="Card">
-          <img [src]="card.image" alt="" />
+          <img [src]="card.imageSizeNormal" alt="" />
           <div class="Card__actions">
             <app-button (click)="openCardModal(card)">Add</app-button>
             <app-button (click)="goToCardDetail(card)">Detail</app-button>
