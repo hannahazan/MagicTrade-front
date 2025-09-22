@@ -1,29 +1,14 @@
-export interface DisplayedSingleCard {
-  name: string;
-  setName: string;
-  typeLine: string;
-  text: string;
-  imageUrl: string;
-  cardMarketLink: string;
-  isDoubleCard: false;
+export interface DisplayedCardFace {
+  name: string | null;
+  typeLine: string | null;
+  text: string | null;
+  imageUrl: string | null;
 }
 
-export interface DisplayedDoubleCard {
-  name: string;
-  setName: string;
-  cardMarketLink: string;
-  isDoubleCard: true;
-  doubleCards: {
-    frontFace: DoubleCardFace;
-    backFace: DoubleCardFace;
-  };
+export interface DisplayedCard {
+  name: string | null;
+  setName: string | null;
+  cardMarketPrice: string | null;
+  isDoubleCard: boolean;
+  faces: DisplayedCardFace[];
 }
-
-interface DoubleCardFace {
-  name: string;
-  typeLine: string;
-  text: string;
-  imageUrl: string;
-}
-
-

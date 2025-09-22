@@ -4,9 +4,14 @@ import {TraderPreviewComponent} from "../../shared/components/trader-preview/tra
 import {NewLineToParagraphPipe} from "../../shared/pipes/new-line-to-paragraph.pipe";
 import {CardModalComponent} from "../../shared/components/add-card-to-collection-modal/card-modal.component";
 import {TraderPreview} from "../../models/trader-preview.model";
-import {Router} from "@angular/router";
-import {DisplayedSingleCard, DisplayedDoubleCard} from "../../models/card/displayed-card.model";
+import {ActivatedRoute, Router} from "@angular/router";
+import {
+  DisplayedCard,
+  DisplayedCardFace
+} from "../../models/card/displayed-card.model";
 import {AuthService} from "../../core/services/auth.service";
+import {GetOneCardService} from "../../core/services/card/get-one-card.service";
+import {Card} from "../../models/card/card.model";
 
 @Component({
   selector: 'app-card-page',
@@ -18,56 +23,63 @@ import {AuthService} from "../../core/services/auth.service";
 export class CardPageComponent implements OnInit {
 
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly getOneCardService = inject(GetOneCardService);
   public readonly authService = inject(AuthService);
 
-  displayedCard!: DisplayedSingleCard | DisplayedDoubleCard;
+  displayedCard!: DisplayedCard;
 
   isFrontFace = true; // Prop seulement pour les cartes doubles
   isAddCardModalOpen = false;
   isCardInWishlist = false;
 
-  get currentCardFace(): keyof DisplayedDoubleCard['doubleCards'] {
-    return this.isFrontFace ? "frontFace" : "backFace";
+  get currentCardFace(): DisplayedCardFace {
+    return this.displayedCard.faces[this.isFrontFace? 0 : 1];
   }
 
   // Mappeur à placer dans un service dans le futur
-  initDisplayedCard(card: any): void {
+  mapToDisplayedCard(card: Card): void {
     if (card.isDoubleCard) {
       this.displayedCard = {
         name: card.name,
-        setName: card.setName,
-        cardMarketLink: card.cardMarketLink,
+        setName: null,
+        cardMarketPrice: card.cardMarketPrice,
         isDoubleCard: true,
-        doubleCards: {
-          frontFace: {
+        faces: [
+          {
             name: card.doubleCards[0].name,
             typeLine: card.doubleCards[0].typeLine,
             text: card.doubleCards[0].text,
             imageUrl: card.doubleCards[0].imageSizeNormal,
           },
-          backFace: {
+          {
             name: card.doubleCards[1].name,
             typeLine: card.doubleCards[1].typeLine,
             text: card.doubleCards[1].text,
             imageUrl: card.doubleCards[1].imageSizeNormal,
-          }
-        },
+          },
+        ],
       };
     } else {
       this.displayedCard = {
         name: card.name,
-        setName: card.setName,
-        cardMarketLink: card.cardMarketLink,
+        setName: null,
+        cardMarketPrice: card.cardMarketPrice,
         isDoubleCard: false,
-        typeLine: card.typeLine,
-        text: card.text,
-        imageUrl: card.imageSizeNormal,
+        faces: [
+          {
+            name: card.name,
+            typeLine: card.types,
+            text: card.text,
+            imageUrl: card.imageSizeNormal,
+          },
+        ],
       };
     }
   }
 
   flipCard(): void {
-    if (this.card.isDoubleCard) {
+    if (this.displayedCard.isDoubleCard) {
       this.isFrontFace = !this.isFrontFace;
     }
   }
@@ -75,7 +87,7 @@ export class CardPageComponent implements OnInit {
   addToWishlist(): void {
     // TODO : appeler un service qui ajoute la carte à la wishlist
     this.isCardInWishlist = true;
-    console.log("card added to wishlist", this.card);
+    console.log("card added to wishlist", this.displayedCard);
   }
 
   toggleAddCardModal(): void {
@@ -87,41 +99,21 @@ export class CardPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initDisplayedCard(this.card);
-  }
-
-  // Exemple de single card
-  // card: any = {
-  //   name: "Ambitious Farmhand",
-  //   setName: "Innistrad Remastered",
-  //   typeLine: "Creature — Human Peasant",
-  //   text: "When this creature enters, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.\nCoven — {1}{W}{W}: Transform this creature. Activate only if you control three or more creatures with different powers.",
-  //   imageSizeNormal: "https://cards.scryfall.io/normal/front/5/4/54d4e7c3-294d-4900-8b70-faafda17cc33.jpg?1634346867",
-  //   cardMarketLink: "https://www.cardmarket.com/en/Magic/Products?idProduct=574956&referrer=scryfall&utm_campaign=card_prices&utm_medium=text&utm_source=scryfall",
-  //   isDoubleCard: false,
-  //   doubleCards: []
-  // }
-
-  // Exemple de double card
-  card: any = {
-    name: "Ambitious Farmhand // Seasoned Cathar",
-    setName: "Innistrad Remastered",
-    cardMarketLink: "https://www.cardmarket.com/en/Magic/Products?idProduct=574956&referrer=scryfall&utm_campaign=card_prices&utm_medium=text&utm_source=scryfall",
-    isDoubleCard: true,
-    doubleCards: [
-      {
-        name: "Ambitious Farmhand",
-        typeLine: "Creature — Human Peasant",
-        text: "When this creature enters, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.\nCoven — {1}{W}{W}: Transform this creature. Activate only if you control three or more creatures with different powers.",
-        imageSizeNormal: "https://cards.scryfall.io/normal/front/5/4/54d4e7c3-294d-4900-8b70-faafda17cc33.jpg?1634346867",
-      },
-      {
-        name: "Seasoned Cathar",
-        typeLine: "Creature — Human Knight",
-        text: "Lifelink",
-        imageSizeNormal: "https://cards.scryfall.io/normal/back/5/4/54d4e7c3-294d-4900-8b70-faafda17cc33.jpg?1634346867",
+    this.route.paramMap.subscribe(params => {
+      const cardId = params.get('cardId');
+      if (cardId) {
+        this.getOneCardService.execute(cardId).subscribe({
+          next: result => {
+            if (result.cards.length === 0) {
+              this.router.navigate(["/not-found"]);
+            } else {
+              this.mapToDisplayedCard(result.cards[0]);
+            }
+          },
+          error: error => console.log(error),
+        })
       }
-    ]
+    })
   }
 
   owners: TraderPreview[] = [

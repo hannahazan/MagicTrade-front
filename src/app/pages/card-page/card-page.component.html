@@ -1,78 +1,83 @@
 <div class="page-inner">
-  <section class="card-container gradient-border-lg">
-    <div class="card-wrapper">
-      <div class="card__details">
-        <div class="card__img-container">
-          <div class="card__img-wrapper" [class.card-flipped]="!isFrontFace">
-            <img
-              class="card__img card__img--front"
-              [src]="displayedCard.isDoubleCard ? displayedCard.doubleCards.frontFace.imageUrl : displayedCard.imageUrl"
-              alt=""
-            />
-            @if (displayedCard.isDoubleCard) {
+
+  @if (displayedCard) {
+    <section class="card-container gradient-border-lg">
+      <div class="card-wrapper">
+        <div class="card__details">
+          <div class="card__img-container">
+            <div class="card__img-wrapper" [class.card-flipped]="!isFrontFace">
               <img
-                class="card__img card__img--back"
-                [src]="displayedCard.doubleCards.backFace.imageUrl"
+                class="card__img card__img--front"
+                [src]="displayedCard.faces[0].imageUrl"
                 alt=""
               />
+              @if (displayedCard.isDoubleCard) {
+                <img
+                  class="card__img card__img--back"
+                  [src]="displayedCard.faces[1].imageUrl"
+                  alt=""
+                />
+              }
+            </div>
+
+            @if (displayedCard.isDoubleCard) {
+              <button
+                class="card-flipper-btn"
+                (click)="flipCard()"
+                (keydown.enter)="flipCard()"
+                (keydown.space)="flipCard()"
+              >
+                <img src="icons/flip-card.svg" />
+              </button>
             }
           </div>
 
-          @if (displayedCard.isDoubleCard) {
-            <button
-              class="card-flipper-btn"
-              (click)="flipCard()"
-              (keydown.enter)="flipCard()"
-              (keydown.space)="flipCard()"
-            >
-              <img src="icons/flip-card.svg" />
-            </button>
-          }
+          <div class="card__info">
+            <h2 class="card__info__title">{{ displayedCard.name?.toUpperCase() }}</h2>
+            <p>
+              <span class="card__info__label">Type : </span>
+              {{ currentCardFace.typeLine }}
+            </p>
+            <p class="card__info__text">
+              <span class="card__info__label">Text : </span>
+              <span
+                [innerHTML]="(currentCardFace.text ? currentCardFace.text : '') | newLineToParagraph">
+              </span>
+            </p>
+            <p><span class="card__info__label">Set : </span>{{ displayedCard.setName ? displayedCard.setName : '' }}</p>
+            <p><a [href]="displayedCard.cardMarketPrice">See on Cardmarket</a></p>
+          </div>
         </div>
 
-        <div class="card__info">
-          <h2 class="card__info__title">{{ displayedCard.name.toUpperCase() }}</h2>
-          <p>
-            <span class="card__info__label">Type : </span>
-            {{ displayedCard.isDoubleCard ? displayedCard.doubleCards[currentCardFace].typeLine : displayedCard.typeLine }}
-          </p>
-          <p class="card__info__text">
-            <span class="card__info__label">Text : </span>
-            <span
-              [innerHTML]="displayedCard.isDoubleCard ? displayedCard.doubleCards[currentCardFace].text : displayedCard.text | newLineToParagraph">
-            </span>
-          </p>
-          <p><span class="card__info__label">Set : </span>{{ displayedCard.setName }}</p>
-          <p><a [href]="displayedCard.cardMarketLink">See on Cardmarket</a></p>
-        </div>
+        @if (authService.isLoggedIn()) {
+          <div class="card__actions">
+            @if (!isCardInWishlist) {
+              <app-button (click)="addToWishlist()">Add to Wishlist</app-button>
+            }
+            <app-button (click)="toggleAddCardModal()">Add to Collection</app-button>
+          </div>
+        }
+
       </div>
+    </section>
 
-      @if (authService.isLoggedIn()) {
-        <div class="card__actions">
-          @if (!isCardInWishlist) {
-            <app-button (click)="addToWishlist()">Add to Wishlist</app-button>
-          }
-          <app-button (click)="toggleAddCardModal()">Add to Collection</app-button>
-        </div>
+    <section class="card-owners">
+      <h2 class="card-owners__title">OWNERS</h2>
+      @for (owner of owners; track $index) {
+        <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>
       }
+    </section>
 
-    </div>
-  </section>
+    <app-button (click)="clickOnViewTraders()">View all traders</app-button>
 
-  <section class="card-owners">
-    <h2 class="card-owners__title">OWNERS</h2>
-    @for (owner of owners; track $index) {
-      <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>
-    }
-  </section>
-
-  <app-button (click)="clickOnViewTraders()">View all traders</app-button>
-
-  @if (isAddCardModalOpen) {
-    <app-add-card-to-collection-modal
+    @if (isAddCardModalOpen) {
+      <app-add-card-to-collection-modal
         [card]="displayedCard"
         (close)="toggleAddCardModal()"
-    >
-    </app-add-card-to-collection-modal>
+      >
+      </app-add-card-to-collection-modal>
+    }
+  } @else {
+    <p style="color: white;">Loading...</p>
   }
 </div>
