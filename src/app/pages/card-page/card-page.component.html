@@ -46,12 +46,16 @@
           <p><a [href]="displayedCard.cardMarketLink">See on Cardmarket</a></p>
         </div>
       </div>
-      <div class="card__actions">
-        @if (!isCardInWishlist) {
-          <app-button (click)="addToWishlist()">Add to Wishlist</app-button>
-        }
-        <app-button (click)="toggleAddCardModal()">Add to Collection</app-button>
-      </div>
+
+      @if (authService.isLoggedIn()) {
+        <div class="card__actions">
+          @if (!isCardInWishlist) {
+            <app-button (click)="addToWishlist()">Add to Wishlist</app-button>
+          }
+          <app-button (click)="toggleAddCardModal()">Add to Collection</app-button>
+        </div>
+      }
+
     </div>
   </section>
 

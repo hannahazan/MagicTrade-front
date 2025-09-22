@@ -6,6 +6,7 @@ import {CardModalComponent} from "../../shared/components/add-card-to-collection
 import {TraderPreview} from "../../models/trader-preview";
 import {Router} from "@angular/router";
 import {DisplayedSingleCard, DisplayedDoubleCard} from "../../models/displayed-card";
+import {AuthService} from "../../core/services/auth.service";
 
 @Component({
   selector: 'app-card-page',
@@ -17,6 +18,7 @@ import {DisplayedSingleCard, DisplayedDoubleCard} from "../../models/displayed-c
 export class CardPageComponent implements OnInit {
 
   private readonly router = inject(Router);
+  public readonly authService = inject(AuthService);
 
   displayedCard!: DisplayedSingleCard | DisplayedDoubleCard;
 
