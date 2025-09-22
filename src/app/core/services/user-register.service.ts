@@ -10,9 +10,9 @@ import {environment} from "../../../environments/environment";
 export class UserRegisterService {
   private readonly http = inject(HttpClient);
 
-  private readonly _baseUrl = `${environment.magicTradeApiUrl}auth/register`;
+  private readonly _apiUrl = `${environment.magicTradeApiUrl}auth/register`;
 
   execute(user: UserRegister): Observable<object> {
-    return this.http.post<object>(this._baseUrl, user);
+    return this.http.post<object>(this._apiUrl, user);
   }
 }

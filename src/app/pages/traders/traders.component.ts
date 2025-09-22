@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {TraderPreviewComponent} from "../../shared/components/trader-preview/trader-preview.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
-import {TraderPreview} from "../../models/trader-preview";
+import {TraderPreviewModel} from "../../models/trader-preview.model";
 
 @Component({
   selector: 'app-traders',
@@ -14,7 +14,7 @@ import {TraderPreview} from "../../models/trader-preview";
   styleUrl: './traders.component.scss'
 })
 export class TradersComponent {
-  traders: TraderPreview[] = [
+  traders: TraderPreviewModel[] = [
     {
       profilePicture: "dragon.png",
       pseudo: "JOHN WICK",

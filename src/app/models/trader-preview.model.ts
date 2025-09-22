@@ -1,4 +1,4 @@
-import {CardState} from "./card-state";
+import {CardState} from "./card-state.model";
 
 export interface TraderPreview {
   profilePicture: string,

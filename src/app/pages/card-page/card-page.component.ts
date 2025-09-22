@@ -3,9 +3,9 @@ import {ButtonComponent} from "../../shared/components/button/button.component";
 import {TraderPreviewComponent} from "../../shared/components/trader-preview/trader-preview.component";
 import {NewLineToParagraphPipe} from "../../shared/pipes/new-line-to-paragraph.pipe";
 import {CardModalComponent} from "../../shared/components/add-card-to-collection-modal/card-modal.component";
-import {TraderPreview} from "../../models/trader-preview";
+import {TraderPreview} from "../../models/trader-preview.model";
 import {Router} from "@angular/router";
-import {DisplayedSingleCard, DisplayedDoubleCard} from "../../models/displayed-card";
+import {DisplayedSingleCard, DisplayedDoubleCard} from "../../models/card/displayed-card.model";
 import {AuthService} from "../../core/services/auth.service";
 
 @Component({

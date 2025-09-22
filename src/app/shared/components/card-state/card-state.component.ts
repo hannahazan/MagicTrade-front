@@ -1,7 +1,7 @@
 import {Component, input} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {CARD_STATES} from "../../../core/constants/card-states";
-import {CardState} from "../../../models/card-state";
+import {CardStateModel} from "../../../models/card-state.model";
 
 @Component({
   selector: 'app-card-state',
@@ -13,7 +13,7 @@ import {CardState} from "../../../models/card-state";
   styleUrl: './card-state.component.scss'
 })
 export class CardStateComponent {
-  cardState = input.required<CardState | false>();
+  cardState = input.required<CardStateModel | false>();
 
   get abbreviatedCardState(): string {
     const state = this.cardState();

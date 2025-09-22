@@ -2,12 +2,12 @@
 ************** SCSS Variables ***************
 ********************************************/
 
-// Card width
+// CardModel width
 $card-img-width--mobile: 120px;
 $card-img-width--tablet: 200px;
 $card-img-width--desktop: 286px;
 
-// Card-height
+// CardModel-height
 $card-height--mobile: calc(#{$card-img-width--mobile} * 1.395);
 $card-height--tablet: calc(#{$card-img-width--tablet} * 1.395);
 $card-height--desktop: calc(#{$card-img-width--desktop} * 1.395);

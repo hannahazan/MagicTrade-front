@@ -5,7 +5,7 @@ import { StatusComponent } from '../../shared/components/status/status.component
 import { AuthTextInputComponent } from '../../shared/components/auth-text-input/auth-text-input.component';
 import {FormBuilder} from "@angular/forms";
 import {TraderPreviewComponent} from "../../shared/components/trader-preview/trader-preview.component";
-import {TraderPreview} from "../../models/trader-preview";
+import {TraderPreviewModel} from "../../models/trader-preview.model";
 
 @Component({
   selector: 'app-sandbox',
@@ -23,7 +23,7 @@ import {TraderPreview} from "../../models/trader-preview";
 export class SandboxComponent {
   private readonly fb = inject(FormBuilder);
 
-  trader: TraderPreview = {
+  trader: TraderPreviewModel = {
     profilePicture: "dragon.png",
     pseudo: "JOHN WICK",
     rate: "4,8",
