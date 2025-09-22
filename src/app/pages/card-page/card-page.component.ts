@@ -11,7 +11,7 @@ import {
 } from "../../models/card/displayed-card.model";
 import {AuthService} from "../../core/services/auth.service";
 import {GetOneCardService} from "../../core/services/card/get-one-card.service";
-import {Card} from "../../models/card/card.model";
+import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
 
 @Component({
   selector: 'app-card-page',
@@ -35,47 +35,6 @@ export class CardPageComponent implements OnInit {
 
   get currentCardFace(): DisplayedCardFace {
     return this.displayedCard.faces[this.isFrontFace? 0 : 1];
-  }
-
-  // Mappeur à placer dans un service dans le futur
-  mapToDisplayedCard(card: Card): void {
-    if (card.isDoubleCard) {
-      this.displayedCard = {
-        name: card.name,
-        setName: null,
-        cardMarketPrice: card.cardMarketPrice,
-        isDoubleCard: true,
-        faces: [
-          {
-            name: card.doubleCards[0].name,
-            typeLine: card.doubleCards[0].typeLine,
-            text: card.doubleCards[0].text,
-            imageUrl: card.doubleCards[0].imageSizeNormal,
-          },
-          {
-            name: card.doubleCards[1].name,
-            typeLine: card.doubleCards[1].typeLine,
-            text: card.doubleCards[1].text,
-            imageUrl: card.doubleCards[1].imageSizeNormal,
-          },
-        ],
-      };
-    } else {
-      this.displayedCard = {
-        name: card.name,
-        setName: null,
-        cardMarketPrice: card.cardMarketPrice,
-        isDoubleCard: false,
-        faces: [
-          {
-            name: card.name,
-            typeLine: card.types,
-            text: card.text,
-            imageUrl: card.imageSizeNormal,
-          },
-        ],
-      };
-    }
   }
 
   flipCard(): void {
@@ -107,7 +66,7 @@ export class CardPageComponent implements OnInit {
             if (result.cards.length === 0) {
               this.router.navigate(["/not-found"]);
             } else {
-              this.mapToDisplayedCard(result.cards[0]);
+              this.displayedCard = mapToDisplayedCard(result.cards[0]);
             }
           },
           error: error => console.log(error),

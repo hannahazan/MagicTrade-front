@@ -9,6 +9,6 @@ export interface DisplayedCard {
   name: string | null;
   setName: string | null;
   cardMarketPrice: string | null;
-  isDoubleCard: boolean;
+  isDoubleCard: boolean | null;
   faces: DisplayedCardFace[];
 }
