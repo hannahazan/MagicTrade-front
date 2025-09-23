@@ -3,6 +3,8 @@ import {ButtonComponent} from "../button/button.component";
 import {SelectComponent} from "../select/select.component";
 import {AuthCheckboxComponent} from "../auth-checkbox/auth-checkbox.component";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AddCardToCollectionService} from "../../../core/services/collection/add-card-to-collection.service";
+import {UserCard} from "../../../models/user-card/user-card";
 
 @Component({
   selector: 'app-add-card-to-collection-modal',
@@ -19,8 +21,10 @@ import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 export class CardModalComponent {
 
   private readonly formBuilder = inject(FormBuilder);
+  private readonly addCardToCollectionService = inject(AddCardToCollectionService);
 
   failedToAddCard = false;
+  cardHasBeenAdded = false;
 
   AddCardToCollectionForm = this.formBuilder.group({
     state: ['', [Validators.required]],
@@ -35,18 +39,32 @@ export class CardModalComponent {
   addToCollection = output<any>();
 
   onStateChange(evt: string): void {
-    console.log(evt);
     this.AddCardToCollectionForm.controls['state'].setValue(evt);
   }
 
   onLanguageChange(evt: string): void {
-    console.log(evt);
     this.AddCardToCollectionForm.controls['language'].setValue(evt);
   }
 
   onSubmit(): void {
-    this.addToCollection.emit(this.cardId);
-    // this.closeModal.emit();
-    console.log(this.AddCardToCollectionForm.getRawValue());
+    const formValues = this.AddCardToCollectionForm.getRawValue();
+    const userCard: UserCard = {
+      userId: 13,
+      cardId: this.cardId(),
+      state: formValues.state!,
+      lang: formValues.language!
+    }
+
+    this.addCardToCollectionService.execute([userCard]).subscribe({
+      next: () => {
+        this.failedToAddCard = false;
+        this.cardHasBeenAdded = true;
+        this.addToCollection.emit(this.cardId);
+      },
+      error: error => {
+        this.cardHasBeenAdded = false;
+        this.failedToAddCard = true;
+      }
+    });
   }
 }

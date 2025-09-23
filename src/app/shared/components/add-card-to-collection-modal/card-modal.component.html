@@ -6,9 +6,13 @@
       </button>
 
       <p class="modal__subtitle">Add in your collection one by one</p>
-      <h2 class="modal__title">About your Card {{ cardId() }}</h2>
+      <h2 class="modal__title">About your Card</h2>
 
-      <form [formGroup]="AddCardToCollectionForm">
+      @if (cardHasBeenAdded) {
+        <p class="modal__flash modal__flash--success">This card has been added to your collection ! Want to add one more ?</p>
+      }
+
+      <form [formGroup]="AddCardToCollectionForm" (submit)="onSubmit()">
         <div class="modal__select-group">
           <app-select
             label="State"
@@ -30,34 +34,32 @@
             class="modal__checkbox"
             label="Foil"
             [control]="AddCardToCollectionForm.controls.foil"
-          ></app-auth-checkbox>
+          />
           <app-auth-checkbox
             label="Full art"
             class="modal__checkbox"
             [control]="AddCardToCollectionForm.controls.fullArt"
-          ></app-auth-checkbox>
+          />
           <app-auth-checkbox
             label="Textless"
             class="modal__checkbox"
             [control]="AddCardToCollectionForm.controls.textless"
-          ></app-auth-checkbox>
-
-          <!--
-          <label class="modal__checkbox-label">
-            <input type="checkbox" class="modal__checkbox" /> Foil
-          </label>
-          <label class="modal__checkbox-label">
-            <input type="checkbox" class="modal__checkbox" /> Full art
-          </label>
-          <label class="modal__checkbox-label">
-            <input type="checkbox" class="modal__checkbox" /> Textless
-          </label>
-          -->
+          />
         </div>
 
-        <app-button class="modal__button" [disabled]="AddCardToCollectionForm.invalid">Add to Collection</app-button>
+        <app-button
+          class="modal__button"
+          type="submit"
+          [disabled]="AddCardToCollectionForm.invalid"
+        >
+          Add to Collection
+        </app-button>
 
       </form>
+
+      @if (failedToAddCard) {
+        <p class="modal__flash modal__flash--failure">This card could not be added to your collection. Please try again.</p>
+      }
 
     </div>
   </div>

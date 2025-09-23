@@ -123,4 +123,17 @@ $modal-card-width--desktop: 600px;
       outline-offset: 2px;
     }
   }
+
+  &__flash {
+    @include paragraph("Poppins Regular");
+    margin: 1.5em 1.5em;
+
+    &--success {
+      color: $secondary-color;
+    }
+
+    &--failure {
+      color: $red-error-color;
+    }
+  }
 }
