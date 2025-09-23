@@ -1,4 +1,4 @@
-import {CardState} from "../../models/card-state";
+import {CardState} from "../../models/card-state.model";
 
 export const CARD_STATES: Record<CardState, string> = {
   "mint": "M",

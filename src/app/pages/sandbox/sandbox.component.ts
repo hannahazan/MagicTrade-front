@@ -5,7 +5,7 @@ import { StatusComponent } from '../../shared/components/status/status.component
 import { AuthTextInputComponent } from '../../shared/components/auth-text-input/auth-text-input.component';
 import {FormBuilder} from "@angular/forms";
 import {TraderPreviewComponent} from "../../shared/components/trader-preview/trader-preview.component";
-import {TraderPreview} from "../../models/trader-preview";
+import {TraderPreview} from "../../models/trader-preview.model";
 
 @Component({
   selector: 'app-sandbox',

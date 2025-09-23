@@ -1,7 +1,7 @@
 import {Component, input} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {CARD_STATES} from "../../../core/constants/card-states";
-import {CardState} from "../../../models/card-state";
+import {CardState} from "../../../models/card-state.model";
 
 @Component({
   selector: 'app-card-state',

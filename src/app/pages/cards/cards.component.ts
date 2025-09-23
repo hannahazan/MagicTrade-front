@@ -4,8 +4,8 @@ import {Router, RouterLink} from "@angular/router";
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
 import {PagerComponent} from "../../shared/components/pager/pager.component";
-import {Card} from "../../models/card.model";
-import {CardService} from "../../core/services/cards.service";
+import {Card} from "../../models/card/card.model";
+import {GetAllCardsService} from "../../core/services/card/get-all-cards.service";
 
 @Component({
   selector: 'app-cards',
@@ -22,8 +22,8 @@ import {CardService} from "../../core/services/cards.service";
 })
 
 export class CardsComponent implements OnInit {
-  private router = inject(Router);
-  constructor(private cardService: CardService) {}
+  private readonly router = inject(Router);
+  private readonly getAllCardsService = inject(GetAllCardsService);
 
   cards: Card[] = [];
   currentPage = 1;
@@ -31,7 +31,7 @@ export class CardsComponent implements OnInit {
   selectedCard: Card | null = null;
 
   ngOnInit(): void {
-    this.cardService.getCards().subscribe({
+    this.getAllCardsService.execute().subscribe({
       next: (res) => {
         this.cards = res.cards;
       },

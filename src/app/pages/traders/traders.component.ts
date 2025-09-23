@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {TraderPreviewComponent} from "../../shared/components/trader-preview/trader-preview.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
-import {TraderPreview} from "../../models/trader-preview";
+import {TraderPreview} from "../../models/trader-preview.model";
 
 @Component({
   selector: 'app-traders',
