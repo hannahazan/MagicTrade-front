@@ -1,12 +1,12 @@
 <div class="modal">
   <div class="modal__card modal__card--gradient-border-md">
     <div class="modal__wrapper">
-      <button class="modal__close-btn" (click)="close.emit()">
+      <button class="modal__close-btn" (click)="closeModal.emit()">
         ✕
       </button>
 
       <p class="modal__subtitle">Add in your collection one by one</p>
-      <h2 class="modal__title">About your Card</h2>
+      <h2 class="modal__title">About your Card {{ cardId() }}</h2>
 
       <div class="modal__select-group">
         <select class="modal__select-box">

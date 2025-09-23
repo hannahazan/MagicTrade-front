@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
 
 @Component({
@@ -12,12 +12,12 @@ import {ButtonComponent} from "../button/button.component";
 })
 export class CardModalComponent {
 
-@Input() card: any;
-@Output() close = new EventEmitter<void>();
-@Output() addToCollection = new EventEmitter<any>();
+  cardId = input.required<string>();
+  closeModal = output<void>();
+  addToCollection = output<any>();
 
   onAdd(): void {
-    this.addToCollection.emit(this.card);
-    this.close.emit();
+    this.addToCollection.emit(this.cardId);
+    this.closeModal.emit();
   }
 }

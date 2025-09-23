@@ -72,8 +72,8 @@
 
     @if (isAddCardModalOpen) {
       <app-add-card-to-collection-modal
-        [card]="displayedCard"
-        (close)="toggleAddCardModal()"
+        [cardId]="displayedCard.id"
+        (closeModal)="toggleAddCardModal()"
       >
       </app-add-card-to-collection-modal>
     }

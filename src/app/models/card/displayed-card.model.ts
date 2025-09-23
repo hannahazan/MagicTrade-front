@@ -6,6 +6,7 @@ export interface DisplayedCardFace {
 }
 
 export interface DisplayedCard {
+  id: string;
   name: string | null;
   setName: string | null;
   cardMarketPrice: string | null;

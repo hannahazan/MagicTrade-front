@@ -18,6 +18,7 @@ function mapFace(card: {
 export function mapToDisplayedCard(card: Card): DisplayedCard {
   if (card.isDoubleCard) {
     return {
+      id: card.id,
       name: card.name,
       setName: null,
       cardMarketPrice: card.cardMarketPrice,
@@ -29,6 +30,7 @@ export function mapToDisplayedCard(card: Card): DisplayedCard {
     };
   } else {
     return {
+      id: card.id,
       name: card.name,
       setName: null,
       cardMarketPrice: card.cardMarketPrice,
