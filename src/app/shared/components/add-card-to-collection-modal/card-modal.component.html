@@ -8,28 +8,57 @@
       <p class="modal__subtitle">Add in your collection one by one</p>
       <h2 class="modal__title">About your Card {{ cardId() }}</h2>
 
-      <div class="modal__select-group">
-        <select class="modal__select-box">
-          <option disabled selected>State</option>
-        </select>
-        <select class="modal__select-box">
-          <option disabled selected>Language</option>
-        </select>
-      </div>
+      <form [formGroup]="AddCardToCollectionForm">
+        <div class="modal__select-group">
+          <app-select
+            label="State"
+            [options]="['Mint', 'Near-Mint', 'Played', '...']"
+            placeholder="Card condition"
+            (valueChange)="onStateChange($event)"
+          />
 
-      <div class="modal__checkbox-group">
-        <label class="modal__checkbox-label">
-          <input type="checkbox" class="modal__checkbox" /> Foil
-        </label>
-        <label class="modal__checkbox-label">
-          <input type="checkbox" class="modal__checkbox" /> Full art
-        </label>
-        <label class="modal__checkbox-label">
-          <input type="checkbox" class="modal__checkbox" /> Textless
-        </label>
-      </div>
+          <app-select
+            label="Language"
+            [options]="['FR', 'EN', 'JP', '...']"
+            placeholder="Card language"
+            (valueChange)="onLanguageChange($event)"
+          />
+        </div>
 
-      <app-button class="modal__button">Add to Collection</app-button>
+        <div class="modal__checkbox-group">
+          <app-auth-checkbox
+            class="modal__checkbox"
+            label="Foil"
+            [control]="AddCardToCollectionForm.controls.foil"
+          ></app-auth-checkbox>
+          <app-auth-checkbox
+            label="Full art"
+            class="modal__checkbox"
+            [control]="AddCardToCollectionForm.controls.fullArt"
+          ></app-auth-checkbox>
+          <app-auth-checkbox
+            label="Textless"
+            class="modal__checkbox"
+            [control]="AddCardToCollectionForm.controls.textless"
+          ></app-auth-checkbox>
+
+          <!--
+          <label class="modal__checkbox-label">
+            <input type="checkbox" class="modal__checkbox" /> Foil
+          </label>
+          <label class="modal__checkbox-label">
+            <input type="checkbox" class="modal__checkbox" /> Full art
+          </label>
+          <label class="modal__checkbox-label">
+            <input type="checkbox" class="modal__checkbox" /> Textless
+          </label>
+          -->
+        </div>
+
+        <app-button class="modal__button" [disabled]="AddCardToCollectionForm.invalid">Add to Collection</app-button>
+
+      </form>
+
     </div>
   </div>
 </div>
