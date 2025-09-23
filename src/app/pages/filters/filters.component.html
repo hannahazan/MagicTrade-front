@@ -3,9 +3,9 @@
   <div class="filters__container gradient-border-lg">
     <div class="filters__wrapper">
       <form class="filters__form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-        <!-- CardModel name -->
+        <!-- Card name -->
         <app-auth-text-input
-          label="CardModel name"
+          label="Card name"
           type="text"
           placeholder='Any words in the name, e.g. "Fire"'
           [control]="searchForm.controls.cardName"

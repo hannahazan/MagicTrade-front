@@ -1,4 +1,4 @@
-// CardModel (raw from API)
+// Card (raw from API)
 export interface Card {
   id: string;
   setId: string | null;
