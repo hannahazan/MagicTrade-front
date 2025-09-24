@@ -28,10 +28,7 @@ export class CardModalComponent {
 
   AddCardToCollectionForm = this.formBuilder.group({
     state: ['', [Validators.required]],
-    language: ['', [Validators.required]],
-    foil: [false, [Validators.required]],
-    fullArt: [false, [Validators.required]],
-    textless: [false, [Validators.required]]
+    language: ['', [Validators.required]]
   })
 
   cardId = input.required<string>();
@@ -49,7 +46,7 @@ export class CardModalComponent {
   onSubmit(): void {
     const formValues = this.AddCardToCollectionForm.getRawValue();
     const userCard: UserCard = {
-      userId: 13,
+      userId: null,
       cardId: this.cardId(),
       state: formValues.state!,
       lang: formValues.language!

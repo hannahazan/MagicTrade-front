@@ -1,5 +1,5 @@
 export interface UserCard {
-  userId: number;
+  userId: null;
   cardId: string;
   state: string;
   lang: string;

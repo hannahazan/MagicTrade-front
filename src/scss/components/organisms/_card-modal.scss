@@ -91,17 +91,6 @@ $modal-card-width--desktop: 600px;
     appearance: none;
   }
 
-  &__checkbox-group {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1.5rem;
-  }
-
-  &__checkbox {
-    accent-color: $primary-color;
-    transform: scale(1.2);
-  }
-
   &__close-btn {
     position: absolute;
     top: 0.8rem;
