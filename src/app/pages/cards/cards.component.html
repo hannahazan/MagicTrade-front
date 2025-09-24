@@ -44,8 +44,8 @@
       }
       @if (selectedCard) {
         <app-add-card-to-collection-modal
-          [card]="selectedCard"
-          (close)="closeModal()">
+          [cardId]="selectedCard.id"
+          (closeModal)="closeModal()">
         </app-add-card-to-collection-modal>
       }
     </div>
