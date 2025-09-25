@@ -16,6 +16,7 @@ $button-min-height--desktop: 50px;
 $button-padding-block--mobile: 5px;
 $button-padding-block--tablet: 10px;
 $button-padding-block--desktop: 15px;
+$button-padding-sides: 20px;
 
 /********************************************
 ************** Custom properties ************
@@ -45,9 +46,10 @@ $button-padding-block--desktop: 15px;
   font-size: var(--button-font-size);
   padding: var(--button-padding-block);
   height: var(--button-min-height);
-  cursor: pointer;
   outline: none;
   box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
   font-weight: 700;
   line-height: 1;
   text-align: center;
@@ -60,14 +62,20 @@ $button-padding-block--desktop: 15px;
   margin: 10px;
   border-radius: $border-radius-small;
 
+  &[type="submit"] {
+    font-size: $font-size-20;
+    padding: $button-padding-sides;
+  }
+
   &--primary {
     background-color: $white-color;
     color: $black-color;
 
-    &:hover {
+    &:hover:not([disabled]) {
       background-color: $black-color;
       color: $white-color;
       outline: solid $white-color 3px;
+      cursor: pointer;
     }
   }
 
@@ -75,14 +83,16 @@ $button-padding-block--desktop: 15px;
     background-color: $black-color;
     color: $white-color;
 
-    &:hover {
+    &:hover:not([disabled]) {
       background-color: $white-color;
       color: $black-color;
       outline: solid $black-color 3px;
+      cursor: pointer;
     }
   }
 
   &[disabled] {
     color: $grey-color;
+    cursor: not-allowed;
   }
 }

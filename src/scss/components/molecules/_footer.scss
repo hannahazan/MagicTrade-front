@@ -1,0 +1,86 @@
+.Footer {
+  @include paragraph("Poppins Regular");
+
+  position: relative;
+  background-color: $background-black-color;
+  color: white;
+  padding: 2rem 1.5rem;
+  border-top: 2px solid transparent;
+  border-image-slice: 1;
+  margin-top: 50px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: $gradient-border;
+    z-index: 1;
+    transform: translateY(-100%);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @include breakpoint('tablet') {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__section {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #00ff88;
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #00cc77;
+  }
+
+  &__text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #ccc;
+  }
+
+  &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin: 0.3rem 0;
+
+      a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #00ff88;
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+    border-top: 1px solid #222;
+    padding-top: 1rem;
+  }
+}

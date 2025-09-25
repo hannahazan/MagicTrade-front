@@ -6,6 +6,7 @@ $secondary-color: #00d0ff;
 $grey-color: #747474;
 $white-color: #ffffff;
 $black-color: #000000;
+$red-error-color: rgb(209, 23, 23);
 
 // Border color
 $gradient-border: linear-gradient(135deg, $primary-color, $secondary-color);
@@ -26,6 +27,7 @@ $state-poor: #dc3545;
 $font-size-64: 4rem; // 64px
 $font-size-48: 3rem; // 48px
 $font-size-36: 2.25rem; // 36px
+$font-size-28: 1.75rem; // 28px
 $font-size-24: 1.5rem; // 24px
 $font-size-20: 1.25rem; // 20px
 $font-size-18: 1.125rem; // 18px
@@ -33,6 +35,26 @@ $font-size-16: 1rem; // 16px
 $font-size-14: .875rem; // 14px
 $font-size-12: .75rem; // 12px
 $font-size-10: .625rem; // 10px
+
+// Heading
+$heading1--font-size--mobile: $font-size-36;
+$heading1--font-size--desktop: $font-size-48;
+$heading2--font-size--mobile: $font-size-28;
+$heading2--font-size--desktop: $font-size-36;
+$heading3--font-size--mobile: $font-size-20;
+$heading3--font-size--desktop: $font-size-28;
+$heading4--font-size--mobile: $font-size-18;
+$heading4--font-size--desktop: $font-size-24;
+$heading5--font-size--mobile: $font-size-16;
+$heading5--font-size--desktop: $font-size-20;
+
+// paragraph
+$paragraph--font-size--mobile: $font-size-12;
+$paragraph--font-size--desktop: $font-size-16;
+
+// Navbar
+$navbar-font-size--mobile: $font-size-12;
+$navbar-font-size--desktop: $font-size-14;
 
 // Breakpoints
 $mt-breakpoint: (

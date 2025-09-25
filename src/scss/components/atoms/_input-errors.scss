@@ -1,0 +1,15 @@
+@import "scss/components/molecules/auth-form";
+
+.input-errors {
+  font-family: "Poppins Regular", serif;
+    color: $red-error-color;
+    font-size: $font-size-10;
+    position: absolute;
+    top: 5px;
+    width: var(--input-width);
+    text-align: left;
+
+    @include breakpoint("desktop") {
+        font-size: $font-size-12;
+    }
+}

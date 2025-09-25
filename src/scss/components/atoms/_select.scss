@@ -1,0 +1,67 @@
+/********************************************
+************** SCSS select **************
+********************************************/
+
+$select-width--mobile: 120px;
+$select-width--tablet: 140px;
+$select-width--desktop: 160px;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --select-width: #{$select-width--mobile};
+
+  @include breakpoint('tablet') {
+  --select-width: #{$select-width--tablet};
+  }
+
+  @include breakpoint('desktop') {
+  --select-width: #{$select-width--desktop};
+  }
+}
+
+.select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__label {
+    @include paragraph("Poppins Regular");
+    color: $white-color;
+    font-weight: 600;
+    text-align: left;
+  }
+}
+
+select {
+  @include paragraph("Poppins Regular");
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: var(--select-width);
+  background-color: $white-color;
+  color: $black-color;
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  border: none;
+  border-radius: $border-radius-small;
+  cursor: pointer;
+  outline: none;
+  height: 50px;
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+
+  transition: background-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    box-shadow: 0 0 0 2px $primary-color;
+  }
+
+  // Custom arrow
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23222' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 1rem;
+}

@@ -1,0 +1,40 @@
+
+.auth__text-input {
+  @include paragraph("Poppins Regular");
+    color: $background-black-color;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: var(--input-width);
+
+    label {
+        color: $black-color;
+        font-weight: 600;
+      text-align: left;
+    }
+
+    input {
+        @include paragraph("Poppins Light");
+
+        color: $background-black-color;
+        height: 50px;
+        border-radius: $border-radius-small;
+        border: 2px solid $background-black-color;
+        padding: 1rem;
+        outline: none;
+
+        &:focus {
+            border: 2px solid $secondary-color;
+        }
+    }
+
+    &--invalid {
+        input {
+            border-color: $red-error-color;
+
+            &:focus {
+                border-color: $red-error-color;
+            }
+        }
+    }
+}

@@ -5,16 +5,19 @@ import { map } from 'rxjs';
 import { CustomBreakpoints } from '../../core/constants/breakpoints';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { effect } from '@angular/core';
+import {RouterLink} from "@angular/router";
+import {AuthService} from "../../core/services/auth.service";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  public readonly authService = inject(AuthService);
 
   menuOpen = false;
 

@@ -1,0 +1,62 @@
+<div class="page-inner">
+  <h1 class="collection__title">Collection</h1>
+  <div class="collection__filter">
+    <p class="collection__filter-label">SORT BY :</p>
+
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Set"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Type"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Rarity"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Color"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="CCM"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+  </div>
+
+  <div class="collection__container gradient-border-lg">
+
+    <div class="collection__wrapper">
+      @for (card of cards; track $index) {
+        <div class="Card">
+          <img class="gradient-border-md" [src]="card.image" alt="Card illustration" />
+          <div class="Card__info">
+            <p class="Card__info__description"><strong>State:</strong> {{ card.state }}</p>
+            <p class="Card__info__description"><strong>Language:</strong> {{ card.language }}</p>
+            <p class="Card__info__description"><strong>Foil:</strong> {{ card.foil }}</p>
+            <p class="Card__info__description"><strong>Full art:</strong> {{ card.fullArt }}</p>
+            <p class="Card__info__description"><strong>Textless:</strong> {{ card.textless }}</p>
+              <a class="Nav-link">{{ card.price }}</a>
+          </div>
+        </div>
+      } @empty {
+        <div class="collection__empty">
+          <h3 class="collection__subtitle">You have no items in your Collection.</h3>
+          <app-button class="Button">Back to cards</app-button>
+        </div>
+      }
+    </div>
+
+  </div>
+  <app-pager
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)">
+  </app-pager>
+</div>

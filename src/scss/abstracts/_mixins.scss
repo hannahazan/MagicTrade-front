@@ -11,26 +11,6 @@
   }
 }
 
-// Heading
-$heading1--font-size--mobile: $font-size-48;
-$heading1--font-size--desktop: $font-size-64;
-$heading2--font-size--mobile: $font-size-36;
-$heading2--font-size--desktop: $font-size-48;
-$heading3--font-size--mobile: $font-size-24;
-$heading3--font-size--desktop: $font-size-36;
-$heading4--font-size--mobile: $font-size-20;
-$heading4--font-size--desktop: $font-size-24;
-$heading5--font-size--mobile: $font-size-16;
-$heading5--font-size--desktop: $font-size-20;
-
-// paragraph
-$paragraph--font-size--mobile: $font-size-16;
-$paragraph--font-size--desktop: $font-size-20;
-
-// Navbar
-$navbar-font-size--mobile: $font-size-14;
-$navbar-font-size--desktop: $font-size-18;
-
 // Custom Properties
 :root {
   --heading1--font-size: #{$heading1--font-size--mobile};
@@ -39,7 +19,7 @@ $navbar-font-size--desktop: $font-size-18;
   --heading4--font-size: #{$heading4--font-size--mobile};
   --heading5--font-size: #{$heading5--font-size--mobile};
   --paragraph--font-size: #{$paragraph--font-size--mobile};
-  --nav-font-size: #{$navbar-font-size--mobile};
+  --navbar-font-size: #{$navbar-font-size--mobile};
 
   @include breakpoint("desktop") {
     --heading1--font-size: #{$heading1--font-size--desktop};
@@ -48,8 +28,7 @@ $navbar-font-size--desktop: $font-size-18;
     --heading4--font-size: #{$heading4--font-size--desktop};
     --heading5--font-size: #{$heading5--font-size--desktop};
     --paragraph--font-size: #{$paragraph--font-size--desktop};
-    --nav-font-size: #{$navbar-font-size--desktop};
-
+    --navbar-font-size: #{$navbar-font-size--desktop};
   }
 }
 
@@ -135,6 +114,14 @@ $navbar-font-size--desktop: $font-size-18;
 
 @mixin header {
   font-family: "Poppins", sans-serif;
-  font-size: var(--navbar--font-size);
+  font-size: var(--navbar-font-size);
+  font-weight: 700;
   color: $white-color;
+}
+
+@mixin gradient-border($border-radius) {
+  background: linear-gradient(to right, $primary-color, $secondary-color) border-box;
+  border-radius: $border-radius;
+  border: 2px solid transparent;
+  overflow: hidden;
 }

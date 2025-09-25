@@ -16,11 +16,35 @@
 @import "./scss/components/atoms/states";
 @import "./scss/components/atoms/link";
 @import "./scss/components/atoms/status";
+@import "./scss/components/atoms/input-errors";
+@import "./scss/components/atoms/auth-text-input";
+@import "./scss/components/atoms/select";
+@import "./scss/components/atoms/pager";
+@import "./scss/components/atoms/auth_checkbox";
 
 // Molecules
 @import "./scss/components/molecules/card";
+@import "./scss/components/molecules/auth-form";
+@import "./scss/components/molecules/footer";
+
 // Organism
+@import "./scss/components/organisms/card-modal";
 @import "./scss/components/organisms/header";
+@import "./scss/components/organisms/auth-container";
+@import "./scss/components/organisms/trader";
 
 // Pages
+@import "./scss/pages/cards";
+@import "./scss/pages/collection";
 @import "./scss/pages/home";
+@import "./scss/pages/signup";
+@import "./scss/pages/login";
+@import "./scss/pages/profile";
+@import "./scss/pages/traders";
+@import "./scss/pages/login";
+@import "./scss/pages/wishlist";
+@import "./scss/pages/filters";
+@import "./scss/pages/card";
+
+// globals
+@import "./scss/globals";
