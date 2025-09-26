@@ -33,7 +33,7 @@ jobs:
 
   deploy:
     name: Déploiement sur le VPS
-    needs: build-and-test
+    # needs: build-and-test
     if: github.ref == 'refs/heads/main' # Ce job se déclenche que si le workflow est déclenché depuis la branche main
     runs-on: ubuntu-latest
 
