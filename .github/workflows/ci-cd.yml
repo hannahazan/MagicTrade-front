@@ -87,7 +87,7 @@ jobs:
             docker build -t ${{ secrets.PROJECT_NAME }} . &&
             docker run -d --name ${{ secrets.PROJECT_NAME }} \
               --label traefik.enable=true \
-              --label 'traefik.http.routers.magic-trade-front.rule=Host(\"magictrade.duckdns.org\")' \
+              --label 'traefik.http.routers.magic-trade-front.rule=Host(`magictrade.duckdns.org`)' \
               --label traefik.http.routers.magic-trade-front.entrypoints=websecure \
               --label traefik.http.routers.magic-trade-front.tls.certresolver=letsencrypt \
               --label traefik.http.services.magic-trade-front.loadbalancer.server.port=80 \
