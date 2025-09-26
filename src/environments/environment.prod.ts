@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  magicTradeApiUrl: "http://java-092024-bleu-6.wns.wilders.dev/magicTrade-api/"
+  magicTradeApiUrl: "http://java-092024-bleu-6.wns.wilders.dev:8080/magicTrade-api/"
 };

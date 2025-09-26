@@ -23,7 +23,7 @@ jobs:
 #      - name: Installer Node.js # installe node sur le runner
 #        uses: actions/setup-node@v3
 #        with:
-#          node-version: 22
+#          node-version: 20
 #
 #      - name: Installer les dépendances
 #        run: npm ci
@@ -44,7 +44,7 @@ jobs:
       - name: Installer Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 22
+          node-version: 20
 
       - name: Installer Angular CLI
         run: npm install -g @angular/cli
