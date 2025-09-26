@@ -86,11 +86,14 @@ jobs:
             docker rm ${{ secrets.PROJECT_NAME }} || true &&
             docker build -t ${{ secrets.PROJECT_NAME }} . &&
             docker run -d --name ${{ secrets.PROJECT_NAME }} \
-              --label traefik.enable=true \
-              --label 'traefik.http.routers.magic-trade-front.rule=Host("magictrade.duckdns.org")' \
-              --label traefik.http.routers.magic-trade-front.entrypoints=websecure \
-              --label traefik.http.routers.magic-trade-front.tls.certresolver=letsencrypt \
-              --label traefik.http.services.magic-trade-front.loadbalancer.server.port=80 \
               --network traefik \
+              --restart unless-stopped \
+              -l 'traefik.enable=true' \
+              -l 'traefik.docker.network=traefik' \
+              -l 'traefik.http.routers.front.rule=Host(`magictrade.duckdns.org`)' \
+              -l 'traefik.http.routers.front.entrypoints=websecure' \
+              -l 'traefik.http.routers.front.tls=true' \
+              -l 'traefik.http.routers.front.tls.certresolver=letsencrypt' \
+              -l 'traefik.http.services.front.loadbalancer.server.port=80' \
               ${{ secrets.PROJECT_NAME }}
           "
