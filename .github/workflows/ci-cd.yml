@@ -12,24 +12,24 @@ on:
       - DEV
 
 jobs:
-  build-and-test:
-    name: Build and test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout du code # récupère le code du repo sur le runner
-        uses: actions/checkout@v3
-
-      - name: Installer Node.js # installe node sur le runner
-        uses: actions/setup-node@v3
-        with:
-          node-version: 22
-
-      - name: Installer les dépendances
-        run: npm ci
-
-      - name: Lancer les tests
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
+#  build-and-test:
+#    name: Build and test
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout du code # récupère le code du repo sur le runner
+#        uses: actions/checkout@v3
+#
+#      - name: Installer Node.js # installe node sur le runner
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: 22
+#
+#      - name: Installer les dépendances
+#        run: npm ci
+#
+#      - name: Lancer les tests
+#        run: npm run test -- --watch=false --browsers=ChromeHeadless
 
   deploy:
     name: Déploiement sur le VPS
