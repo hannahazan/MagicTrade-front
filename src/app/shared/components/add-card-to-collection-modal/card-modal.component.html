@@ -28,13 +28,23 @@
           />
         </div>
 
-        <app-button
-          class="modal__button"
-          type="submit"
-          [disabled]="AddCardToCollectionForm.invalid"
-        >
-          Add to Collection
-        </app-button>
+        @if (isUserConnected) {
+          <app-button
+            class="modal__button"
+            type="submit"
+            [disabled]="AddCardToCollectionForm.invalid"
+          >
+            Add to Collection
+          </app-button>
+        } @else {
+          <app-button
+            class="modal__button"
+            type="button"
+            (click)="redirectToLogin()"
+          >
+            Sign in / Sign up
+          </app-button>
+        }
       </form>
 
       @if (failedToAddCard) {
