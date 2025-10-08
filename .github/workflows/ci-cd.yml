@@ -1,0 +1,99 @@
+name: CI/CD Angular
+
+on:
+  push:
+    branches:
+      - main
+      - DEV
+      - feat-**
+  pull_request:
+    branches:
+      - main
+      - DEV
+
+jobs:
+#  build-and-test:
+#    name: Build and test
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout du code # récupère le code du repo sur le runner
+#        uses: actions/checkout@v3
+#
+#      - name: Installer Node.js # installe node sur le runner
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: 20
+#
+#      - name: Installer les dépendances
+#        run: npm ci
+#
+#      - name: Lancer les tests
+#        run: npm run test -- --watch=false --browsers=ChromeHeadless
+
+  deploy:
+    name: Déploiement sur le VPS
+    # needs: build-and-test
+    if: github.ref == 'refs/heads/main' # Ce job se déclenche que si le workflow est déclenché depuis la branche main
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Installer Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Build Angular (production)
+        run: npm run build -- --configuration production
+
+      - name: Préparer les fichiers à transférer
+        run: |
+          mkdir -p deploy/browser
+          cp -r dist/magic-trade-front/browser/* deploy/browser/
+          cp nginx.conf Dockerfile deploy/
+
+      - name: Ajouter la clé SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519_${{ secrets.PROJECT_NAME }}
+          chmod 600 ~/.ssh/id_ed25519_${{ secrets.PROJECT_NAME }}
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Copier les fichiers sur le VPS
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "deploy/**"
+          strip_components: 1
+          target: /home/${{ secrets.VPS_USER }}/${{ secrets.PROJECT_NAME }}/
+
+      - name: Build et run le conteneur sur le VPS
+        run: |
+          ssh -i ~/.ssh/id_ed25519_${{ secrets.PROJECT_NAME }} -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+            cd /home/${{ secrets.VPS_USER }}/${{ secrets.PROJECT_NAME }} &&
+            docker stop ${{ secrets.PROJECT_NAME }} || true &&
+            docker rm ${{ secrets.PROJECT_NAME }} || true &&
+            docker build -t ${{ secrets.PROJECT_NAME }} . &&
+            docker run -d --name ${{ secrets.PROJECT_NAME }} \
+              --network traefik \
+              --restart unless-stopped \
+              -l 'traefik.enable=true' \
+              -l 'traefik.docker.network=traefik' \
+              -l 'traefik.http.routers.front.rule=Host(`magictrade.duckdns.org`)' \
+              -l 'traefik.http.routers.front.entrypoints=websecure' \
+              -l 'traefik.http.routers.front.tls=true' \
+              -l 'traefik.http.routers.front.tls.certresolver=letsencrypt' \
+              -l 'traefik.http.services.front.loadbalancer.server.port=80' \
+              ${{ secrets.PROJECT_NAME }}
+          "
