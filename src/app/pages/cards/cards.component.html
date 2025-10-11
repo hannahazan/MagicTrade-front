@@ -4,30 +4,21 @@
     <p class="cards__filter-label">SORT BY :</p>
 
     <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      [options]="setOptions"
       placeholder="Set"
-      (valueChange)="onSortChange($event)">
+      (valueChange)="onSetFilterChange($event)">
     </app-select>
     <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      [options]="types"
       placeholder="Type"
-      (valueChange)="onSortChange($event)">
+      (valueChange)="onTypeChange($event)">
     </app-select>
-    <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
-      placeholder="Rarity"
-      (valueChange)="onSortChange($event)">
-    </app-select>
-    <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
-      placeholder="Color"
-      (valueChange)="onSortChange($event)">
-    </app-select>
-    <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
-      placeholder="CCM"
-      (valueChange)="onSortChange($event)">
-    </app-select>
+<!--    <app-select-->
+<!--      label="Color"-->
+<!--      [options]="colorOptions"-->
+<!--      placeholder="Select color"-->
+<!--      (valueChange)="onColorChange($event)">-->
+<!--    </app-select>-->
     <app-button [routerLink]="['/filters']">Advanced filter</app-button>
   </div>
 
