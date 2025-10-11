@@ -3,21 +3,21 @@
   <div class="traders__filter">
     <p class="traders__filter-label">SORT BY :</p>
 
-    <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
-      placeholder="State"
-      (valueChange)="onSortChange($event)">
-    </app-select>
-    <app-select
-      [options]="['⭐','⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐']"
-      placeholder="Rate"
-      (valueChange)="onSortChange($event)">
-    </app-select>
-    <app-select
-      [options]="['Paris','Lyon','Grenoble','Chambéry','Nouille York']"
-      placeholder="Department"
-      (valueChange)="onSortChange($event)">
-    </app-select>
+<!--    <app-select-->
+<!--      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"-->
+<!--      placeholder="State"-->
+<!--      (valueChange)="onSortChange($event)">-->
+<!--    </app-select>-->
+<!--    <app-select-->
+<!--      [options]="['⭐','⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐']"-->
+<!--      placeholder="Rate"-->
+<!--      (valueChange)="onSortChange($event)">-->
+<!--    </app-select>-->
+<!--    <app-select-->
+<!--      [options]="['Paris','Lyon','Grenoble','Chambéry','Nouille York']"-->
+<!--      placeholder="Department"-->
+<!--      (valueChange)="onSortChange($event)">-->
+<!--    </app-select>-->
   </div>
   <div class="traders__container">
     @for (trader of traders; track $index) {

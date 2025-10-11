@@ -2,16 +2,14 @@
   <h1 class="filters__title">FILTERS</h1>
   <div class="filters__container gradient-border-lg">
     <div class="filters__wrapper">
-      <form class="filters__form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-        <!-- Card name -->
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <app-auth-text-input
           label="Card name"
           type="text"
-          placeholder='Any words in the name, e.g. "Fire"'
+          placeholder="Any words in the name, e.g. 'Fire'"
           [control]="searchForm.controls.cardName"
         />
 
-        <!-- Type line -->
         <app-auth-text-input
           label="Type Line"
           type="text"
@@ -19,38 +17,23 @@
           [control]="searchForm.controls.typeLine"
         />
 
-        <div formGroupName="colors" class="checkboxes">
-          <p>Color</p>
-          <div class="checkboxes__labels">
-            <div class="checkboxes__labels-triple">
-            <app-auth-checkbox label="White" [control]="searchForm.controls.colors.controls.white" />
-            <app-auth-checkbox label="Blue" [control]="searchForm.controls.colors.controls.blue" />
-            <app-auth-checkbox label="Black" [control]="searchForm.controls.colors.controls.black" />
-            </div>
-            <div class="checkboxes__labels-triple">
-            <app-auth-checkbox label="Red" [control]="searchForm.controls.colors.controls.red" />
-            <app-auth-checkbox label="Green" [control]="searchForm.controls.colors.controls.green" />
-            <app-auth-checkbox label="Colorless" [control]="searchForm.controls.colors.controls.colorless" />
-            </div>
-          </div>
+        <div formGroupName="colors">
+          <app-auth-checkbox label="White" [control]="searchForm.controls.colors.controls.white" />
+          <app-auth-checkbox label="Blue" [control]="searchForm.controls.colors.controls.blue" />
+          <app-auth-checkbox label="Black" [control]="searchForm.controls.colors.controls.black" />
+          <app-auth-checkbox label="Red" [control]="searchForm.controls.colors.controls.red" />
+          <app-auth-checkbox label="Green" [control]="searchForm.controls.colors.controls.green" />
+          <app-auth-checkbox label="Colorless" [control]="searchForm.controls.colors.controls.colorless" />
         </div>
 
-        <!-- Mana cost -->
         <app-auth-text-input
           label="Mana Cost"
           type="text"
           placeholder='Any mana symbols, e.g. "{W}{W}"'
           [control]="searchForm.controls.manaCost"
         />
-
-        <!-- Sets -->
-        <app-select
-          [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
-          placeholder="Set"
-          (valueChange)="onSortChange($event)">
-        </app-select>
-
-        <app-button>Search with these options</app-button>
+        <app-button type="button" (click)="clearFilters()">Clear filters</app-button>
+        <app-button type="submit">Search</app-button>
       </form>
 
     </div>
