@@ -4,7 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable, tap} from "rxjs";
 import {LoginCredentials} from "../../models/login-credentials.model";
-import {jwtDecode} from "jwt-decode";
+import {jwtDecode, JwtPayload} from "jwt-decode";
+import {JwtCustomPayload} from "../../models/jwt-custom-payload.model";
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,13 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  getUserRole(): string[] | null {
+  getUserRole(): string | null {
     const token = this.getToken();
     if (!token) return null;
     try {
-      const decodedToken: any = jwtDecode(token);
-      return decodedToken.roles || null;
+      const decodedToken: JwtCustomPayload = jwtDecode(token);
+      // Les users ont un seul rôle donc on prend le premier (pas de table de jointure user_role dans le back)
+      return decodedToken.roles?.[0]?.authority ?? null;
     } catch {
       return null;
     }
@@ -57,7 +59,12 @@ export class AuthService {
     if (!token) return;
 
     try {
-      const decodedToken: any = jwtDecode(token);
+      const decodedToken = jwtDecode<JwtPayload>(token);
+      if (!decodedToken.exp) {
+        this.clearToken();
+        return
+      }
+
       const expiryDate = new Date(decodedToken.exp * 1000);
       if (expiryDate < new Date()) {
         this.clearToken();
@@ -71,17 +78,28 @@ export class AuthService {
     const token = this.getToken();
     if (!token) return false;
     try {
-      const decodedToken: any = jwtDecode(token);
+      const decodedToken = jwtDecode<JwtPayload>(token);
+      if (!decodedToken.exp) {
+        this.clearToken();
+        return false;
+      }
+
       const expiryDate = new Date(decodedToken.exp * 1000);
       if (expiryDate < new Date()) {
         this.clearToken();
         return false;
       }
+
       return true;
     } catch {
       this.clearToken();
       return false;
     }
+  }
+
+  isAdmin(): boolean {
+    if (!this.isLoggedIn()) return false;
+    return this.getUserRole() === "ROLE_ADMIN";
   }
 
 }

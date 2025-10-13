@@ -63,6 +63,8 @@ export class SignUpFormComponent {
   });
 
   onSubmit(): void {
+    if (this.signupForm.invalid) return;
+
     this.userRegisterService.execute(this.formValue).subscribe({
       next: () => {
         this.failedRegister = false;

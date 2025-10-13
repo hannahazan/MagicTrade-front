@@ -11,11 +11,24 @@
 
   <nav class="Header-Nav-links" [ngClass]="{ open: menuOpen }">
     <a class="Nav-link">HOME</a>
-    <a class="Nav-link">CARDS</a>
-    <a class="Nav-link">TRADERS</a>
-    <a class="Nav-link">WISHLIST</a>
-    <a [routerLink]="['/collection']" class="Nav-link">COLLECTION</a>
-    <a [routerLink]="['/signup']" class="Nav-link">SIGN UP</a>
-    <a [routerLink]="['/login']" class="Nav-link">LOG IN</a>
+    <a [routerLink]="['/cards']" class="Nav-link">CARDS</a>
+    <a [routerLink]="['/cards/1']" class="Nav-link">SINGLE CARD</a>
+    <a [routerLink]="['/traders']" class="Nav-link">TRADERS</a>
+
+    @if (authService.isLoggedIn()) {
+      <a [routerLink]="['/wishlist']" class="Nav-link">WISHLIST</a>
+      <a [routerLink]="['/collection']" class="Nav-link">COLLECTION</a>
+      <a [routerLink]="['/login']" class="Nav-link" (click)="authService.logout()">LOG OUT</a>
+    }
+
+    @if (!authService.isLoggedIn()) {
+      <a [routerLink]="['/signup']" class="Nav-link">SIGN UP</a>
+      <a [routerLink]="['/login']" class="Nav-link">LOG IN</a>
+    }
+
+    @if(authService.isAdmin()) {
+      <a [routerLink]="['/admin']" class="Nav-link">ADMIN</a>
+    }
+
   </nav>
 </div>

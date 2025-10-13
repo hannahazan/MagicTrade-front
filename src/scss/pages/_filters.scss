@@ -1,0 +1,37 @@
+.filters {
+
+  &__title {
+    @include heading1-poly;
+    margin-block-end: 20px;
+  }
+
+  &__container {
+    width: var(--cards-container-width);
+    min-height: 200px;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background: $background-black-color;
+    min-height: 200px;
+    color: $white-color;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    select {
+      width: var(--input-width);
+    }
+
+    label {
+      color: $white-color;
+    }
+  }
+}

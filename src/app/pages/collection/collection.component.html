@@ -1,30 +1,41 @@
-<div class="Page-Inner">
-  <h1 class="Collection__title">Collection</h1>
-  <div class="Collection__filter">
-    <p>Sort by :</p>
-    <select name="set" id="set-select">
-      <option value="">Set</option>
-    </select>
-    <select name="type" id="type-select">
-      <option value="">Type</option>
-    </select>
-    <select name="Rarity" id="rarity-select">
-      <option value="">Rarity</option>
-    </select>
-    <select name="Color" id="color-select">
-      <option value="">Color</option>
-    </select>
-    <select name="CCM" id="ccm-select">
-      <option value="">CCM</option>
-    </select>
+<div class="page-inner">
+  <h1 class="collection__title">Collection</h1>
+  <div class="collection__filter">
+    <p class="collection__filter-label">SORT BY :</p>
+
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Set"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Type"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Rarity"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="Color"
+      (valueChange)="onSortChange($event)">
+    </app-select>
+    <app-select
+      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      placeholder="CCM"
+      (valueChange)="onSortChange($event)">
+    </app-select>
   </div>
 
-  <div class="Collection__container gradient-border-lg">
+  <div class="collection__container gradient-border-lg">
 
-    <div class="Collection__wrapper">
-      @for (card of paginatedCards; track $index) {
+    <div class="collection__wrapper">
+      @for (card of cards; track $index) {
         <div class="Card">
-          <img class="gradient-border-md" [src]="card.image" alt="Card Image" />
+          <img class="gradient-border-md" [src]="card.image" alt="Card illustration" />
           <div class="Card__info">
             <p class="Card__info__description"><strong>State:</strong> {{ card.state }}</p>
             <p class="Card__info__description"><strong>Language:</strong> {{ card.language }}</p>
@@ -35,20 +46,17 @@
           </div>
         </div>
       } @empty {
-        <div class="Collection__empty">
-          <h3 class="Collection__subtitle">You have no items in your Collection.</h3>
+        <div class="collection__empty">
+          <h3 class="collection__subtitle">You have no items in your Collection.</h3>
           <app-button class="Button">Back to cards</app-button>
         </div>
       }
     </div>
 
   </div>
-
-  <div class="Pagination">
-    <button class="Button" (click)="prevPage()" [disabled]="currentPage === 1"> < </button>
-
-    <span class="Pagination__description">Page {{ currentPage }} of {{ totalPages }}</span>
-
-    <button class="Button" (click)="nextPage()" [disabled]="currentPage === totalPages"> > </button>
-  </div>
+  <app-pager
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)">
+  </app-pager>
 </div>

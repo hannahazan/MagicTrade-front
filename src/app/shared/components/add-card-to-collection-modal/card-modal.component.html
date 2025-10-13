@@ -1,0 +1,56 @@
+<div class="modal">
+  <div class="modal__card modal__card--gradient-border-md">
+    <div class="modal__wrapper">
+      <button class="modal__close-btn" (click)="closeModal.emit()">
+        ✕
+      </button>
+
+      <p class="modal__subtitle">Add in your collection one by one</p>
+      <h2 class="modal__title">About your Card</h2>
+
+      @if (cardHasBeenAdded) {
+        <p class="modal__flash modal__flash--success">This card has been added to your collection ! Want to add one more ?</p>
+      }
+
+      <form [formGroup]="AddCardToCollectionForm" (submit)="onSubmit()">
+        <div class="modal__select-group">
+          <app-select
+            label="State"
+            [options]="['Mint', 'Near-Mint', 'Played', '...']"
+            placeholder="condition"
+            (valueChange)="onStateChange($event)"
+          />
+          <app-select
+            label="Language"
+            [options]="['FR', 'EN', 'JP', '...']"
+            placeholder="language"
+            (valueChange)="onLanguageChange($event)"
+          />
+        </div>
+
+        @if (isUserConnected) {
+          <app-button
+            class="modal__button"
+            type="submit"
+            [disabled]="AddCardToCollectionForm.invalid"
+          >
+            Add to Collection
+          </app-button>
+        } @else {
+          <app-button
+            class="modal__button"
+            type="button"
+            (click)="redirectToLogin()"
+          >
+            Sign in / Sign up
+          </app-button>
+        }
+      </form>
+
+      @if (failedToAddCard) {
+        <p class="modal__flash modal__flash--failure">This card could not be added to your collection. Please try again.</p>
+      }
+
+    </div>
+  </div>
+</div>

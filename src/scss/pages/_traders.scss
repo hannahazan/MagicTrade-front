@@ -1,0 +1,56 @@
+/********************************************
+************** SCSS traders *****************
+********************************************/
+
+$traders-filter-width--mobile: calc(100vw - 72px);
+$traders-filter-width--tablet: calc(100vw - 100px);
+$traders-filter-width--desktop: calc(100vw - 200px);
+
+$traders-filter-flex-direction--mobile: column;
+$traders-filter-flex-direction--tablet: row;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --traders-filter-width: #{$traders-filter-width--mobile};
+  --traders-filter-flex-direction: #{$traders-filter-flex-direction--mobile};
+
+  @include breakpoint('tablet') {
+    --traders-filter-width: #{$traders-filter-width--tablet};
+    --traders-filter-flex-direction: #{$traders-filter-flex-direction--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --traders-filter-width: #{$traders-filter-width--desktop};
+  }
+}
+
+.traders {
+  &__title {
+    @include heading1-poly;
+    margin-block-end: 20px;
+  }
+
+  &__container {
+    width: var(--collection-container-width);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__filter {
+    width: var(--traders-filter-width);
+    display: flex;
+    flex-direction: var(--traders-filter-flex-direction);
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    margin: 30px 0px;
+
+    &-label {
+      @include paragraph("Poppins Regular");
+    }
+  }
+}

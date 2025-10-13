@@ -1,39 +1,31 @@
 import { Component } from '@angular/core';
 import {ButtonComponent} from "../../shared/components/button/button.component";
+import {SelectComponent} from "../../shared/components/select/select.component";
+import {PagerComponent} from "../../shared/components/pager/pager.component";
 
 
 @Component({
   selector: 'app-collection',
   standalone: true,
   imports: [
-    ButtonComponent
+    ButtonComponent,
+    SelectComponent,
+    PagerComponent
   ],
   templateUrl: './collection.component.html',
   styleUrl: './collection.component.scss'
 })
 export class CollectionComponent {
   currentPage = 1;
-  itemsPerPage = 8;
+  totalPages = 10;
 
-  get paginatedCards() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    return this.cards.slice(start, start + this.itemsPerPage);
+
+  onPageChange(newPage: number) {
+    this.currentPage = newPage;
   }
 
-  get totalPages() {
-    return Math.ceil(this.cards.length / this.itemsPerPage);
-  }
-
-  nextPage() {
-    if (this.currentPage < this.totalPages) this.currentPage++;
-  }
-
-  prevPage() {
-    if (this.currentPage > 1) this.currentPage--;
-  }
-
-  goToPage(page: number) {
-    if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+  onSortChange(value: string) {
+    console.log('Selected value:', value);
   }
 
   cards = [

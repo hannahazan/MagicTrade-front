@@ -1,0 +1,65 @@
+/********************************************
+************** SCSS cards **************
+********************************************/
+
+// Card width
+$cards-container-width--mobile: calc(100vw - 72px);
+$cards-container-width--tablet: calc(100vw - 100px);
+$cards-container-width--desktop: calc(100vw - 200px);
+
+$cards-filter-flex-direction--mobile: column;
+$cards-filter-flex-direction--tablet: row;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --cards-container-width: #{$cards-container-width--mobile};
+  --cards-filter-flex-direction: #{$cards-filter-flex-direction--mobile};
+
+  @include breakpoint('tablet') {
+    --cards-container-width: #{$cards-container-width--tablet};
+    --cards-filter-flex-direction: #{$cards-filter-flex-direction--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --cards-container-width: #{$cards-container-width--desktop};
+  }
+}
+
+.cards {
+  &__title {
+    @include heading1-poly;
+    margin-block-end: 20px;
+  }
+
+  &__container {
+    width: var(--cards-container-width);
+    min-height: 500px;
+  }
+
+  &__filter {
+    width: var(--cards-container-width);
+    display: flex;
+    flex-direction: var(--cards-filter-flex-direction);
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    margin: 30px 0px;
+
+    &-label {
+      @include paragraph("Poppins Regular");
+    }
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-img-width), 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    background: $background-black-color;
+    min-height: 500px;
+    justify-items: center;
+  }
+}

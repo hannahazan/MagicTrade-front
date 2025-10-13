@@ -39,7 +39,7 @@ $state-height--desktop: 40px;
   }
 }
 
-.States {
+.states {
   @include heading5-poppins;
 
   font-size: var(--state-font-size);
