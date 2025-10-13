@@ -11,7 +11,7 @@ export class GetAllCardsService {
   private readonly http = inject(HttpClient);
   private readonly _apiUrl = `${environment.magicTradeApiUrl}`;
 
-  execute(filters: { set: string; type: string; rarity: string; color: string; ccm: string }): Observable<CardList> {
+  execute(filters: { set: string; type: string; rarity: string; color: string; ccm: string; name?: string; }): Observable<CardList> {
     let params = new HttpParams();
 
     if (filters.set) params = params.set('set-id', filters.set);
@@ -19,6 +19,7 @@ export class GetAllCardsService {
     if (filters.rarity) params = params.set('rarities', filters.rarity);
     if (filters.color) params = params.set('colors', filters.color);
     if (filters.ccm) params = params.set('cmc', filters.ccm);
+    if (filters.name) params = params.set('name', filters.name);
 
     console.log('Requête GET avec filtres :', params.toString());
 
