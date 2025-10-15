@@ -17,6 +17,10 @@
     background: $background-black-color;
     min-height: 200px;
     color: $white-color;
+
+    .auth__text-input label {
+      color: $white-color;
+    }
   }
 
   &__form {

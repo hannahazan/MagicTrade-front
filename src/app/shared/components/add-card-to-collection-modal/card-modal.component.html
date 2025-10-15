@@ -16,16 +16,17 @@
         <div class="modal__select-group">
           <app-select
             label="State"
-            [options]="['Mint', 'Near-Mint', 'Played', '...']"
-            placeholder="condition"
+            [options]="stateOptions"
+            placeholder="Condition"
             (valueChange)="onStateChange($event)"
-          />
+          ></app-select>
+
           <app-select
             label="Language"
-            [options]="['FR', 'EN', 'JP', '...']"
-            placeholder="language"
+            [options]="languageOptions"
+            placeholder="Language"
             (valueChange)="onLanguageChange($event)"
-          />
+          ></app-select>
         </div>
 
         @if (isUserConnected) {

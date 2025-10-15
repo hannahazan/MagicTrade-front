@@ -29,6 +29,19 @@ export class CardModalComponent {
   cardHasBeenAdded = false;
   isUserConnected = false;
 
+  stateOptions = [
+    { label: 'Mint', value: 'MINT' },
+    { label: 'Near-Mint', value: 'NEAR_MINT' },
+    { label: 'Played', value: 'PLAYED' },
+    { label: 'Poor', value: 'POOR' }
+  ];
+
+  languageOptions = [
+    { label: 'French', value: 'FR' },
+    { label: 'English', value: 'EN' },
+    { label: 'Japanese', value: 'JP' }
+  ];
+
   constructor() {
     this.isUserConnected = this.authService.isLoggedIn();
   }
