@@ -6,6 +6,8 @@ import {AddCardToCollectionService} from "../../../core/services/collection/add-
 import {UserCard} from "../../../models/user-card/user-card";
 import {AuthService} from "../../../core/services/auth.service";
 import {Router} from "@angular/router";
+import {CARD_STATES} from "../../../core/constants/card-states";
+import {CARD_LANGUAGES} from "../../../core/constants/card-languages";
 
 @Component({
   selector: 'app-add-card-to-collection-modal',
@@ -25,22 +27,12 @@ export class CardModalComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
+  public readonly stateOptions = Object.entries(CARD_STATES).map(([key, value]) => ({ label: key, value }));
+  public readonly languageOptions = Object.entries(CARD_LANGUAGES).map(([key, value]) => ({ label: key, value }));
+
   failedToAddCard = false;
   cardHasBeenAdded = false;
   isUserConnected = false;
-
-  stateOptions = [
-    { label: 'Mint', value: 'MINT' },
-    { label: 'Near-Mint', value: 'NEAR_MINT' },
-    { label: 'Played', value: 'PLAYED' },
-    { label: 'Poor', value: 'POOR' }
-  ];
-
-  languageOptions = [
-    { label: 'French', value: 'FR' },
-    { label: 'English', value: 'EN' },
-    { label: 'Japanese', value: 'JP' }
-  ];
 
   constructor() {
     this.isUserConnected = this.authService.isLoggedIn();
