@@ -25,7 +25,7 @@ export class CardPageComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly getOneCardService = inject(GetOneCardService);
-  public readonly authService = inject(AuthService);
+  readonly authService = inject(AuthService);
 
   displayedCard!: DisplayedCard;
 

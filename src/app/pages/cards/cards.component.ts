@@ -9,6 +9,10 @@ import {GetAllCardsService} from "../../core/services/card/get-all-cards.service
 import {GetAllCardsSetsService} from "../../core/services/card/get-all-cards-sets.service";
 import {GetAllCardsTypesService} from "../../core/services/card/get-all-cards-types.service";
 import {ScryfallSet} from "../../models/card/card-set.model";
+import {WishlistButtonComponent} from "../../shared/components/wishlist-button/wishlist-button.component";
+import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
+import {DisplayedCard} from "../../models/card/displayed-card.model";
+import {AuthService} from "../../core/services/auth.service";
 
 @Component({
   selector: 'app-cards',
@@ -18,6 +22,7 @@ import {ScryfallSet} from "../../models/card/card-set.model";
     ButtonComponent,
     SelectComponent,
     PagerComponent,
+    WishlistButtonComponent,
     RouterLink
   ],
   templateUrl: './cards.component.html',
@@ -28,12 +33,13 @@ export class CardsComponent implements OnInit {
   private readonly getAllCardsService = inject(GetAllCardsService);
   private readonly getAllSetsService = inject(GetAllCardsSetsService);
   private readonly getAllCardsTypesService = inject(GetAllCardsTypesService);
+  readonly authService = inject(AuthService);
 
   // Données
-  cards: Card[] = [];
+  cards: DisplayedCard[] = [];
   currentPage = 1;
   totalPages = 10;
-  selectedCard: Card | null = null;
+  selectedCard: DisplayedCard | null = null;
   types: { label: string; value: string }[] = [];
   sets: ScryfallSet[] = [];
   setOptions: { label: string; value: string }[] = [];
@@ -65,7 +71,10 @@ export class CardsComponent implements OnInit {
   loadCards(): void {
     this.getAllCardsService.execute(this.filters).subscribe({
       next: (res) => {
-        this.cards = res.cards;
+        this.cards = res.cards?.map(card => ({
+          ...mapToDisplayedCard(card),
+          isWishlisted: false
+        }));
       },
       error: (err) => console.error('Erreur de chargement des cartes', err)
     });
@@ -136,15 +145,20 @@ export class CardsComponent implements OnInit {
     console.log('Selected value:', value);
   }
 
-  openCardModal(card: Card): void {
+  openCardModal(card: DisplayedCard): void {
     this.selectedCard = card;
   }
 
-  goToCardDetail(card: Card): void {
+  goToCardDetail(card: DisplayedCard): void {
     this.router.navigate(['/cards', card.id]);
   }
 
   closeModal(): void {
     this.selectedCard = null;
+  }
+
+  onWishlistToggle(cardId: string, isWishlisted: boolean): void {
+    this.cards.find(c => c.id === cardId)!.isWishlisted = !isWishlisted;
+    // TODO : Appeler un service/API pour la persistance de la wishlist en BDD
   }
 }
