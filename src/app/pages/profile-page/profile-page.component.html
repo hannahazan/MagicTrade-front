@@ -1,4 +1,13 @@
 <div class="page-inner">
-  <h1 class="profile__title">My profile</h1>
-  <p style="color: white">page en construction</p>
+  <h1 class="profile__title">Mon profil</h1>
+
+  @for (userItem of [user]; track userItem?.email) {
+    <p><strong>Pseudo :</strong> {{ userItem?.pseudo }}</p>
+    <p><strong>Email :</strong> {{ userItem?.email }}</p>
+    <p><strong>Prénom :</strong> {{ userItem?.firstName }}</p>
+    <p><strong>Nom :</strong> {{ userItem?.lastName }}</p>
+    <p><strong>Ville :</strong> {{ userItem?.city }}</p>
+    <p><strong>Pays :</strong> {{ userItem?.country }}</p>
+    <p><strong>Département :</strong> {{ userItem?.department }}</p>
+  }
 </div>
