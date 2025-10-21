@@ -12,11 +12,12 @@ import {
 import {AuthService} from "../../core/services/auth.service";
 import {GetOneCardService} from "../../core/services/card/get-one-card.service";
 import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
+import {WishlistButtonComponent} from "../../shared/components/wishlist-button/wishlist-button.component";
 
 @Component({
   selector: 'app-card-page',
   standalone: true,
-  imports: [ButtonComponent, TraderPreviewComponent, NewLineToParagraphPipe, CardModalComponent],
+  imports: [ButtonComponent, TraderPreviewComponent, NewLineToParagraphPipe, CardModalComponent, WishlistButtonComponent],
   templateUrl: './card-page.component.html',
   styleUrl: './card-page.component.scss'
 })
@@ -66,13 +67,21 @@ export class CardPageComponent implements OnInit {
             if (result.cards.length === 0) {
               this.router.navigate(["/not-found"]);
             } else {
-              this.displayedCard = mapToDisplayedCard(result.cards[0]);
+              this.displayedCard = {
+                ...mapToDisplayedCard(result.cards[0]),
+                isWishlisted: false
+              };
             }
           },
           error: error => console.log(error),
         })
       }
     })
+  }
+
+  onWishlistToggle(isWishlisted: boolean): void {
+    this.displayedCard.isWishlisted = !isWishlisted;
+    // TODO : Appeler un service/API pour la persistance de la wishlist en BDD
   }
 
   owners: TraderPreview[] = [
