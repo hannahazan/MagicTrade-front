@@ -13,6 +13,7 @@ import {WishlistButtonComponent} from "../../shared/components/wishlist-button/w
 import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
 import {DisplayedCard} from "../../models/card/displayed-card.model";
 import {AuthService} from "../../core/services/auth.service";
+import {AddWishlistItemService} from "../../core/services/wishlist/add-wishlist-item.service";
 
 @Component({
   selector: 'app-cards',
@@ -33,6 +34,7 @@ export class CardsComponent implements OnInit {
   private readonly getAllCardsService = inject(GetAllCardsService);
   private readonly getAllSetsService = inject(GetAllCardsSetsService);
   private readonly getAllCardsTypesService = inject(GetAllCardsTypesService);
+  private readonly addWishlistItemService = inject(AddWishlistItemService);
   readonly authService = inject(AuthService);
 
   // Données
@@ -158,7 +160,20 @@ export class CardsComponent implements OnInit {
   }
 
   onWishlistToggle(cardId: string, isWishlisted: boolean): void {
-    this.cards.find(c => c.id === cardId)!.isWishlisted = !isWishlisted;
+    if (isWishlisted) {
+      // If card is in wishlist, remove it
+    }
+    if (!isWishlisted) {
+      // If card is not in wishlist, add it
+      this.cards.find(c => c.id === cardId)!.isWishlisted = true;
+      this.addWishlistItemService.execute(cardId).subscribe({
+        error: (error) => {
+          console.error(error);
+        }
+      });
+    }
+
+
     // TODO : Appeler un service/API pour la persistance de la wishlist en BDD
   }
 }
