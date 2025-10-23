@@ -13,6 +13,9 @@ import {AuthService} from "../../core/services/auth.service";
 import {GetOneCardService} from "../../core/services/card/get-one-card.service";
 import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
 import {WishlistButtonComponent} from "../../shared/components/wishlist-button/wishlist-button.component";
+import {GetOneCardWithWishlistService} from "../../core/services/card/get-one-card-with-wishlist.service";
+import {AddWishlistItemService} from "../../core/services/wishlist/add-wishlist-item.service";
+import {DeleteWishlistItemService} from "../../core/services/wishlist/delete-wishlist-item.service";
 
 @Component({
   selector: 'app-card-page',
@@ -26,13 +29,15 @@ export class CardPageComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly getOneCardService = inject(GetOneCardService);
+  private readonly getOneCardWithWishlistService = inject(GetOneCardWithWishlistService);
+  private readonly addWishlistItemService = inject(AddWishlistItemService);
+  private readonly deleteWishlistItemService = inject(DeleteWishlistItemService);
   readonly authService = inject(AuthService);
 
   displayedCard!: DisplayedCard;
 
   isFrontFace = true; // Prop seulement pour les cartes doubles
   isAddCardModalOpen = false;
-  isCardInWishlist = false;
 
   get currentCardFace(): DisplayedCardFace {
     return this.displayedCard.faces[this.isFrontFace? 0 : 1];
@@ -42,12 +47,6 @@ export class CardPageComponent implements OnInit {
     if (this.displayedCard.isDoubleCard) {
       this.isFrontFace = !this.isFrontFace;
     }
-  }
-
-  addToWishlist(): void {
-    // TODO : appeler un service qui ajoute la carte à la wishlist
-    this.isCardInWishlist = true;
-    console.log("card added to wishlist", this.displayedCard);
   }
 
   toggleAddCardModal(): void {
@@ -62,15 +61,13 @@ export class CardPageComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const cardId = params.get('cardId');
       if (cardId) {
-        this.getOneCardService.execute(cardId).subscribe({
+        const getOneCard = this.authService.isLoggedIn() ? this.getOneCardWithWishlistService : this.getOneCardService;
+        getOneCard.execute(cardId).subscribe({
           next: result => {
             if (result.cards.length === 0) {
               this.router.navigate(["/not-found"]);
             } else {
-              this.displayedCard = {
-                ...mapToDisplayedCard(result.cards[0]),
-                isWishlisted: false
-              };
+              this.displayedCard = mapToDisplayedCard(result.cards[0])
             }
           },
           error: error => console.log(error),
@@ -81,7 +78,16 @@ export class CardPageComponent implements OnInit {
 
   onWishlistToggle(isWishlisted: boolean): void {
     this.displayedCard.isWishlisted = !isWishlisted;
-    // TODO : Appeler un service/API pour la persistance de la wishlist en BDD
+    if (isWishlisted) {
+      // If card is in wishlist, remove it
+      this.displayedCard.isWishlisted = false;
+      this.deleteWishlistItemService.execute(this.displayedCard.id).subscribe();
+    }
+    if (!isWishlisted) {
+      // If card is not in wishlist, add it
+      this.displayedCard.isWishlisted = true;
+      this.addWishlistItemService.execute(this.displayedCard.id).subscribe();
+    }
   }
 
   owners: TraderPreview[] = [

@@ -47,7 +47,7 @@ export class WishlistComponent implements OnInit {
     this.router.navigate(['/cards', card.cardId]);
   }
 
-  redirectToCardsPage(): void {
+  goToCardsPage(): void {
     this.router.navigate(['/cards']);
   }
 

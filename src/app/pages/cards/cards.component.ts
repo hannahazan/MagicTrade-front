@@ -79,7 +79,7 @@ export class CardsComponent implements OnInit {
     const getCards = this.authService.isLoggedIn() ? this.getCardsWithWishlistService : this.getAllCardsService;
     getCards.execute(this.filters).subscribe({
       next: (res) => {
-        this.cards = res.cards?.map(card => ({
+        this.cards = res.cards.map(card => ({
           ...mapToDisplayedCard(card)
         }));
       },
