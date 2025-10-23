@@ -18,14 +18,18 @@
   <div class="wishlist__container gradient-border-lg">
     <div class="wishlist__wrapper">
       @if (cards) {
-        @for (card of cards.length ? cards : []; track $index) {
+        @for (card of cards ; track card.id) {
           <div class="Card">
             <img [src]="card.imageSizeNormal" alt="" />
+            <div class="wishlist__actions">
+              <app-button (click)="removeWishlistItem(card)">Remove</app-button>
+              <app-button (click)="goToCardDetail(card)">Details</app-button>
+            </div>
           </div>
         } @empty {
           <div class="wishlist__empty">
-            <h3 class="wishlist__subtitle">You have no items in your Wishlist.</h3>
-            <app-button class="Button">Back to cards</app-button>
+            <h3 class="wishlist__subtitle">Your wishlist is empty.</h3>
+            <app-button class="Button" (click)="redirectToCardsPage()">Back to cards</app-button>
           </div>
         }
       }
