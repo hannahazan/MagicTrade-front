@@ -13,7 +13,6 @@ export class WishlistButtonComponent {
   @Output() wishlistToggled = new EventEmitter<boolean>();
 
   onToggle(): void {
-    // this.isWishlisted = !this.isWishlisted;
     this.wishlistToggled.emit(this.isWishlisted);
   }
 }
