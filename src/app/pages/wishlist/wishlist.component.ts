@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ButtonComponent} from "../../shared/components/button/button.component";
 import {SelectComponent} from "../../shared/components/select/select.component";
 import {PagerComponent} from "../../shared/components/pager/pager.component";
+import {WishlistCard} from "../../models/wishlist/wishlist-card";
+import {GetUserWishlistService} from "../../core/services/wishlist/get-user-wishlist.service";
 
 @Component({
   selector: 'app-wishlist',
@@ -14,10 +16,12 @@ import {PagerComponent} from "../../shared/components/pager/pager.component";
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.scss'
 })
-export class WishlistComponent {
+export class WishlistComponent implements OnInit {
+  private readonly getUserWishlistService = inject(GetUserWishlistService);
+
+  cards!: WishlistCard[];
   currentPage = 1;
   totalPages = 10;
-
 
   onPageChange(newPage: number) {
     this.currentPage = newPage;
@@ -27,105 +31,9 @@ export class WishlistComponent {
     console.log('Selected value:', value);
   }
 
-  cards = [
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-    {
-      image: 'cardMagic.png',
-      state: 'Mint',
-      language: 'English',
-      foil: 'Yes',
-      fullArt: 'Yes',
-      textless: 'No',
-      price: 'See on Cardmarket'
-    },
-  ];
+  ngOnInit() {
+    this.getUserWishlistService.execute().subscribe({
+      next: response => this.cards = response
+    })
+  }
 }

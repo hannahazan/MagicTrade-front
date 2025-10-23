@@ -15,6 +15,7 @@ import {DisplayedCard} from "../../models/card/displayed-card.model";
 import {AuthService} from "../../core/services/auth.service";
 import {AddWishlistItemService} from "../../core/services/wishlist/add-wishlist-item.service";
 import {GetCardsWithWishlistService} from "../../core/services/card/get-cards-with-wishlist.service";
+import {DeleteWishlistItemService} from "../../core/services/wishlist/delete-wishlist-item.service";
 
 @Component({
   selector: 'app-cards',
@@ -32,11 +33,13 @@ import {GetCardsWithWishlistService} from "../../core/services/card/get-cards-wi
 })
 export class CardsComponent implements OnInit {
   private readonly router = inject(Router);
+
   private readonly getAllCardsService = inject(GetAllCardsService);
   private readonly getCardsWithWishlistService = inject(GetCardsWithWishlistService);
   private readonly getAllSetsService = inject(GetAllCardsSetsService);
   private readonly getAllCardsTypesService = inject(GetAllCardsTypesService);
   private readonly addWishlistItemService = inject(AddWishlistItemService);
+  private readonly deleteWishlistItemService = inject(DeleteWishlistItemService);
   readonly authService = inject(AuthService);
 
   // Données
@@ -162,13 +165,18 @@ export class CardsComponent implements OnInit {
   }
 
   onWishlistToggle(cardId: string, isWishlisted: boolean): void {
-    if (isWishlisted) {
-      // TODO : If card is in wishlist, remove it
-    }
-    if (!isWishlisted) {
-      // If card is not in wishlist, add it
-      this.cards.find(c => c.id === cardId)!.isWishlisted = true;
-      this.addWishlistItemService.execute(cardId).subscribe();
+    const card = this.cards.find(c => c.id === cardId);
+    if (card) {
+      if (isWishlisted) {
+        // If card is in wishlist, remove it
+        card.isWishlisted = false;
+        this.deleteWishlistItemService.execute(cardId).subscribe();
+      }
+      if (!isWishlisted) {
+        // If card is not in wishlist, add it
+        card.isWishlisted = true;
+        this.addWishlistItemService.execute(cardId).subscribe();
+      }
     }
   }
 }
