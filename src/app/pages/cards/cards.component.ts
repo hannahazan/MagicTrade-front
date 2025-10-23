@@ -14,6 +14,7 @@ import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
 import {DisplayedCard} from "../../models/card/displayed-card.model";
 import {AuthService} from "../../core/services/auth.service";
 import {AddWishlistItemService} from "../../core/services/wishlist/add-wishlist-item.service";
+import {GetCardsWithWishlistService} from "../../core/services/card/get-cards-with-wishlist.service";
 
 @Component({
   selector: 'app-cards',
@@ -32,6 +33,7 @@ import {AddWishlistItemService} from "../../core/services/wishlist/add-wishlist-
 export class CardsComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly getAllCardsService = inject(GetAllCardsService);
+  private readonly getCardsWithWishlistService = inject(GetCardsWithWishlistService);
   private readonly getAllSetsService = inject(GetAllCardsSetsService);
   private readonly getAllCardsTypesService = inject(GetAllCardsTypesService);
   private readonly addWishlistItemService = inject(AddWishlistItemService);
@@ -71,11 +73,11 @@ export class CardsComponent implements OnInit {
 
   // Récupération des cartes
   loadCards(): void {
-    this.getAllCardsService.execute(this.filters).subscribe({
+    const getCards = this.authService.isLoggedIn() ? this.getCardsWithWishlistService : this.getAllCardsService;
+    getCards.execute(this.filters).subscribe({
       next: (res) => {
         this.cards = res.cards?.map(card => ({
-          ...mapToDisplayedCard(card),
-          isWishlisted: false
+          ...mapToDisplayedCard(card)
         }));
       },
       error: (err) => console.error('Erreur de chargement des cartes', err)
@@ -161,19 +163,12 @@ export class CardsComponent implements OnInit {
 
   onWishlistToggle(cardId: string, isWishlisted: boolean): void {
     if (isWishlisted) {
-      // If card is in wishlist, remove it
+      // TODO : If card is in wishlist, remove it
     }
     if (!isWishlisted) {
       // If card is not in wishlist, add it
       this.cards.find(c => c.id === cardId)!.isWishlisted = true;
-      this.addWishlistItemService.execute(cardId).subscribe({
-        error: (error) => {
-          console.error(error);
-        }
-      });
+      this.addWishlistItemService.execute(cardId).subscribe();
     }
-
-
-    // TODO : Appeler un service/API pour la persistance de la wishlist en BDD
   }
 }

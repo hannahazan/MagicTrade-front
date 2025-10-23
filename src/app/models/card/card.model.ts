@@ -30,6 +30,7 @@ export interface Card {
   imageSizeArtCrop: string | null;
   isDoubleCard: boolean | null;
   doubleCards: DoubleCard[];
+  isWishlisted?: boolean | null; // not a field from the API for now
 }
 
 // DoubleCard (raw from API)
