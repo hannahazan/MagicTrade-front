@@ -1,7 +1,6 @@
-import {Component, input, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
-import {CardStateComponent} from "../card-state/card-state.component";
-import {CardState} from "../../../models/card-state.model";
+import {CardState, CardStateComponent} from "../card-state/card-state.component";
 import {TraderPreview} from "../../../models/trader-preview.model";
 
 @Component({

@@ -28,7 +28,7 @@ export class AuthService {
 
   getCurrentUser(): Observable<UserRegister> {
     const token = this.getToken();
-    return this.http.get<UserRegister>(`${this._apiUrl}auth/profile`, {
+    return this.http.get<UserRegister>(`${this._apiUrl}auth/Myprofile`, {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
