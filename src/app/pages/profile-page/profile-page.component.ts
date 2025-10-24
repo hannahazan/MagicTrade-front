@@ -52,6 +52,10 @@ export class ProfilePageComponent implements OnInit{
   }
 
   onSubmit(): void {
-    // TODO : soumettre la modification du profil via un service
+     /* TODO :
+        - soumettre la modification du profil via un service, gestion des erreurs/validité du form
+        - finir le HTML SCSS pour afficher les trades avec les status
+        -
+      */
   }
 }
