@@ -6,7 +6,6 @@ import {Observable, tap} from "rxjs";
 import {LoginCredentials} from "../../models/login-credentials.model";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import {JwtCustomPayload} from "../../models/jwt-custom-payload.model";
-import {UserRegister} from "../../models/user-register.model";
 import {Profile} from "../../models/user/profile.model";
 
 @Injectable({
