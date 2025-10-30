@@ -19,6 +19,12 @@
                 />
               }
             </div>
+            @if (authService.isLoggedIn()) {
+              <app-wishlist-button
+                [isWishlisted]="displayedCard.isWishlisted"
+                (wishlistToggled)="onWishlistToggle($event)"
+              />
+            }
 
             @if (displayedCard.isDoubleCard) {
               <button
@@ -51,9 +57,6 @@
 
         @if (authService.isLoggedIn()) {
           <div class="card__actions">
-            @if (!isCardInWishlist) {
-              <app-button (click)="addToWishlist()">Add to Wishlist</app-button>
-            }
             <app-button (click)="toggleAddCardModal()">Add to Collection</app-button>
           </div>
         }

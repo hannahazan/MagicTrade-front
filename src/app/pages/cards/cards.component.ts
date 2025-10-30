@@ -9,6 +9,13 @@ import {GetAllCardsService} from "../../core/services/card/get-all-cards.service
 import {GetAllCardsSetsService} from "../../core/services/card/get-all-cards-sets.service";
 import {GetAllCardsTypesService} from "../../core/services/card/get-all-cards-types.service";
 import {ScryfallSet} from "../../models/card/card-set.model";
+import {WishlistButtonComponent} from "../../shared/components/wishlist-button/wishlist-button.component";
+import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
+import {DisplayedCard} from "../../models/card/displayed-card.model";
+import {AuthService} from "../../core/services/auth.service";
+import {AddWishlistItemService} from "../../core/services/wishlist/add-wishlist-item.service";
+import {GetCardsWithWishlistService} from "../../core/services/card/get-cards-with-wishlist.service";
+import {DeleteWishlistItemService} from "../../core/services/wishlist/delete-wishlist-item.service";
 
 @Component({
   selector: 'app-cards',
@@ -18,6 +25,7 @@ import {ScryfallSet} from "../../models/card/card-set.model";
     ButtonComponent,
     SelectComponent,
     PagerComponent,
+    WishlistButtonComponent,
     RouterLink
   ],
   templateUrl: './cards.component.html',
@@ -25,15 +33,20 @@ import {ScryfallSet} from "../../models/card/card-set.model";
 })
 export class CardsComponent implements OnInit {
   private readonly router = inject(Router);
+
   private readonly getAllCardsService = inject(GetAllCardsService);
+  private readonly getCardsWithWishlistService = inject(GetCardsWithWishlistService);
   private readonly getAllSetsService = inject(GetAllCardsSetsService);
   private readonly getAllCardsTypesService = inject(GetAllCardsTypesService);
+  private readonly addWishlistItemService = inject(AddWishlistItemService);
+  private readonly deleteWishlistItemService = inject(DeleteWishlistItemService);
+  readonly authService = inject(AuthService);
 
   // Données
-  cards: Card[] = [];
+  cards: DisplayedCard[] = [];
   currentPage = 1;
   totalPages = 10;
-  selectedCard: Card | null = null;
+  selectedCard: DisplayedCard | null = null;
   types: { label: string; value: string }[] = [];
   sets: ScryfallSet[] = [];
   setOptions: { label: string; value: string }[] = [];
@@ -63,9 +76,12 @@ export class CardsComponent implements OnInit {
 
   // Récupération des cartes
   loadCards(): void {
-    this.getAllCardsService.execute(this.filters).subscribe({
+    const getCards = this.authService.isLoggedIn() ? this.getCardsWithWishlistService : this.getAllCardsService;
+    getCards.execute(this.filters).subscribe({
       next: (res) => {
-        this.cards = res.cards;
+        this.cards = res.cards.map(card => ({
+          ...mapToDisplayedCard(card)
+        }));
       },
       error: (err) => console.error('Erreur de chargement des cartes', err)
     });
@@ -136,15 +152,31 @@ export class CardsComponent implements OnInit {
     console.log('Selected value:', value);
   }
 
-  openCardModal(card: Card): void {
+  openCardModal(card: DisplayedCard): void {
     this.selectedCard = card;
   }
 
-  goToCardDetail(card: Card): void {
+  goToCardDetail(card: DisplayedCard): void {
     this.router.navigate(['/cards', card.id]);
   }
 
   closeModal(): void {
     this.selectedCard = null;
+  }
+
+  onWishlistToggle(cardId: string, isWishlisted: boolean): void {
+    const card = this.cards.find(c => c.id === cardId);
+    if (card) {
+      if (isWishlisted) {
+        // If card is in wishlist, remove it
+        card.isWishlisted = false;
+        this.deleteWishlistItemService.execute(cardId).subscribe();
+      }
+      if (!isWishlisted) {
+        // If card is not in wishlist, add it
+        card.isWishlisted = true;
+        this.addWishlistItemService.execute(cardId).subscribe();
+      }
+    }
   }
 }

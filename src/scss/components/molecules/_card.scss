@@ -3,7 +3,7 @@
 ********************************************/
 
 // Card width
-$card-img-width--mobile: 120px;
+$card-img-width--mobile: 160px;
 $card-img-width--tablet: 200px;
 $card-img-width--desktop: 286px;
 
@@ -58,5 +58,9 @@ $card-height--desktop: calc(#{$card-img-width--desktop} * 1.395);
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+
+    &__wishlist {
+      align-self: center;
+    }
   }
 }

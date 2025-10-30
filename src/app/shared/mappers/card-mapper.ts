@@ -26,7 +26,8 @@ export function mapToDisplayedCard(card: Card): DisplayedCard {
       faces: [
         mapFace(card.doubleCards[0]),
         mapFace(card.doubleCards[1]),
-      ]
+      ],
+      isWishlisted: card.isWishlisted ?? undefined
     };
   } else {
     return {
@@ -43,6 +44,7 @@ export function mapToDisplayedCard(card: Card): DisplayedCard {
           imageUrl: card.imageSizeNormal,
         },
       ],
+      isWishlisted: card.isWishlisted ?? undefined
     };
   }
 

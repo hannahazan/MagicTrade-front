@@ -12,4 +12,5 @@ export interface DisplayedCard {
   cardMarketPrice: string | null;
   isDoubleCard: boolean | null;
   faces: DisplayedCardFace[];
+  isWishlisted?: boolean;
 }
