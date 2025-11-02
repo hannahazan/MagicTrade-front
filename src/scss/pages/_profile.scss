@@ -221,8 +221,14 @@ $profile-user-info-width--desktop: 500px;
       height: 100%;
       background-color: $background-black-color;
       display: flex;
+      flex-direction: column;
+      gap: 1em;
       align-items: center;
       justify-content: space-between;
+
+      @include breakpoint('tablet') {
+        flex-direction: row;
+      }
     }
 
     &__left-col {
@@ -247,9 +253,38 @@ $profile-user-info-width--desktop: 500px;
       @include paragraph("Poppins Bold");
       color: $black-color;
       background-color: #FFC107;
-      width: fit-content;
+      min-width: fit-content;
+      width: 7em;
       padding: 0.3em 0.5em;
       border-radius: 5px;
+
+      &--open {
+        background-color: $secondary-color;
+      }
+
+      &--accepted {
+        background-color: $primary-color;
+      }
+
+      &--cancelled {
+        background-color: #7a01e4;
+        color: $white-color;
+      }
+
+      &--rejected {
+        background-color: #FFC107;
+      }
+
+      &--closed {
+        background-color: #DC3545;
+        color: $white-color;
+      }
+
+      &--expired {
+        background-color: #636363;
+        color: $white-color;
+      }
+
     }
   }
 }
