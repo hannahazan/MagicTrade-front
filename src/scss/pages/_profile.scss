@@ -1,6 +1,290 @@
+/********************************************
+************** SCSS Profile **************
+********************************************/
+
+$profile-main-sections-width--mobile: 320px;
+$profile-main-sections-width--tablet: 600px;
+$profile-main-sections-width--desktop: 1000px;
+
+$profile-user-info-width--mobile: calc($profile-main-sections-width--mobile - 20px);
+$profile-user-info-width--tablet: 400px;
+$profile-user-info-width--desktop: 500px;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --profile-main-sections-width: #{$profile-main-sections-width--mobile};
+  --profile-user-info-width: #{$profile-user-info-width--mobile};
+
+  @include breakpoint('tablet') {
+    --profile-main-sections-width: #{$profile-main-sections-width--tablet};
+    --profile-user-info-width: #{$profile-user-info-width--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --profile-main-sections-width: #{$profile-main-sections-width--desktop};
+    --profile-user-info-width: #{$profile-user-info-width--desktop};
+  }
+}
+
+
 .profile {
   &__title {
     @include heading1-poly;
-    margin-block-end: 20px;
+    margin-block-end: 50px;
+  }
+
+  &__details {
+    width: var(--profile-main-sections-width);
+    margin-block-end: 3.5em;
+
+    &__wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      background-color: $background-black-color;
+      padding: 2em;
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: var(--profile-user-info-width);
+    }
+
+    &__header {
+      align-self: flex-start;
+      display: flex;
+      color: $white-color;
+      align-items: center;
+      gap: 1em;
+      width: fit-content;
+      margin-bottom: 1em;
+    }
+
+    &__picture {
+      position: relative;
+      width: 70px;
+      height: 70px;
+
+       > img {
+         width: 100%;
+         border-radius: 50%;
+         background-color: black;
+         overflow: hidden;
+       }
+
+      &-edit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        width: 37%;
+        height: 37%;
+        background-color: $white-color;
+        transition: background-color ease-in-out 0.1s;
+        border: none;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $secondary-color;
+        }
+      }
+    }
+
+    &__name {
+      text-align: left;
+
+      h3 {
+        font-family: "Poppins Regular", sans-serif;
+        font-size: 1.8em;
+      }
+
+      p {
+        @include paragraph("Poppins Regular");
+        color: darken($white-color, 40%);
+      }
+    }
+
+    &__info {
+      width: 100%;
+      margin-bottom: 1em;
+
+      &__item {
+        @include paragraph("Poppins Light");
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid $primary-color;
+        height: 3.5em;
+        width: 100%;
+
+        &:focus-within {
+          background-color: darken($grey-color, 32%);
+        }
+
+        label {
+          color: $white-color;
+        }
+
+        input {
+          text-align: right;
+          color: darken($white-color, 40%);
+          background-color: inherit;
+          border: none;
+          font-family: inherit;
+          font-size: inherit;
+          min-width: 50%;
+          width: 75%;
+          height: 100%;
+
+          &:focus {
+            color: $white-color;
+            outline: none;
+          }
+        }
+      }
+    }
+
+  }
+
+  &__stats {
+    width: var(--profile-main-sections-width);
+    margin-block-end: 3.5em;
+
+    &__container {
+      margin-block-start: 2em;
+      width: 100%;
+    }
+
+    &__wrapper {
+      width: 100%;
+      background-color: $background-black-color;
+      padding: 1.5em;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      gap: 2em;
+
+      @include breakpoint('tablet') {
+        flex-direction: row;
+      }
+    }
+
+    &__item {
+      color: $white-color;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+
+      p {
+        @include paragraph("Poppins Bold");
+      }
+    }
+
+    &__icon {
+      background-color: $primary-color;
+      border-radius: 5px;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 50%;
+      }
+    }
+  }
+
+  &__trades {
+    width: var(--profile-main-sections-width);
+
+    &__container {
+      width: 100%;
+      margin-block-start: 2em;
+    }
+  }
+
+  &__trade-preview {
+    margin-block-end: 2em;
+
+    &__wrapper {
+      padding: 1.5em 1em;
+      height: 100%;
+      background-color: $background-black-color;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: center;
+      justify-content: space-between;
+
+      @include breakpoint('tablet') {
+        flex-direction: row;
+      }
+    }
+
+    &__left-col {
+      @include paragraph("Poppins Light");
+      text-align: left;
+
+      p:first-child {
+        color: $white-color;
+        margin-block-end: 0.8em;
+
+        span {
+          @include paragraph("Poppins Bold");
+        }
+      }
+
+      p:nth-child(2) {
+        color: darken($white-color, 40%);
+      }
+    }
+
+    &__status {
+      @include paragraph("Poppins Bold");
+      color: $black-color;
+      background-color: #FFC107;
+      min-width: fit-content;
+      width: 7em;
+      padding: 0.3em 0.5em;
+      border-radius: 5px;
+
+      &--open {
+        background-color: $secondary-color;
+      }
+
+      &--accepted {
+        background-color: $primary-color;
+      }
+
+      &--cancelled {
+        background-color: #7a01e4;
+        color: $white-color;
+      }
+
+      &--rejected {
+        background-color: #FFC107;
+      }
+
+      &--closed {
+        background-color: #DC3545;
+        color: $white-color;
+      }
+
+      &--expired {
+        background-color: #636363;
+        color: $white-color;
+      }
+
+    }
   }
 }
