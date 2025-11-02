@@ -9,10 +9,12 @@
       <h2 class="modal__title">About your Card</h2>
 
       @if (cardHasBeenAdded) {
-        <p class="modal__flash modal__flash--success">This card has been added to your collection ! Want to add one more ?</p>
+        <p class="modal__flash modal__flash--success">
+          This card has been added to your collection! Want to add one more?
+        </p>
       }
 
-      <form [formGroup]="AddCardToCollectionForm" (submit)="onSubmit()">
+      <form [formGroup]="form" (submit)="onSubmit()">
         <div class="modal__select-group">
           <app-select
             label="State"
@@ -33,9 +35,9 @@
           <app-button
             class="modal__button"
             type="submit"
-            [disabled]="AddCardToCollectionForm.invalid"
+            [disabled]="form.invalid || isSubmitting"
           >
-            Add to Collection
+            {{ isSubmitting ? 'Adding...' : 'Add to Collection' }}
           </app-button>
         } @else {
           <app-button
@@ -49,7 +51,9 @@
       </form>
 
       @if (failedToAddCard) {
-        <p class="modal__flash modal__flash--failure">This card could not be added to your collection. Please try again.</p>
+        <p class="modal__flash modal__flash--failure">
+          This card could not be added to your collection. Please try again.
+        </p>
       }
 
     </div>
