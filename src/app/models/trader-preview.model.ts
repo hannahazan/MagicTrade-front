@@ -3,9 +3,12 @@ import { CARD_STATES } from "../core/constants/card-states";
 export type CardState = keyof typeof CARD_STATES;
 
 export interface TraderPreview {
-  profilePicture: string;
+  id: number;
   pseudo: string;
-  rate: string;
-  location: string;
-  ownedCardState?: CardState;
+  city: string;
+  country: string;
+  department: string;
+  collectionCount: number;
+  profilePicture?: string;
+  rate?: string;
 }

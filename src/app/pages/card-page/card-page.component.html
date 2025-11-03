@@ -64,12 +64,12 @@
       </div>
     </section>
 
-    <section class="card-owners">
-      <h2 class="card-owners__title">OWNERS</h2>
-      @for (owner of owners; track $index) {
-        <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>
-      }
-    </section>
+<!--    <section class="card-owners">-->
+<!--      <h2 class="card-owners__title">OWNERS</h2>-->
+<!--      @for (owner of owners; track $index) {-->
+<!--        <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>-->
+<!--      }-->
+<!--    </section>-->
 
     <app-button (click)="clickOnViewTraders()">View all traders</app-button>
 
