@@ -1,9 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ButtonComponent} from "../../shared/components/button/button.component";
-import {TraderPreviewComponent} from "../../shared/components/trader-preview/trader-preview.component";
 import {NewLineToParagraphPipe} from "../../shared/pipes/new-line-to-paragraph.pipe";
 import {CardModalComponent} from "../../shared/components/add-card-to-collection-modal/card-modal.component";
-import {TraderPreview} from "../../models/trader-preview.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {
   DisplayedCard,
@@ -20,7 +18,7 @@ import {DeleteWishlistItemService} from "../../core/services/wishlist/delete-wis
 @Component({
   selector: 'app-card-page',
   standalone: true,
-  imports: [ButtonComponent, TraderPreviewComponent, NewLineToParagraphPipe, CardModalComponent, WishlistButtonComponent],
+  imports: [ButtonComponent, NewLineToParagraphPipe, CardModalComponent, WishlistButtonComponent],
   templateUrl: './card-page.component.html',
   styleUrl: './card-page.component.scss'
 })
@@ -89,42 +87,4 @@ export class CardPageComponent implements OnInit {
       this.addWishlistItemService.execute(this.displayedCard.id).subscribe();
     }
   }
-
-  owners: TraderPreview[] = [
-    {
-      profilePicture: "dragon.png",
-      pseudo: "JOHN WICK",
-      rate: "4,8",
-      location: "Auvergne-Rhône-Alpes",
-      ownedCardState: "mint"
-    },
-    {
-      profilePicture: "dragon.png",
-      pseudo: "JOHN WICK",
-      rate: "4,8",
-      location: "Auvergne-Rhône-Alpes",
-      ownedCardState: "near-mint"
-    },
-    {
-      profilePicture: "dragon.png",
-      pseudo: "JOHN WICK",
-      rate: "4,8",
-      location: "Auvergne-Rhône-Alpes",
-      ownedCardState: "poor"
-    },
-    {
-      profilePicture: "dragon.png",
-      pseudo: "JOHN WICK",
-      rate: "4,8",
-      location: "Auvergne-Rhône-Alpes",
-      ownedCardState: "light-played"
-    },
-    {
-      profilePicture: "dragon.png",
-      pseudo: "JOHN WICK",
-      rate: "4,8",
-      location: "Auvergne-Rhône-Alpes",
-      ownedCardState: "excellent"
-    }
-  ]
 }
