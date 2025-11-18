@@ -1,18 +1,14 @@
-import {Component, input, Input} from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
-import {CardStateComponent} from "../card-state/card-state.component";
-import {CardState} from "../../../models/card-state.model";
-import {TraderPreview} from "../../../models/trader-preview.model";
+import { Component, input } from '@angular/core';
+import { ButtonComponent } from '../button/button.component';
+import { CardState, CardStateComponent } from '../card-state/card-state.component';
+import { TraderPreview } from '../../../models/trader-preview.model';
 
 @Component({
-  selector: 'app-trader',
+  selector: 'app-trader-preview',
   standalone: true,
-  imports: [
-    ButtonComponent,
-    CardStateComponent
-  ],
+  imports: [ButtonComponent, CardStateComponent],
   templateUrl: './trader-preview.component.html',
-  styleUrl: './trader-preview.component.scss'
+  styleUrls: ['./trader-preview.component.scss'],
 })
 export class TraderPreviewComponent {
   traderPreview = input.required<TraderPreview>();

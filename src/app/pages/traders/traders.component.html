@@ -19,9 +19,13 @@
 <!--      (valueChange)="onSortChange($event)">-->
 <!--    </app-select>-->
   </div>
-  <div class="traders__container">
-    @for (trader of traders; track $index) {
-      <app-trader [traderPreview]="trader"></app-trader>
+    @if (isLoading) {
+      <p>Loading...</p>
+    } @else {
+      <div class="traders__container">
+      @for (trader of traders; track trader.id) {
+        <app-trader-preview [traderPreview]="trader"></app-trader-preview>
+      }
+      </div>
     }
-  </div>
 </div>

@@ -1,13 +1,156 @@
 <div class="page-inner">
-  <h1 class="profile__title">Mon profil</h1>
+  <h1 class="profile__title">My profile</h1>
 
-  @for (userItem of [user]; track userItem?.email) {
-    <p><strong>Pseudo :</strong> {{ userItem?.pseudo }}</p>
-    <p><strong>Email :</strong> {{ userItem?.email }}</p>
-    <p><strong>Prénom :</strong> {{ userItem?.firstName }}</p>
-    <p><strong>Nom :</strong> {{ userItem?.lastName }}</p>
-    <p><strong>Ville :</strong> {{ userItem?.city }}</p>
-    <p><strong>Pays :</strong> {{ userItem?.country }}</p>
-    <p><strong>Département :</strong> {{ userItem?.department }}</p>
+  @if (user) {
+    <section class="profile__details gradient-border-lg">
+      <div class="profile__details__wrapper">
+        <form
+          class="profile__details__container"
+          [formGroup]="profileForm"
+          (submit)="onSubmit()"
+        >
+          <div class="profile__details__header">
+            <div class="profile__details__picture">
+              <img src="dragon.png" alt="profile"/>
+              <button class="profile__details__picture-edit" type="button" title="edit your profile picture">
+                <img src="icons/pen-edit.svg" alt="edit"/>
+              </button>
+            </div>
+            <div class="profile__details__name">
+              <h3>{{ user.pseudo.toUpperCase() }}</h3>
+              <p>exemple&#64;gmail.com</p>
+            </div>
+          </div>
+          <div class="profile__details__info">
+            <div class="profile__details__info__item">
+              <label for="pseudo">Pseudo</label>
+              <input id="pseudo" formControlName="pseudo" />
+            </div>
+            <div class="profile__details__info__item">
+              <label for="email">E-mail</label>
+              <input id="email" formControlName="email" />
+            </div>
+            <div class="profile__details__info__item">
+              <label for="country">Country</label>
+              <input id="country" formControlName="country" />
+            </div>
+            <div class="profile__details__info__item">
+              <label for="department">Department</label>
+              <input id="department" formControlName="department" />
+            </div>
+            <div class="profile__details__info__item">
+              <label for="city">City</label>
+              <input id="city" formControlName="city" />
+            </div>
+          </div>
+          <app-button type="submit">Save changes</app-button>
+        </form> <!-- .profile__details__container -->
+      </div> <!-- .profile__details__wrapper -->
+    </section> <!-- .profile__details -->
+
+    <section class="profile__stats">
+      <h2 class="heading2-poppins">Statistics</h2>
+      <div class="profile__stats__container gradient-border-lg">
+        <div class="profile__stats__wrapper">
+          <div class="profile__stats__item">
+            <div class="profile__stats__icon">
+              <img src="icons/cards.svg" alt="cards"/>
+            </div>
+            <p>215 cards</p>
+          </div>
+          <div class="profile__stats__item">
+            <div class="profile__stats__icon">
+              <img src="icons/trade.svg" alt="trades"/>
+            </div>
+            <p>52 trades</p>
+          </div>
+          <div class="profile__stats__item">
+            <div class="profile__stats__icon">
+              <img src="icons/star-rate.svg" alt="rate"/>
+            </div>
+            <p>rate: 4.8</p>
+          </div>
+        </div>
+      </div>
+    </section> <!-- .profile__stats -->
+
+    <section class="profile__trades">
+      <h2 class="heading2-poppins">My trades</h2>
+      <div class="profile__trades__container">
+        <div class="profile__trade-preview gradient-border-md">
+          <div class="profile__trade-preview__wrapper">
+            <div class="profile__trade-preview__left-col">
+              <p>Trade with <span>John Paswick</span></p>
+              <p>Initiated on: 18/08/2025</p>
+            </div>
+            <div class="profile__trade-preview__status profile__trade-preview__status--open">
+              open
+            </div>
+            <app-button>See this trade</app-button>
+          </div>
+        </div>
+        <div class="profile__trade-preview gradient-border-md">
+          <div class="profile__trade-preview__wrapper">
+            <div class="profile__trade-preview__left-col">
+              <p>Trade with <span>John Paswick</span></p>
+              <p>Initiated on: 18/08/2025</p>
+            </div>
+            <div class="profile__trade-preview__status profile__trade-preview__status--accepted">
+              accepted
+            </div>
+            <app-button>See this trade</app-button>
+          </div>
+        </div>
+        <div class="profile__trade-preview gradient-border-md">
+          <div class="profile__trade-preview__wrapper">
+            <div class="profile__trade-preview__left-col">
+              <p>Trade with <span>John Paswick</span></p>
+              <p>Initiated on: 18/08/2025</p>
+            </div>
+            <div class="profile__trade-preview__status profile__trade-preview__status--cancelled">
+              cancelled
+            </div>
+            <app-button>See this trade</app-button>
+          </div>
+        </div>
+        <div class="profile__trade-preview gradient-border-md">
+          <div class="profile__trade-preview__wrapper">
+            <div class="profile__trade-preview__left-col">
+              <p>Trade with <span>John Paswick</span></p>
+              <p>Initiated on: 18/08/2025</p>
+            </div>
+            <div class="profile__trade-preview__status profile__trade-preview__status--rejected">
+              rejected
+            </div>
+            <app-button>See this trade</app-button>
+          </div>
+        </div>
+        <div class="profile__trade-preview gradient-border-md">
+          <div class="profile__trade-preview__wrapper">
+            <div class="profile__trade-preview__left-col">
+              <p>Trade with <span>John Paswick</span></p>
+              <p>Initiated on: 18/08/2025</p>
+            </div>
+            <div class="profile__trade-preview__status profile__trade-preview__status--closed">
+              closed
+            </div>
+            <app-button>See this trade</app-button>
+          </div>
+        </div>
+        <div class="profile__trade-preview gradient-border-md">
+          <div class="profile__trade-preview__wrapper">
+            <div class="profile__trade-preview__left-col">
+              <p>Trade with <span>John Paswick</span></p>
+              <p>Initiated on: 18/08/2025</p>
+            </div>
+            <div class="profile__trade-preview__status profile__trade-preview__status--expired">
+              expired
+            </div>
+            <app-button>See this trade</app-button>
+          </div>
+        </div>
+      </div>
+    </section>
   }
+
 </div>

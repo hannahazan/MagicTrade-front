@@ -6,7 +6,7 @@ import {Observable, tap} from "rxjs";
 import {LoginCredentials} from "../../models/login-credentials.model";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import {JwtCustomPayload} from "../../models/jwt-custom-payload.model";
-import {UserRegister} from "../../models/user-register.model";
+import {Profile} from "../../models/user/profile.model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +26,8 @@ export class AuthService {
       );
   }
 
-  getCurrentUser(): Observable<UserRegister> {
-    const token = this.getToken();
-    return this.http.get<UserRegister>(`${this._apiUrl}auth/profile`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
+  getCurrentUser(): Observable<Profile> {
+    return this.http.get<Profile>(`${this._apiUrl}auth/Myprofile`);
   }
 
   logout(): void {

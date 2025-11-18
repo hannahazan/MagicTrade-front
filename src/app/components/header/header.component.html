@@ -17,6 +17,7 @@
     @if (authService.isLoggedIn()) {
       <a [routerLink]="['/wishlist']" class="Nav-link">WISHLIST</a>
       <a [routerLink]="['/collection']" class="Nav-link">COLLECTION</a>
+      <a [routerLink]="['/profile']" class="Nav-link">MY PROFILE</a>
       <a [routerLink]="['/login']" class="Nav-link" (click)="authService.logout()">LOG OUT</a>
     }
 
