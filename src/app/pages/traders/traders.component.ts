@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { TraderService } from '../../core/services/trader/trader.service';
 import { TraderPreview } from '../../models/trader-preview.model';
 import { TraderPreviewComponent } from '../../shared/components/trader-preview/trader-preview.component';
+import {ActivatedRoute} from "@angular/router";
+import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
 
 @Component({
   selector: 'app-traders',
@@ -12,8 +14,10 @@ import { TraderPreviewComponent } from '../../shared/components/trader-preview/t
 })
 export class TradersComponent implements OnInit {
 
+  private readonly route = inject(ActivatedRoute);
+
   // Liste des traders
-  traders: TraderPreview[] = [];
+  traders: TraderPreview[] = []
 
   // Indique si le chargement est en cours
   isLoading = true;
