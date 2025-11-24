@@ -55,52 +55,52 @@ $state-height--desktop: 40px;
   margin: 10px;
 
   &--open {
-    background: $state-mint;
+    background: $state-M;
     width: 135px;
   }
 
   &--negotiation {
-    background: $state-good;
+    background: $state-GD;
     color: $black-color;
     width: 135px;
   }
 
   &--validation {
-    background: $state-near-mint;
+    background: $state-NM;
     width: 135px;
   }
 
   &--closed {
-    background: $state-poor;
+    background: $state-PO;
     width: 135px;
   }
 
-  &--mint {
-    background: $state-mint;
+  &--M {
+    background: $state-M;
   }
 
-  &--near-mint {
-    background: $state-near-mint;
+  &--NM {
+    background: $state-NM;
   }
 
-  &--excellent {
-    background: $state-excellent;
+  &--EX {
+    background: $state-EX;
   }
 
-  &--good {
-    background: $state-good;
+  &--GD {
+    background: $state-GD;
     color: $black-color;
   }
 
-  &--light-played {
-    background: $state-light-played;
+  &--LP {
+    background: $state-LP;
   }
 
-  &--played {
-    background: $state-played;
+  &--PL {
+    background: $state-PL;
   }
 
-  &--poor {
-    background: $state-poor;
+  &--PO {
+    background: $state-PO;
   }
 }

@@ -12,5 +12,4 @@ import { TraderPreview } from '../../../models/trader-preview.model';
 })
 export class TraderPreviewComponent {
   traderPreview = input.required<TraderPreview>();
-  ownedCardState = input<string>;
 }
