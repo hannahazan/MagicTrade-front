@@ -21,7 +21,7 @@
   </div>
     @if (isLoading) {
       <p>Loading...</p>
-    } @else {
+    } @else{
       <div class="traders__container">
       @for (trader of traders; track trader.id) {
         <app-trader-preview [traderPreview]="trader"></app-trader-preview>

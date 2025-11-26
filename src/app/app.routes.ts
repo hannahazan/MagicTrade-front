@@ -53,6 +53,10 @@ export const routes: Routes = [
       component: TradersComponent
     },
     {
+      path: 'traders/:cardId',
+      component: TradersComponent
+    },
+    {
       path: 'wishlist',
       component: WishlistComponent,
       canActivate: [authGuard]

@@ -51,7 +51,7 @@
               </span>
             </p>
             <p><span class="card__info__label">Set : </span>{{ displayedCard.setName ? displayedCard.setName : '' }}</p>
-            <p><a [href]="displayedCard.cardMarketPrice">See on Cardmarket</a></p>
+            <p><a [href]="displayedCard.cardMarketPrice" target="_blank">See on Cardmarket</a></p>
           </div>
         </div>
 
@@ -70,8 +70,11 @@
 <!--        <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>-->
 <!--      }-->
 <!--    </section>-->
-
-    <app-button (click)="clickOnViewTraders()">View all traders</app-button>
+    <div class="traders__container">
+      @for (trader of traders; track trader.id) {
+        <app-trader-preview [traderPreview]="trader"></app-trader-preview>
+      }
+    </div>
 
     @if (isAddCardModalOpen) {
       <app-add-card-to-collection-modal

@@ -8,8 +8,8 @@
 
     <p class="trader__name">{{ traderPreview().pseudo }}</p>
 
-    @if (ownedCardState()) {
-      <app-card-state [cardState]="ownedCardState()"></app-card-state>
+    @if (traderPreview().cardState) {
+      <app-card-state [cardState]="traderPreview().cardState"></app-card-state>
     }
 
     <p class="trader__rate">Rate : {{ traderPreview().rate }} ⭐</p>

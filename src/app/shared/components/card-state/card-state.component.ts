@@ -12,11 +12,12 @@ export type CardState = keyof typeof CARD_STATES;
   styleUrl: './card-state.component.scss'
 })
 export class CardStateComponent {
-  cardState = input.required<CardState | false>();
+  cardState = input.required<string|undefined >();
 
   get abbreviatedCardState(): string {
     const state = this.cardState();
-    if (!state || typeof state !== 'string') return 'NC';
+    console.log(this.cardState);
+    if (!state) return 'NC';
     return CARD_STATES[state]?.code ?? state;
   }
 }
