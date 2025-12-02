@@ -8,5 +8,4 @@ export interface Owner{
   city: string,
   country: string,
   department: string
-
 }

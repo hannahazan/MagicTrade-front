@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
-import { CardState, CardStateComponent } from '../card-state/card-state.component';
+import { CardStateComponent } from '../card-state/card-state.component';
 import { TraderPreview } from '../../../models/trader-preview.model';
 
 @Component({

@@ -9,7 +9,7 @@ export interface TraderPreview {
   country: string;
   department: string;
   collectionCount: number;
-  cardState? : string;
+  cardState? : CardState;
   profilePicture?: string;
-  rate?: string;
+  rate?: number;
 }
