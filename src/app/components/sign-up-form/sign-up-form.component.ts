@@ -33,14 +33,14 @@ export class SignUpFormComponent {
       Validators.minLength(3),
       Validators.maxLength(15)
     ]],
-    firstName: ['', [
+    /*firstName: ['', [
       Validators.required,
       Validators.maxLength(15)
     ]],
     lastName: ['', [
       Validators.required,
       Validators.maxLength(15)
-    ]],
+    ]],*/
     country: ['', [
       Validators.required,
       Validators.maxLength(30)
@@ -90,8 +90,6 @@ export class SignUpFormComponent {
     return {
       pseudo: values.username!,
       email: values.email!,
-      firstName: values.firstName!,
-      lastName: values.lastName!,
       country: values.country!,
       department: values.department!,
       city: values.city!,
