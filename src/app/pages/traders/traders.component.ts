@@ -3,7 +3,6 @@ import { TraderService } from '../../core/services/trader/trader.service';
 import { TraderPreview } from '../../models/trader-preview.model';
 import { TraderPreviewComponent } from '../../shared/components/trader-preview/trader-preview.component';
 import {ActivatedRoute} from "@angular/router";
-import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
 
 @Component({
   selector: 'app-traders',
@@ -37,7 +36,7 @@ export class TradersComponent implements OnInit {
         this.traders = data.map(trader => ({
           ...trader,
           profilePicture: 'dragon.png',
-          rate: (Math.random() * 2 + 3).toFixed(1), // note entre 3.0 et 5.0
+          rate: 0,
         }));
 
         this.isLoading = false;

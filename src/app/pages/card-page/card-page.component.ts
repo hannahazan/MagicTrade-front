@@ -56,7 +56,7 @@ export class CardPageComponent implements OnInit {
     this.isAddCardModalOpen = !this.isAddCardModalOpen;
   }
 
-  clickOnViewTraders(cardId: String): void {
+  clickOnViewTraders(cardId: string): void {
      void this.router.navigate(['/traders', cardId]);
   }
 
@@ -97,7 +97,6 @@ export class CardPageComponent implements OnInit {
               collectionCount:0,
               cardState: owner.state,
               profilePicture: 'dragon.png',
-              rate: (Math.random() * 2 + 3).toFixed(1), // note entre 3.0 et 5.0
             }));
 
             //this.isLoading = false;
