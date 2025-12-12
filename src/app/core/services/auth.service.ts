@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, finalize, map, Observable, of, switchMap, tap} from "rxjs";
 import {LoginCredentials} from "../../models/login-credentials.model";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import {JwtCustomPayload} from "../../models/jwt-custom-payload.model";
@@ -12,17 +12,21 @@ import {Profile} from "../../models/user/profile.model";
   providedIn: 'root'
 })
 export class AuthService {
+  private loggedIn$ = new BehaviorSubject<boolean>(false);
   private readonly _apiUrl = environment.magicTradeApiUrl;
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
 
-  login(loginCredentials: LoginCredentials): Observable<string> {
+  login(loginCredentials: LoginCredentials): Observable<void> {
     return this.http
-      .post(`${this._apiUrl}auth/login`, { email: loginCredentials.email, password: loginCredentials.password }, { responseType: 'text' })
+      .post<void>(
+        `${this._apiUrl}auth/login`,
+        { email: loginCredentials.email, password: loginCredentials.password },
+        { withCredentials: true }
+      )
       .pipe(
-        tap((token) => {
-          this.saveToken(token);
-        })
+        switchMap(() => this.refreshSession()),
+        map(() => void 0)
       );
   }
 
@@ -31,75 +35,42 @@ export class AuthService {
   }
 
   logout(): void {
-    this.clearToken();
-    this.router.navigate(['/login']);
-  }
-
-  saveToken(token: string): void {
-    localStorage.setItem('token', token);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  clearToken(): void {
-    localStorage.removeItem('token');
+    this.http.post(`${this._apiUrl}auth/logout`, {}, { withCredentials: true })
+      .pipe(
+        // quoi qu’il arrive, UI = déconnecté
+        finalize(() => this.loggedIn$.next(false))
+      )
+      .subscribe({
+        next: () => this.router.navigate(['/login']),
+        error: () => this.router.navigate(['/login']),
+      });
   }
 
   getUserRole(): string | null {
-    const token = this.getToken();
+    let token = ""
+    this.getCurrentUser().subscribe({
+      next: (data: Profile) => {
+        token = data.role
+      },
+      error: err => console.error('Erreur récupération profil:', err)
+    })
     if (!token) return null;
-    try {
-      const decodedToken: JwtCustomPayload = jwtDecode(token);
-      // Les users ont un seul rôle donc on prend le premier (pas de table de jointure user_role dans le back)
-      return decodedToken.roles?.[0]?.authority ?? null;
-    } catch {
-      return null;
-    }
+    return token
+
   }
 
-  verifyToken(): void {
-    const token = this.getToken();
-    if (!token) return;
-
-    try {
-      const decodedToken = jwtDecode<JwtPayload>(token);
-      if (!decodedToken.exp) {
-        this.clearToken();
-        return
-      }
-
-      const expiryDate = new Date(decodedToken.exp * 1000);
-      if (expiryDate < new Date()) {
-        this.clearToken();
-      }
-    } catch {
-      this.clearToken();
-    }
+  refreshSession() {
+    return this.http.get(`${this._apiUrl}auth/Myprofile`, { withCredentials: true }).pipe(
+      tap(() => this.loggedIn$.next(true)),
+      catchError(() => {
+        this.loggedIn$.next(false);
+        return of(null);
+      })
+    );
   }
 
   isLoggedIn(): boolean {
-    const token = this.getToken();
-    if (!token) return false;
-    try {
-      const decodedToken = jwtDecode<JwtPayload>(token);
-      if (!decodedToken.exp) {
-        this.clearToken();
-        return false;
-      }
-
-      const expiryDate = new Date(decodedToken.exp * 1000);
-      if (expiryDate < new Date()) {
-        this.clearToken();
-        return false;
-      }
-
-      return true;
-    } catch {
-      this.clearToken();
-      return false;
-    }
+    return this.loggedIn$.value;
   }
 
   isAdmin(): boolean {
