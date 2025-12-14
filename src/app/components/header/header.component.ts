@@ -44,8 +44,4 @@ export class HeaderComponent {
   logOut():void{
     this.authService.logout()
   }
-
-  /*ngOnInit(): void {
-    this.authService.refreshSession(this.isLoged)
-  }*/
 }
