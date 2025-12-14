@@ -14,21 +14,21 @@
     <a [routerLink]="['/cards']" class="Nav-link">CARDS</a>
     <a [routerLink]="['/traders']" class="Nav-link">TRADERS</a>
 
-    @if (authService.isLoggedIn()) {
+    @if (authService.authState.value) {
       <a [routerLink]="['/wishlist']" class="Nav-link">WISHLIST</a>
       <a [routerLink]="['/collection']" class="Nav-link">COLLECTION</a>
       <a [routerLink]="['/profile']" class="Nav-link">MY PROFILE</a>
-      <a class="Nav-link" (click)="authService.logout()">LOG OUT</a>
+      <a class="Nav-link" (click)="logOut()">LOG OUT</a>
     }
 
-    @if (!authService.isLoggedIn()) {
+    @if (!authService.authState.value) {
       <a [routerLink]="['/signup']" class="Nav-link">SIGN UP</a>
       <a [routerLink]="['/login']" class="Nav-link">LOG IN</a>
     }
 
-    @if(authService.isAdmin()) {
+    <!--@if(authService.isAdmin) {
       <a [routerLink]="['/admin']" class="Nav-link">ADMIN</a>
-    }
+    }-->
 
   </nav>
 </div>

@@ -30,8 +30,6 @@ describe('UserRegisterService', () => {
       email: 'test@test.com',
       password: 'Password@123?',
       pseudo: 'john',
-      firstName: 'John',
-      lastName: 'Doe',
       country: 'FR',
       department: '75',
       city: 'Paris',
