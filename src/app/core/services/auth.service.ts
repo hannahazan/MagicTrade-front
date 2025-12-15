@@ -12,22 +12,27 @@ import {Profile} from "../../models/user/profile.model";
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn$ = new BehaviorSubject<boolean>(false);
+  authState = { value: false };
   private readonly _apiUrl = environment.magicTradeApiUrl;
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
 
-  login(loginCredentials: LoginCredentials): Observable<void> {
-    return this.http
+  login(loginCredentials: LoginCredentials): void {
+    this.http
       .post<void>(
         `${this._apiUrl}auth/login`,
         { email: loginCredentials.email, password: loginCredentials.password },
         { withCredentials: true }
       )
-      .pipe(
-        switchMap(() => this.refreshSession()),
-        map(() => void 0)
-      );
+     .subscribe({
+        next: () => {
+          this.authState.value = true
+          this.router.navigate(['/profile'])
+        },
+        error: () => {
+          this.authState.value = false;
+        }
+      });
   }
 
   getCurrentUser(): Observable<Profile> {
@@ -37,8 +42,7 @@ export class AuthService {
   logout(): void {
     this.http.post(`${this._apiUrl}auth/logout`, {}, { withCredentials: true })
       .pipe(
-        // quoi qu’il arrive, UI = déconnecté
-        finalize(() => this.loggedIn$.next(false))
+        finalize(() => this.authState.value = false)
       )
       .subscribe({
         next: () => this.router.navigate(['/login']),
@@ -59,21 +63,26 @@ export class AuthService {
 
   }
 
-  refreshSession() {
-    return this.http.get(`${this._apiUrl}auth/Myprofile`, { withCredentials: true }).pipe(
-      tap(() => this.loggedIn$.next(true)),
-      catchError(() => {
-        this.loggedIn$.next(false);
-        return of(null);
-      })
-    );
+  refreshSession(target: { value: boolean }): Observable<boolean> {
+    return this.http
+      .get(`${this._apiUrl}auth/Myprofile`, { withCredentials: true })
+      .pipe(
+        map(() => {
+          target.value = true;
+          return true;
+        }),
+        catchError(() => {
+          target.value = false;
+          return of(false);
+        })
+      );
   }
 
   isLoggedIn(): boolean {
-    return this.loggedIn$.value;
+    return this.authState.value;
   }
 
-  isAdmin(): boolean {
+  get isAdmin(): boolean {
     if (!this.isLoggedIn()) return false;
     return this.getUserRole() === "ROLE_ADMIN";
   }

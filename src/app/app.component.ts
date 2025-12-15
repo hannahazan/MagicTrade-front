@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {HeaderComponent} from "./components/header/header.component";
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./components/footer/footer.component";
@@ -17,10 +17,4 @@ import {BehaviorSubject} from "rxjs";
 })
 export class AppComponent {
   title = 'MagicTrade';
-
-  constructor(private auth: AuthService) {}
-
-  ngOnInit(): void {
-    this.auth.refreshSession().subscribe();
-  }
 }
