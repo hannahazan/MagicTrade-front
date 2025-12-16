@@ -1,7 +1,7 @@
 <form
   class="auth-form"
   [formGroup]="loginForm"
-  (submit)="onSubmit()"
+  (ngSubmit)="onSubmit()"
 >
   <div class="auth__input">
     <app-auth-text-input

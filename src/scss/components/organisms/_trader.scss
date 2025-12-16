@@ -7,15 +7,21 @@ $trader-container-width--mobile: calc(100vw - 72px);
 $trader-container-width--tablet: calc(100vw - 100px);
 $trader-container-width--desktop: calc(100vw - 200px);
 
+// Img Height
+$trader-img-height--mobile: 50%;
+$trader-img-height--tablet: 100%;
+
 /********************************************
 ************** Custom properties ************
 ********************************************/
 
 :root {
   --trader-container-width: #{$trader-container-width--mobile};
+  --trader-img-height: #{$trader-img-height--mobile};
 
   @include breakpoint('tablet') {
     --trader-container-width: #{$trader-container-width--tablet};
+    --trader-img-height: #{$trader-img-height--tablet};
   }
 
   @include breakpoint('desktop') {
@@ -43,6 +49,11 @@ $trader-container-width--desktop: calc(100vw - 200px);
       row-gap: 1rem;
       height: 100px;
     }
+  }
+
+  &__img {
+    height: var(--trader-img-height);
+    width: auto;
   }
 
   &__name,

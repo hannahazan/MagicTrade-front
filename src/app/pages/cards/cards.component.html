@@ -1,33 +1,25 @@
+<script src="../../models/card/displayed-card.model.ts"></script>
 <div class="page-inner">
   <h1 class="cards__title">cards</h1>
   <div class="cards__filter">
     <p class="cards__filter-label">SORT BY :</p>
 
     <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      [options]="setOptions"
       placeholder="Set"
-      (valueChange)="onSortChange($event)">
+      (valueChange)="onSetFilterChange($event)">
     </app-select>
     <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
+      [options]="types"
       placeholder="Type"
-      (valueChange)="onSortChange($event)">
+      (valueChange)="onTypeChange($event)">
     </app-select>
-    <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
-      placeholder="Rarity"
-      (valueChange)="onSortChange($event)">
-    </app-select>
-    <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
-      placeholder="Color"
-      (valueChange)="onSortChange($event)">
-    </app-select>
-    <app-select
-      [options]="['Mint','Near mint','Excellent','Good','Light Played', 'Played', 'Poor']"
-      placeholder="CCM"
-      (valueChange)="onSortChange($event)">
-    </app-select>
+<!--    <app-select-->
+<!--      label="Color"-->
+<!--      [options]="colorOptions"-->
+<!--      placeholder="Select color"-->
+<!--      (valueChange)="onColorChange($event)">-->
+<!--    </app-select>-->
     <app-button [routerLink]="['/filters']">Advanced filter</app-button>
   </div>
 
@@ -35,9 +27,16 @@
     <div class="cards__wrapper">
       @for (card of cards; track $index) {
         <div class="Card">
-          <img [src]="card.imageSizeNormal" alt="" />
+          <img [src]="card.faces[0].imageUrl" alt="" />
           <div class="Card__actions">
             <app-button (click)="openCardModal(card)">Add</app-button>
+            @if (authService.isLoggedIn()) {
+              <app-wishlist-button
+                class="Card__actions__wishlist"
+                [isWishlisted]="card.isWishlisted"
+                (wishlistToggled)="onWishlistToggle(card.id, $event)"
+              />
+            }
             <app-button (click)="goToCardDetail(card)">Detail</app-button>
           </div>
         </div>

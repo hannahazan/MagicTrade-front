@@ -40,15 +40,7 @@ export class LoginFormComponent {
   onSubmit(): void {
     if (this.loginForm.invalid) return;
 
-    this.auth.login(this.formValue).subscribe({
-      next: () => {
-        this.failedLogin = false;
-        this.router.navigate(['/profile']);
-      },
-      error: () => {
-        this.failedLogin = true;
-      }
-    })
+    this.auth.login(this.formValue)
   }
 
   get formValue(): LoginCredentials {

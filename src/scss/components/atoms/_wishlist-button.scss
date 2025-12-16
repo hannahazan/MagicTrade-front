@@ -1,0 +1,45 @@
+/********************************************
+************** SCSS Variables ***************
+********************************************/
+
+// icon size
+$wishlist-icon-size--mobile: 20px;
+$wishlist-icon-size--tablet: 22px;
+$wishlist-icon-size--desktop: 24px;
+
+/********************************************
+************** Custom properties ************
+********************************************/
+
+:root {
+  --wishlist-icon-size: #{$wishlist-icon-size--mobile};
+
+  @include breakpoint('tablet') {
+    --wishlist-icon-size: #{$wishlist-icon-size--tablet};
+  }
+
+  @include breakpoint('desktop') {
+    --wishlist-icon-size: #{$wishlist-icon-size--desktop};
+  }
+}
+
+
+.wishlist-btn {
+  background-color: transparent;
+  border: none;
+
+  svg {
+    width: var(--wishlist-icon-size);
+    height: var(--wishlist-icon-size);
+    color: gray;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &--full svg {
+    color: $primary-color;
+    filter: drop-shadow(0px 0px 5px rgba($primary-color, 0.6));
+  }
+}

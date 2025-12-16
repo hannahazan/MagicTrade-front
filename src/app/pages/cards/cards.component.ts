@@ -6,6 +6,16 @@ import {SelectComponent} from "../../shared/components/select/select.component";
 import {PagerComponent} from "../../shared/components/pager/pager.component";
 import {Card} from "../../models/card/card.model";
 import {GetAllCardsService} from "../../core/services/card/get-all-cards.service";
+import {GetAllCardsSetsService} from "../../core/services/card/get-all-cards-sets.service";
+import {GetAllCardsTypesService} from "../../core/services/card/get-all-cards-types.service";
+import {ScryfallSet} from "../../models/card/card-set.model";
+import {WishlistButtonComponent} from "../../shared/components/wishlist-button/wishlist-button.component";
+import {mapToDisplayedCard} from "../../shared/mappers/card-mapper";
+import {DisplayedCard} from "../../models/card/displayed-card.model";
+import {AuthService} from "../../core/services/auth.service";
+import {AddWishlistItemService} from "../../core/services/wishlist/add-wishlist-item.service";
+import {GetCardsWithWishlistService} from "../../core/services/card/get-cards-with-wishlist.service";
+import {DeleteWishlistItemService} from "../../core/services/wishlist/delete-wishlist-item.service";
 
 @Component({
   selector: 'app-cards',
@@ -15,30 +25,125 @@ import {GetAllCardsService} from "../../core/services/card/get-all-cards.service
     ButtonComponent,
     SelectComponent,
     PagerComponent,
+    WishlistButtonComponent,
     RouterLink
   ],
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss']
 })
-
 export class CardsComponent implements OnInit {
   private readonly router = inject(Router);
-  private readonly getAllCardsService = inject(GetAllCardsService);
 
-  cards: Card[] = [];
+  private readonly getAllCardsService = inject(GetAllCardsService);
+  private readonly getCardsWithWishlistService = inject(GetCardsWithWishlistService);
+  private readonly getAllSetsService = inject(GetAllCardsSetsService);
+  private readonly getAllCardsTypesService = inject(GetAllCardsTypesService);
+  private readonly addWishlistItemService = inject(AddWishlistItemService);
+  private readonly deleteWishlistItemService = inject(DeleteWishlistItemService);
+  readonly authService = inject(AuthService);
+
+  // Données
+  cards: DisplayedCard[] = [];
   currentPage = 1;
   totalPages = 10;
-  selectedCard: Card | null = null;
+  selectedCard: DisplayedCard | null = null;
+  types: { label: string; value: string }[] = [];
+  sets: ScryfallSet[] = [];
+  setOptions: { label: string; value: string }[] = [];
+
+  filters = {
+    set: '',
+    type: '',
+    rarity: '',
+    color: '',
+    ccm: ''
+  };
+
+  // colorOptions = [
+  //   { label: 'White', value: 'White' },
+  //   { label: 'Blue', value: 'Blue' },
+  //   { label: 'Black', value: 'Black' },
+  //   { label: 'Red', value: 'Red' },
+  //   { label: 'Green', value: 'Green' },
+  //   { label: 'Colorless', value: 'Colorless' }
+  // ];
 
   ngOnInit(): void {
-    this.getAllCardsService.execute().subscribe({
+    this.loadSets();
+    this.loadTypes();
+    this.loadCards();
+  }
+
+  // Récupération des cartes
+  loadCards(): void {
+    const getCards = this.authService.isLoggedIn() ? this.getCardsWithWishlistService : this.getAllCardsService;
+    getCards.execute(this.filters).subscribe({
       next: (res) => {
-        this.cards = res.cards;
+        this.cards = res.cards.map(card => ({
+          ...mapToDisplayedCard(card)
+        }));
       },
       error: (err) => console.error('Erreur de chargement des cartes', err)
     });
   }
 
+  // Récupération des sets
+  loadSets(): void {
+    this.getAllSetsService.execute().subscribe({
+      next: (sets: ScryfallSet[]) => {
+        this.sets = sets;
+        this.setOptions = sets.map((s) => ({
+          label: s.name,
+          value: s.id
+        }));
+      },
+      error: (err) => console.error('Erreur de chargement des sets', err)
+    });
+  }
+
+  loadTypes(): void {
+    this.getAllCardsTypesService.execute().subscribe({
+      next: (res) => {
+        // types.filters est un string[]
+        this.types = res.filters.map(t => ({ label: t, value: t }));
+      },
+      error: (err) => console.error('Erreur lors du chargement des types', err)
+    });
+  }
+
+  // Application des filtres
+  applyFilters(): void {
+    console.log('Filtres actifs :', this.filters);
+    this.loadCards();
+  }
+
+  // Gestion des changements dans les selects
+  onSetFilterChange(value: string): void {
+    this.filters.set = value;
+    this.applyFilters();
+  }
+
+  onRarityChange(value: string): void {
+    this.filters.rarity = value;
+    this.applyFilters();
+  }
+
+  onColorChange(value: string) {
+    this.filters.color = value;
+    this.applyFilters();
+  }
+
+  onTypeChange(value: string): void {
+    this.filters.type = value;
+    this.applyFilters();
+  }
+
+  onCcmChange(value: string): void {
+    this.filters.ccm = value;
+    this.applyFilters();
+  }
+
+  // Pagination
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
   }
@@ -47,15 +152,31 @@ export class CardsComponent implements OnInit {
     console.log('Selected value:', value);
   }
 
-  openCardModal(card: Card): void {
+  openCardModal(card: DisplayedCard): void {
     this.selectedCard = card;
   }
 
-  goToCardDetail(card: any): void {
+  goToCardDetail(card: DisplayedCard): void {
     this.router.navigate(['/cards', card.id]);
   }
 
   closeModal(): void {
     this.selectedCard = null;
+  }
+
+  onWishlistToggle(cardId: string, isWishlisted: boolean): void {
+    const card = this.cards.find(c => c.id === cardId);
+    if (card) {
+      if (isWishlisted) {
+        // If card is in wishlist, remove it
+        card.isWishlisted = false;
+        this.deleteWishlistItemService.execute(cardId).subscribe();
+      }
+      if (!isWishlisted) {
+        // If card is not in wishlist, add it
+        card.isWishlisted = true;
+        this.addWishlistItemService.execute(cardId).subscribe();
+      }
+    }
   }
 }

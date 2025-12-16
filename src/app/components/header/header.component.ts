@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs';
@@ -7,6 +7,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { effect } from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {AuthService} from "../../core/services/auth.service";
+import {Profile} from "../../models/user/profile.model";
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ import {AuthService} from "../../core/services/auth.service";
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+
   private readonly breakpointObserver = inject(BreakpointObserver);
   public readonly authService = inject(AuthService);
 
@@ -28,6 +30,7 @@ export class HeaderComponent {
     { initialValue: false }
   );
 
+
   constructor() {
     effect(() => {
       if (!this.isDesktop()) this.menuOpen = false;
@@ -36,5 +39,9 @@ export class HeaderComponent {
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+  }
+
+  logOut():void{
+    this.authService.logout()
   }
 }

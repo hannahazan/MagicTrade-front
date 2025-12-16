@@ -1,10 +1,13 @@
-import {Component, inject, input, output} from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
-import {SelectComponent} from "../select/select.component";
-import {AuthCheckboxComponent} from "../auth-checkbox/auth-checkbox.component";
-import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AddCardToCollectionService} from "../../../core/services/collection/add-card-to-collection.service";
-import {UserCard} from "../../../models/user-card/user-card";
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ButtonComponent } from "../button/button.component";
+import { SelectComponent } from "../select/select.component";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AddCardToCollectionService } from "../../../core/services/collection/add-card-to-collection.service";
+import { CollectionCard } from "../../../models/collection-card";
+import { AuthService } from "../../../core/services/auth.service";
+import { Router } from "@angular/router";
+import { CARD_STATES } from "../../../core/constants/card-states";
+import { CARD_LANGUAGES } from "../../../core/constants/card-languages";
 
 @Component({
   selector: 'app-add-card-to-collection-modal',
@@ -12,56 +15,91 @@ import {UserCard} from "../../../models/user-card/user-card";
   imports: [
     ButtonComponent,
     SelectComponent,
-    AuthCheckboxComponent,
     ReactiveFormsModule
   ],
   templateUrl: './card-modal.component.html',
   styleUrl: './card-modal.component.scss'
 })
 export class CardModalComponent {
+  @Input() cardId!: string;
+  @Output() closeModal = new EventEmitter<void>();
+  @Output() addToCollection = new EventEmitter<string>();
 
   private readonly formBuilder = inject(FormBuilder);
   private readonly addCardToCollectionService = inject(AddCardToCollectionService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+  public readonly stateOptions = Object.values(CARD_STATES).map(s => ({
+    label: s.label,
+    value: s.code,
+  }));
+
+  public readonly languageOptions = Object.entries(CARD_LANGUAGES).map(([key, value]) => ({
+    label: key,
+    value
+  }));
 
   failedToAddCard = false;
   cardHasBeenAdded = false;
+  isUserConnected = false;
+  isSubmitting = false;
 
-  AddCardToCollectionForm = this.formBuilder.group({
-    state: ['', [Validators.required]],
-    language: ['', [Validators.required]]
-  })
+  constructor() {
+    this.isUserConnected = this.authService.isLoggedIn();
+  }
 
-  cardId = input.required<string>();
-  closeModal = output<void>();
-  addToCollection = output<any>();
+  readonly form = this.formBuilder.nonNullable.group({
+    state: ['', Validators.required],
+    language: ['', Validators.required],
+  });
 
   onStateChange(evt: string): void {
-    this.AddCardToCollectionForm.controls['state'].setValue(evt);
+    this.form.patchValue({ state: evt });
   }
 
   onLanguageChange(evt: string): void {
-    this.AddCardToCollectionForm.controls['language'].setValue(evt);
+    this.form.patchValue({ language: evt });
   }
 
   onSubmit(): void {
-    const formValues = this.AddCardToCollectionForm.getRawValue();
-    const userCard: UserCard = {
-      userId: null,
-      cardId: this.cardId(),
-      state: formValues.state!,
-      lang: formValues.language!
+    if (!this.isUserConnected) {
+      this.redirectToLogin();
+      return;
     }
 
-    this.addCardToCollectionService.execute([userCard]).subscribe({
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting = true;
+    const { state, language } = this.form.getRawValue();
+
+    const collectionItem: CollectionCard = {
+      id: null,
+      userId: null,
+      cardId: this.cardId,
+      lang: language!,
+      state: state!,
+    };
+
+    this.addCardToCollectionService.execute(collectionItem).subscribe({
       next: () => {
         this.failedToAddCard = false;
         this.cardHasBeenAdded = true;
         this.addToCollection.emit(this.cardId);
+        this.isSubmitting = false;
       },
-      error: error => {
-        this.cardHasBeenAdded = false;
+      error: () => {
         this.failedToAddCard = true;
-      }
+        this.cardHasBeenAdded = false;
+        this.isSubmitting = false;
+      },
     });
+  }
+
+  redirectToLogin(): void {
+    this.router.navigate(['/login']);
   }
 }

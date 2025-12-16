@@ -19,6 +19,12 @@
                 />
               }
             </div>
+            @if (authService.isLoggedIn()) {
+              <app-wishlist-button
+                [isWishlisted]="displayedCard.isWishlisted"
+                (wishlistToggled)="onWishlistToggle($event)"
+              />
+            }
 
             @if (displayedCard.isDoubleCard) {
               <button
@@ -45,15 +51,12 @@
               </span>
             </p>
             <p><span class="card__info__label">Set : </span>{{ displayedCard.setName ? displayedCard.setName : '' }}</p>
-            <p><a [href]="displayedCard.cardMarketPrice">See on Cardmarket</a></p>
+            <p><a [href]="displayedCard.cardMarketPrice" target="_blank">See on Cardmarket</a></p>
           </div>
         </div>
 
         @if (authService.isLoggedIn()) {
           <div class="card__actions">
-            @if (!isCardInWishlist) {
-              <app-button (click)="addToWishlist()">Add to Wishlist</app-button>
-            }
             <app-button (click)="toggleAddCardModal()">Add to Collection</app-button>
           </div>
         }
@@ -61,14 +64,17 @@
       </div>
     </section>
 
-    <section class="card-owners">
-      <h2 class="card-owners__title">OWNERS</h2>
-      @for (owner of owners; track $index) {
-        <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>
+<!--    <section class="card-owners">-->
+<!--      <h2 class="card-owners__title">OWNERS</h2>-->
+<!--      @for (owner of owners; track $index) {-->
+<!--        <app-trader [traderPreview]=owner [ownedCardState]="owner.ownedCardState ?? false"></app-trader>-->
+<!--      }-->
+<!--    </section>-->
+    <div class="traders__container">
+      @for (trader of traders; track trader.id) {
+        <app-trader-preview [traderPreview]="trader"></app-trader-preview>
       }
-    </section>
-
-    <app-button (click)="clickOnViewTraders()">View all traders</app-button>
+    </div>
 
     @if (isAddCardModalOpen) {
       <app-add-card-to-collection-modal

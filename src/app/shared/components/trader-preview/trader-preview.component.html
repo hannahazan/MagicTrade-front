@@ -1,12 +1,19 @@
 <div class="trader__container gradient-border-lg">
   <div class="trader__wrapper">
-    <img class="Header-logo" [src]="traderPreview().profilePicture" alt="logo" />
+    <img
+      class="trader__img"
+      [src]="traderPreview().profilePicture"
+      alt="photo du trader"
+    />
+
     <p class="trader__name">{{ traderPreview().pseudo }}</p>
-    @if (ownedCardState()) {
-      <app-card-state [cardState]="ownedCardState()"></app-card-state>
+
+    @if (traderPreview().cardState) {
+      <app-card-state [cardState]="traderPreview().cardState"></app-card-state>
     }
+
     <p class="trader__rate">Rate : {{ traderPreview().rate }} ⭐</p>
-    <p class="trader__localisation">{{ traderPreview().location }} 📍</p>
+
     <div>
       <app-button>Trade</app-button>
       <app-button>Profile</app-button>
