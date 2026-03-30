@@ -1,0 +1,19 @@
+
+<div class = "multiple-select-container">
+	<div class="multiple-select-label">{{label}}</div>
+	<ng-select 
+	[multiple]="true" 
+	[fixedPlaceholder]="isPlacedholderFixed"
+	[placeholder]= "placeholder"
+	[formControl]="control"
+	id="multiple-choices" 
+	class="custom-class" 
+	appendTo="body"
+	>
+
+		@for (option of options; track option) {
+			<ng-option   [value] = "option.label" id= "multiple-choices-options"  >{{ option.label }}</ng-option>
+		}
+	</ng-select>
+</div>
+

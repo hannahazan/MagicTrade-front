@@ -16,6 +16,10 @@ import {AuthService} from "../../core/services/auth.service";
 import {AddWishlistItemService} from "../../core/services/wishlist/add-wishlist-item.service";
 import {GetCardsWithWishlistService} from "../../core/services/card/get-cards-with-wishlist.service";
 import {DeleteWishlistItemService} from "../../core/services/wishlist/delete-wishlist-item.service";
+import { GetFilters } from '../../signals/GetFilters';
+import { GetNextAndPreviouspage } from '../../signals/GetNextandPreviousPage';
+import { PaginationCursor } from '../../models/PaginationCursor';
+import { PaginationPages } from '../../models/PaginationPages';
 
 @Component({
   selector: 'app-cards',
@@ -23,7 +27,6 @@ import {DeleteWishlistItemService} from "../../core/services/wishlist/delete-wis
   imports: [
     CardModalComponent,
     ButtonComponent,
-    SelectComponent,
     PagerComponent,
     WishlistButtonComponent,
     RouterLink
@@ -41,32 +44,20 @@ export class CardsComponent implements OnInit {
   private readonly addWishlistItemService = inject(AddWishlistItemService);
   private readonly deleteWishlistItemService = inject(DeleteWishlistItemService);
   readonly authService = inject(AuthService);
+  private signalFilters = inject(GetFilters);
+  private signalPagination = inject(GetNextAndPreviouspage)
+
+  filterOn: boolean = false
 
   // Données
   cards: DisplayedCard[] = [];
   currentPage = 1;
+  previousPage = 0;
   totalPages = 10;
   selectedCard: DisplayedCard | null = null;
   types: { label: string; value: string }[] = [];
   sets: ScryfallSet[] = [];
   setOptions: { label: string; value: string }[] = [];
-
-  filters = {
-    set: '',
-    type: '',
-    rarity: '',
-    color: '',
-    ccm: ''
-  };
-
-  // colorOptions = [
-  //   { label: 'White', value: 'White' },
-  //   { label: 'Blue', value: 'Blue' },
-  //   { label: 'Black', value: 'Black' },
-  //   { label: 'Red', value: 'Red' },
-  //   { label: 'Green', value: 'Green' },
-  //   { label: 'Colorless', value: 'Colorless' }
-  // ];
 
   ngOnInit(): void {
     this.loadSets();
@@ -76,12 +67,34 @@ export class CardsComponent implements OnInit {
 
   // Récupération des cartes
   loadCards(): void {
+    const filters = this.signalFilters.getFilters();
+    this.currentPage = 1;
+    this.previousPage = 0 
+    this.signalPagination.resetPaginationCursor();
+    this.signalPagination.resetPaginationPages();
+    
+    
+    if(filters.ccm !== "" || filters.color.length > 0 || filters.name !== "" || filters.rarities.length > 0 || filters.set !== "" || filters.type.length > 0
+      || filters.standard !== '' || filters.pioneer !== '' || filters.modern !== '' || filters.legacy !== '' || filters.pauper !== '' || filters.vintage !== ''
+      || filters.commander !== '' || filters.brawl !== '' || filters.pauperCommander !== '' || filters.duel !== '' || filters.oldSchool !== ''
+      || filters.text !== '' 
+    ){
+      this.filterOn = true
+    }
+
     const getCards = this.authService.isLoggedIn() ? this.getCardsWithWishlistService : this.getAllCardsService;
-    getCards.execute(this.filters).subscribe({
+    
+    getCards.execute(filters, this.signalPagination.getPaginationCursor(), this.signalPagination.getPaginationpages()).subscribe({
       next: (res) => {
         this.cards = res.cards.map(card => ({
           ...mapToDisplayedCard(card)
         }));
+          this.totalPages = Math.round(res.count/175) >= 1 ? Math.round(res.count/175) : 1
+          const index:PaginationCursor ={
+            previousCursorFisrtEntry : res.firstCursor.toString(),
+            nextCursorFirstEntry :res.nextCursor.toString()    
+        }
+        this.signalPagination.setPaginationCursor(index)
       },
       error: (err) => console.error('Erreur de chargement des cartes', err)
     });
@@ -111,45 +124,31 @@ export class CardsComponent implements OnInit {
     });
   }
 
-  // Application des filtres
-  applyFilters(): void {
-    console.log('Filtres actifs :', this.filters);
-    this.loadCards();
-  }
-
-  // Gestion des changements dans les selects
-  onSetFilterChange(value: string): void {
-    this.filters.set = value;
-    this.applyFilters();
-  }
-
-  onRarityChange(value: string): void {
-    this.filters.rarity = value;
-    this.applyFilters();
-  }
-
-  onColorChange(value: string) {
-    this.filters.color = value;
-    this.applyFilters();
-  }
-
-  onTypeChange(value: string): void {
-    this.filters.type = value;
-    this.applyFilters();
-  }
-
-  onCcmChange(value: string): void {
-    this.filters.ccm = value;
-    this.applyFilters();
-  }
-
   // Pagination
-  onPageChange(newPage: number): void {
-    this.currentPage = newPage;
-  }
+  onPageChange( pageData:{currentPage: number; previousPage: number} ): void {
+    this.currentPage = pageData.currentPage;
+    this.previousPage = pageData.previousPage
+    const pages : PaginationPages = {
+      currentPage : this.currentPage,
+      previousPage : this.previousPage
+    }
+    this.signalPagination.setPaginationPages(pages)
+    const filters = this.signalFilters.getFilters(); // CardFilters
+    const getCards = this.authService.isLoggedIn() ? this.getCardsWithWishlistService : this.getAllCardsService;
+    getCards.execute(filters, this.signalPagination.getPaginationCursor(), this.signalPagination.getPaginationpages()).subscribe({
+          next: (res) => {
+             this.cards = res.cards.map(card => ({
+          ...mapToDisplayedCard(card)
+        }));
+            const index:PaginationCursor ={
+            previousCursorFisrtEntry : res.firstCursor.toString(),
+            nextCursorFirstEntry :res.nextCursor.toString()
+          }
+          this.signalPagination.setPaginationCursor(index)
+          },
+          error: (err) => console.error('Erreur de chargement des cartes', err)
+        });
 
-  onSortChange(value: string) {
-    console.log('Selected value:', value);
   }
 
   openCardModal(card: DisplayedCard): void {
@@ -178,5 +177,31 @@ export class CardsComponent implements OnInit {
         this.addWishlistItemService.execute(cardId).subscribe();
       }
     }
+  }
+
+   clearFilters() {
+     const filters = {
+          set: '',
+          rarities: [],
+          color:  [],
+          ccm: '',
+          name:  '',
+          type:  [],
+          standard: '',
+          pioneer: '',
+          modern: '',
+          legacy: '',
+          pauper: '',
+          vintage: '',
+          commander: '',
+          brawl: '',
+          pauperCommander: '',
+          duel: '',
+          oldSchool: '', 
+          text: '' 
+        };
+   this.filterOn = false;     
+   this.signalFilters.setFilters(filters);
+   this.loadCards()
   }
 }

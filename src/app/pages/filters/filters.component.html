@@ -3,39 +3,78 @@
   <div class="filters__container gradient-border-lg">
     <div class="filters__wrapper">
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-        <app-auth-text-input
-          label="Card name"
-          type="text"
-          placeholder="Any words in the name, e.g. 'Fire'"
+        <app-input-select
+          type = "text"
+          label = "Card name"
+          placeholder= "Enter any name card"
           [control]="searchForm.controls.cardName"
         />
 
-        <app-auth-text-input
-          label="Type Line"
-          type="text"
-          placeholder="Enter a type or choose from the list"
-          [control]="searchForm.controls.typeLine"
+        <app-input-select
+          type = "text"
+          label = "Set"
+          placeholder= "Enter any Set card"
+          [control]="searchForm.controls.set"
+        />
+        
+        <app-multiple-select
+          [options]= types
+          type = "text"
+          label = "Type"
+          placeholder= "Enter any type or subtype"
+          [control]="searchForm.controls.type"
         />
 
-        <div formGroupName="colors">
+        <p class = "checkBoxTitle">Colors</p>
+        <div formGroupName="colors" id="allCheckBoxes">
           <app-auth-checkbox label="White" [control]="searchForm.controls.colors.controls.white" />
           <app-auth-checkbox label="Blue" [control]="searchForm.controls.colors.controls.blue" />
           <app-auth-checkbox label="Black" [control]="searchForm.controls.colors.controls.black" />
           <app-auth-checkbox label="Red" [control]="searchForm.controls.colors.controls.red" />
           <app-auth-checkbox label="Green" [control]="searchForm.controls.colors.controls.green" />
-          <app-auth-checkbox label="Colorless" [control]="searchForm.controls.colors.controls.colorless" />
         </div>
 
         <app-auth-text-input
-          label="Mana Cost"
+          label="Cmc"
           type="text"
-          placeholder='Any mana symbols, e.g. "{W}{W}"'
+          placeholder='List every cmc sperated by coma : 4,3'
           [control]="searchForm.controls.manaCost"
         />
-        <app-button type="button" (click)="clearFilters()">Clear filters</app-button>
+
+        <p class = "checkBoxTitle">Rarities</p>
+        <div formGroupName="rarities" id="allCheckBoxes">
+          <app-auth-checkbox label="Common" [control]="searchForm.controls.rarities.controls.common" />
+          <app-auth-checkbox label="Uncommon" [control]="searchForm.controls.rarities.controls.uncommon" />
+          <app-auth-checkbox label="Rare" [control]="searchForm.controls.rarities.controls.rare" />
+          <app-auth-checkbox label="Mythic rare" [control]="searchForm.controls.rarities.controls.mythic" />
+        </div>
+  
+        <app-auth-text-input
+          label="Text"
+          type="text"
+          placeholder="Enter any key words or any text element"
+          [control]="searchForm.controls.text"
+        />
+
+        <div class = "tooLongCheckBoxes">
+         <p class = "checkBoxTitle">Legal in</p>
+         <div formGroupName="formats" id = "allCheckBoxes">
+            <app-auth-checkbox label="Standard" [control]="searchForm.controls.formats.controls.standard" />
+            <app-auth-checkbox label="Pioneer" [control]="searchForm.controls.formats.controls.pioneer" />
+            <app-auth-checkbox label="Modern" [control]="searchForm.controls.formats.controls.modern" />
+            <app-auth-checkbox label="Legacy" [control]="searchForm.controls.formats.controls.legacy" />
+            <app-auth-checkbox label="Pauper" [control]="searchForm.controls.formats.controls.pauper" />
+            <app-auth-checkbox label="Vintage" [control]="searchForm.controls.formats.controls.vintage" />
+            <app-auth-checkbox label="Commander" [control]="searchForm.controls.formats.controls.commander" />
+            <app-auth-checkbox label="Brawl" [control]="searchForm.controls.formats.controls.brawl" />
+            <app-auth-checkbox label="Pauper commander" [control]="searchForm.controls.formats.controls.pauperCommander" />
+            <app-auth-checkbox label="Duel" [control]="searchForm.controls.formats.controls.duel" />
+            <app-auth-checkbox label="Old school" [control]="searchForm.controls.formats.controls.oldSchool" />
+          </div>
+        </div>
+
         <app-button type="submit">Search</app-button>
       </form>
-
     </div>
   </div>
 </div>

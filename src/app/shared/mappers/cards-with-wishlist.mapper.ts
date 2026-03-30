@@ -8,6 +8,9 @@ export function mapCardsWithWishlist(cardList: CardList, wishlist: WishlistCard[
     cards: cardList.cards.map(card => ({
         ...card,
         isWishlisted: wishlistIds.has(card.id)
-      }))
+      })),
+      count : cardList.count,
+      firstCursor : cardList.firstCursor,
+      nextCursor : cardList.nextCursor
   }
 }

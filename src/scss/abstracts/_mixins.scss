@@ -1,10 +1,17 @@
 @use "sass:map";
 
 // Breakpoints
-@mixin breakpoint($device, $breakpoints-system: $mt-breakpoint) {
+@mixin breakpoint($device, $max: null, $breakpoints-system: $mt-breakpoint) {
   @if map.has-key($breakpoints-system, $device) {
-    @media (min-width: #{map.get($breakpoints-system, $device)}px) {
-      @content;
+    $min: map.get($breakpoints-system, $device);
+    @if $max != null {
+      @media (min-width: #{$min}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    } @else {
+      @media (min-width: #{$min}px) {
+        @content;
+      }
     }
   } @else {
     @content;
