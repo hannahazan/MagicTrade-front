@@ -1,0 +1,53 @@
+ng-dropdown-panel.custom-class.ng-dropdown-panel {
+  @include paragraph("Poppins Light");
+  background: #fff !important;
+  overflow: hidden;
+  color: $background-black-color;
+}
+
+#multiple-choices{
+     @include paragraph("Poppins Light");
+        background-color: #fff;
+        color: $grey-color;
+        height: 50px;
+        border-radius: $border-radius-small;
+        border: 2px solid $background-black-color;
+        padding: 1rem;
+        outline: none;
+
+}
+ 
+
+.ng-select.ng-select-multiple.ng-select-container.ng-value-container.ng-placeholder  {
+   @include paragraph("Poppins Light");
+    color: $grey-color;
+    font-size: $font-size-14;
+
+    @include breakpoint("desktop") {
+        font-size: $font-size-16;
+    }
+}
+
+
+.multiple-select-label{
+  @include paragraph("Poppins Light");
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: left;
+  color: #ffffff
+}
+
+.multiple-select-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ng-value-label{
+  color : $black-color;
+}
+
+.ng-select.ng-select-focused {
+  border: 2px solid $secondary-color;
+}

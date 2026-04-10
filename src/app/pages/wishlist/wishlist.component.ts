@@ -30,7 +30,7 @@ export class WishlistComponent implements OnInit {
   currentPage = 1;
   totalPages = 10;
 
-  onPageChange(newPage: number) {
+  onPageChange(newPage: any) {
     this.currentPage = newPage;
   }
 

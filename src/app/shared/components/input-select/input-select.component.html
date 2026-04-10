@@ -1,0 +1,17 @@
+<div class = "multiple-select-container">
+	<div class="multiple-select-label">{{label}}</div>
+	<ng-select
+    [items] = "options"
+	bindLabel="value"
+  	bindValue="labelId"
+    [virtualScroll]="true" 
+	[multiple]="false" 
+	[fixedPlaceholder]="isPlacedholderFixed"
+	[placeholder]= "placeholder"
+	[formControl]="control"
+	id="multiple-choices" 
+	class="custom-class" 
+	appendTo="body"
+	>	
+	</ng-select>
+</div>

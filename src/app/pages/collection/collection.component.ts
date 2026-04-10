@@ -24,7 +24,7 @@ export class CollectionComponent implements OnInit {
   itemsPerPage = 8;
   totalPages = 1;
 
-  onPageChange(newPage: number): void {
+  onPageChange(newPage: any): void {
     this.currentPage = newPage;
     this.updatePagination();
   }

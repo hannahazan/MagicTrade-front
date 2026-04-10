@@ -2,25 +2,9 @@
 <div class="page-inner">
   <h1 class="cards__title">cards</h1>
   <div class="cards__filter">
-    <p class="cards__filter-label">SORT BY :</p>
-
-    <app-select
-      [options]="setOptions"
-      placeholder="Set"
-      (valueChange)="onSetFilterChange($event)">
-    </app-select>
-    <app-select
-      [options]="types"
-      placeholder="Type"
-      (valueChange)="onTypeChange($event)">
-    </app-select>
-<!--    <app-select-->
-<!--      label="Color"-->
-<!--      [options]="colorOptions"-->
-<!--      placeholder="Select color"-->
-<!--      (valueChange)="onColorChange($event)">-->
-<!--    </app-select>-->
-    <app-button [routerLink]="['/filters']">Advanced filter</app-button>
+    <p class="cards__filter-label">SEARCH BY :</p>
+    <app-button [routerLink]="['/filters']">Advanced filters</app-button>
+    <app-button type="button" (click)="clearFilters()" [disabled]="filterOn === false">Clear filters</app-button>
   </div>
 
   <div class="cards__container gradient-border-lg">
@@ -50,6 +34,7 @@
     </div>
   </div>
   <app-pager
+    [previousPage]="previousPage"
     [currentPage]="currentPage"
     [totalPages]="totalPages"
     (pageChange)="onPageChange($event)">
