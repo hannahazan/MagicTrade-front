@@ -1,12 +1,46 @@
-.checkboxes {
-  @include paragraph("Poppins Regular");
+.checkBoxTitle{
+   @include paragraph("Poppins Light");
+   text-align: start;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   font-weight: 600;
+   
+}
+/*.ng-untouched.ng-pristine .ng-valid{
   display: flex;
-  flex-direction: column;
+
+}
+
+.ng-valid.ng-dirty.ng-touched{
+  display : flex
+}*/
+
+/*.allCheckBoxes.ng-untouched.ng-pristine.ng-valid{
+  display: flex;
+  flex-direction: row;
+}*/
+
+#allCheckBoxes{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /*@include breakpoint('tablet', 960) {
+        flex-direction: column;
+      };*/
+  @include breakpoint('mobile', 960) {
+        flex-direction: column;
+      }
+}
+
+.checkbox {
+  @include paragraph("Poppins Light");
+  display: flex;
   align-items: flex-start;
   gap: 0.5rem;
-  width: var(--input-width);
+  margin-left: 5px;
+  margin-right: 5px;
 
-  .checkboxes__labels {
+  .checkbox__labels {
     width: 100%;
     min-height: 50px;
     display: flex;

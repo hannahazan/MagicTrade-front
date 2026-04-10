@@ -6,6 +6,8 @@ import {Card} from "../../../models/card/card.model";
 import {filter, forkJoin, map, Observable} from "rxjs";
 import {mapCardsWithWishlist} from "../../../shared/mappers/cards-with-wishlist.mapper";
 import {CardList} from "../../../models/card/cardList.model";
+import { CardFilters } from '../../../models/CardFilters';
+import { GetNextAndPreviouspage } from '../../../signals/GetNextandPreviousPage';
 
 // Get cards list with wishlist additional property
 @Injectable({
@@ -14,10 +16,11 @@ import {CardList} from "../../../models/card/cardList.model";
 export class GetCardsWithWishlistService {
   private readonly getAllCards = inject(GetAllCardsService);
   private readonly getUserWishlist = inject(GetUserWishlistService);
+  private readonly signalPagination = inject(GetNextAndPreviouspage)
 
-  execute(filters: {set: string; type: string; rarity: string; color: string; ccm: string; name?: string; }): Observable<CardList> {
+  execute(filters: CardFilters): Observable<CardList> {
     return forkJoin({
-      cards: this.getAllCards.execute(filters),
+      cards: this.getAllCards.execute(filters, this.signalPagination.getPaginationCursor(), this.signalPagination.getPaginationpages()),
       wishlist: this.getUserWishlist.execute()
     }).pipe(
       map((responses) => {

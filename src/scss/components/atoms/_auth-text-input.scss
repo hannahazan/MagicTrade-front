@@ -10,7 +10,8 @@
     label {
         color: $black-color;
         font-weight: 600;
-      text-align: left;
+        text-align: left;
+        margin-top: 10px
     }
 
     input {
@@ -26,6 +27,17 @@
         &:focus {
             border: 2px solid $secondary-color;
         }
+
+        &::placeholder{
+             @include paragraph("Poppins Light");
+                color: $grey-color;
+                font-size: $font-size-12;
+
+
+            @include breakpoint("desktop") {
+                font-size: $font-size-16;
+            }
+        }
     }
 
     &--invalid {
@@ -38,3 +50,5 @@
         }
     }
 }
+
+
