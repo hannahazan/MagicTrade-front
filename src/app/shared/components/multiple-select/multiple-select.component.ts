@@ -12,7 +12,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class MultipleSelectComponent {
 	@Input({required:true}) label = "";
-	@Input() options: { label: string, value: string }[] = [];
+	@Input() options: { labelId: string, value: string }[] = [];
 	@Input({required:true}) placeholder = "";
 	@Input({ required: true }) control!: FormControl<unknown>;
 	isPlacedholderFixed : boolean = false;

@@ -2,8 +2,8 @@
 	<div class="multiple-select-label">{{label}}</div>
 	<ng-select
     [items] = "options"
-	bindLabel="name"
-  	bindValue="id"
+	bindLabel="value"
+  	bindValue="labelId"
     [virtualScroll]="true" 
 	[multiple]="false" 
 	[fixedPlaceholder]="isPlacedholderFixed"
@@ -12,7 +12,6 @@
 	id="multiple-choices" 
 	class="custom-class" 
 	appendTo="body"
-	>
-		
+	>	
 	</ng-select>
 </div>

@@ -4,6 +4,7 @@
     <div class="filters__wrapper">
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <app-input-select
+          [options] = cardNames
           type = "text"
           label = "Card name"
           placeholder= "Enter any name card"
@@ -11,18 +12,19 @@
         />
 
         <app-input-select
+          [options] = set
           type = "text"
           label = "Set"
-          placeholder= "Enter any Set card"
-          [control]="searchForm.controls.set"
+          placeholder = "Enter any Set card"
+          [control] = "searchForm.controls.set"
         />
         
         <app-multiple-select
-          [options]= types
+          [options] = types
           type = "text"
           label = "Type"
-          placeholder= "Enter any type or subtype"
-          [control]="searchForm.controls.type"
+          placeholder = "Enter any type or subtype"
+          [control] = "searchForm.controls.type"
         />
 
         <p class = "checkBoxTitle">Colors</p>
