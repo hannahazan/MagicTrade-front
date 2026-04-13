@@ -47,6 +47,9 @@ export class GetAllCardsService {
     if(filters.duel) params = params.set('duel', filters.duel);
     if(filters.oldSchool) params = params.set('oldSchool', filters.oldSchool);
     if(filters.text) params = params.set('text', filters.text);
+    if(filters.foil) params = params.set('foil', filters.foil);
+    if(filters.fullArt) params = params.set("fullArt", filters.fullArt);
+    if(filters.textLess) params = params.set('textLess', filters.textLess);
     
     if(paginationCursor.length > 0){
         if(paginationPages.currentPage > paginationPages.previousPage){
