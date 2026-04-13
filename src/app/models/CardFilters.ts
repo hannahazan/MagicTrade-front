@@ -16,5 +16,8 @@ export interface CardFilters{
     pauperCommander: string;
     duel: string;
     oldSchool: string,
-    text: string
+    text: string,
+    foil : boolean,
+    textLess : boolean,
+    fullArt : boolean
 }

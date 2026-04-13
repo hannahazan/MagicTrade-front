@@ -77,7 +77,7 @@ export class CardsComponent implements OnInit {
     if(filters.ccm !== "" || filters.color.length > 0 || filters.name !== "" || filters.rarities.length > 0 || filters.set !== "" || filters.type.length > 0
       || filters.standard !== '' || filters.pioneer !== '' || filters.modern !== '' || filters.legacy !== '' || filters.pauper !== '' || filters.vintage !== ''
       || filters.commander !== '' || filters.brawl !== '' || filters.pauperCommander !== '' || filters.duel !== '' || filters.oldSchool !== ''
-      || filters.text !== '' 
+      || filters.text !== '' || filters.foil == true || filters.textLess == true || filters.fullArt == true 
     ){
       this.filterOn = true
     }
@@ -198,7 +198,10 @@ export class CardsComponent implements OnInit {
           pauperCommander: '',
           duel: '',
           oldSchool: '', 
-          text: '' 
+          text: '',
+          foil : false,
+          textLess : false,
+          fullArt : false
         };
    this.filterOn = false;     
    this.signalFilters.setFilters(filters);

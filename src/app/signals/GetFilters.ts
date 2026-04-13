@@ -24,7 +24,10 @@ export class GetFilters{
     pauperCommander: '',
     duel: '',
     oldSchool: '',
-    text : ''
+    text : '',
+    foil : false,
+    textLess : false,
+    fullArt : false
   };
 
     filters: WritableSignal<CardFilters> = signal(this.initialFilters);

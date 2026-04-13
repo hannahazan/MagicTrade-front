@@ -12,7 +12,6 @@ import { mapFormatFilter } from '../../shared/mappers/formatFilter-mapper';
 import { raritiesMapper } from '../../shared/mappers/raritiesFilter-mapper';
 import { GetAllCatalogCard } from '../../core/services/card/get-all-cards-catalog';
 import { CardTypeModel } from '../../models/card/card-type.model';
-import { GetAllCardsService } from '../../core/services/card/get-all-cards.service';
 import { GetAllCardsSetsService } from '../../core/services/card/get-all-cards-sets.service';
 import { ScryfallSet } from '../../models/card/card-set.model';
 
@@ -74,6 +73,11 @@ export class FiltersComponent {
       rare: [false],
       mythic: [false],
     }),
+    versions : this.fb.group({
+      foil : false,
+      textLess : false,
+      fullArt : false
+    })
   });
 
   getCatalog(catalog : string, options : {}[]){
@@ -133,7 +137,10 @@ export class FiltersComponent {
       pauperCommander: mapFormatFilter(form.formats?.pauperCommander),
       duel: mapFormatFilter(form.formats?.duel),
       oldSchool: mapFormatFilter(form.formats?.oldSchool),
-      text : form.text || ''
+      text : form.text || '',
+      foil : form.versions?.foil || false,
+      textLess : form.versions?.textLess || false,
+      fullArt : form.versions?.fullArt || false
     };
 
     this.signalFilters.setFilters(filters)
