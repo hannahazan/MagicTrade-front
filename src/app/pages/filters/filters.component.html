@@ -50,6 +50,13 @@
           <app-auth-checkbox label="Rare" [control]="searchForm.controls.rarities.controls.rare" />
           <app-auth-checkbox label="Mythic rare" [control]="searchForm.controls.rarities.controls.mythic" />
         </div>
+
+         <p class = "checkBoxTitle">Art version</p>
+         <div formGroupName="versions" id="allCheckBoxes">
+          <app-auth-checkbox label="Foil" [control]="searchForm.controls.versions.controls.foil" />
+          <app-auth-checkbox label="TextLess" [control]="searchForm.controls.versions.controls.textLess" />
+          <app-auth-checkbox label="FullArt" [control]="searchForm.controls.versions.controls.fullArt" />
+         </div>
   
         <app-auth-text-input
           label="Text"
