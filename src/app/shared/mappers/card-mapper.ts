@@ -1,22 +1,31 @@
 import {DisplayedCard, DisplayedCardFace} from "../../models/card/displayed-card.model";
 import {Card} from "../../models/card/card.model";
 
-function mapFace(card: {
+function mapFace(doubleCard: {
   name: string | null;
   typeLine: string | null;
   text: string | null;
   imageSizeNormal: string | null;
-}): DisplayedCardFace {
+}, card :  Card): DisplayedCardFace {
+  if(card.imageSizeNormal !== null){
+    return {
+      name: doubleCard.name,
+      typeLine: doubleCard.typeLine,
+      text: doubleCard.text,
+      imageUrl: card.imageSizeNormal,
+    }
+  }
+  else
   return {
-    name: card.name,
-    typeLine: card.typeLine,
-    text: card.text,
-    imageUrl: card.imageSizeNormal,
+    name: doubleCard.name,
+    typeLine: doubleCard.typeLine,
+    text: doubleCard.text,
+    imageUrl: doubleCard.imageSizeNormal,
   };
 }
 
 export function mapToDisplayedCard(card: Card): DisplayedCard {
-  if (card.isDoubleCard && card.imageSizeNormal === null) {
+  if (card.isDoubleCard) {
     return {
       id: card.id,
       name: card.name,
@@ -24,8 +33,8 @@ export function mapToDisplayedCard(card: Card): DisplayedCard {
       cardMarketPrice: card.cardMarketPrice,
       isDoubleCard: card.isDoubleCard,
       faces: [
-        mapFace(card.doubleCards[0]),
-        mapFace(card.doubleCards[1]),
+        mapFace(card.doubleCards[0], card),
+        mapFace(card.doubleCards[1], card),
       ],
       isWishlisted: card.isWishlisted ?? undefined
     };
