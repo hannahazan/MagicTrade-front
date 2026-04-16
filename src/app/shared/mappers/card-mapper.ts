@@ -16,7 +16,7 @@ function mapFace(card: {
 }
 
 export function mapToDisplayedCard(card: Card): DisplayedCard {
-  if (card.isDoubleCard) {
+  if (card.isDoubleCard && card.imageSizeNormal === null) {
     return {
       id: card.id,
       name: card.name,
