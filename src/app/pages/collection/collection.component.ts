@@ -49,7 +49,7 @@ export class CollectionComponent implements OnInit {
   }
 
   getCardImage(collection: CollectionCard): string {
-    if (collection.isDoubleCard && collection.doubleCards?.length) {
+    if (collection.isDoubleCard && collection.doubleCards?.length && collection.imageUrl === null) {
       return collection.doubleCards[0].imageSizeNormal ?? 'assets/images/fallback.jpg';
     }
     return collection.imageUrl ?? 'assets/images/fallback.jpg';
